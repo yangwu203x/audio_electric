@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.DynamicMapper">
+
+<sql id="dynamicColumn">
+    s.name as songName,
+    u.is_vip,u.photo,u.nickname ,
+    p.video_path,p.audio_path,p.id as portfolioId,p.listening_times ,p.create_date ,p.introduction ,
+    vul.level,vpgift.amount as giftCount,vpca.amount as collCount,vpga.amount as goodsCount
+</sql>
+    <!--关注的人的动态-->
+    <select id="listAttention" parameterType="User" resultType="map">
+        select
+            <include refid="dynamicColumn"/>
+        from attention a
+            left join user u on u.id = a.be_user_id
+            left join portfolio p on a.be_user_id = p.user_id
+            left join song s on p.song_id = s.id
+            left join v_user_level vul on vul.user_id = u.id
+            left join v_p_gift_amount vpgift on vpgift.portfolio_id = p.id
+            left join v_p_collection_amount vpca on vpca.portfolio_id = p.id
+            left join v_p_goods_amount vpga on vpga.portfolio_id = p.id
+        where a.user_id= #{id} order by p.create_date desc
+    </select>
+    <!--推荐动态，排除关注的人-->
+    <select id="listRecommendDynamic" parameterType="User" resultType="map">
+         select
+          <include refid="dynamicColumn"/>
+        from portfolio p
+            left join user u on u.id = p.user_id
+            left join song s on p.song_id = s.id
+            left join singer ser on p.singer_id = ser.id
+            left join v_user_level vul on vul.user_id = u.id
+            left join v_p_gift_amount vpgift on vpgift.portfolio_id = p.id
+            left join v_p_collection_amount vpca on vpca.portfolio_id = p.id
+            left join v_p_goods_amount vpga on vpga.portfolio_id = p.id
+        where u.id = #{id} and u.id not in (select a.be_user_id from attention a where a.user_id= #{id})
+          order by u.level desc, p.create_date desc
+    </select>
+
+    <select id="getPortfolioInfo" parameterType="long" resultType="map">
+        select
+            s.name as songName,
+            u.photo,vl.level,vl.logo,u.is_vip,
+            p.create_date,p.listening_times,p.introduction,p.picture,p.backgroundimg,
+            vpc.comments
+        from portfolio p
+            left join user u on u.id = p.user_id
+            left join song s on s.id = p.song_id
+            left join v_portfolio_comments vpc on p.id = vpc.id
+            left join v_user_level vl on vl.user_id = u.id
+        where p.id = #{id}
+    </select>
+
+    <select id="getCommentsById" parameterType="long" resultType="map">
+      select u.photo,u.nickname,u.id as user_id,vl.level as level,vl.logo,c.create_date,c.content,c.to_user_id ,bu.nickname as bnickname
+        from comments c
+        left join user u on c.user_id = u.id
+        left join user bu on c.to_user_id = bu.id
+        left join v_user_level vl on vl.user_id = u.id
+         where  c.portfolio_id = #{id} order by c.create_date
+    </select>
+</mapper>
