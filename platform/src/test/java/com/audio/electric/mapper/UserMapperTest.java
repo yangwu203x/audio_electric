@@ -33,7 +33,7 @@ public class UserMapperTest extends PlatformApplicationTests{
             User user = new User();
             user.setName("张李" + i);
             user.setAge(i);
-            user.setId(i+"");
+            user.setId((long) i);
             userMapper.insert(user);
         }
         Assert.isTrue(userMapper.selectByExample(null).size() == 20);

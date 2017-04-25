@@ -2,8 +2,11 @@ package com.audio.electric.controller;
 
 import com.audio.electric.domain.User;
 import com.audio.electric.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +18,7 @@ import java.util.List;
  */
 @RestController
 public class UserController {
+    private final static Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private IUserService userService;
 
@@ -23,9 +27,11 @@ public class UserController {
     public List<User> listUser(){
         List<User> userList = userService.listUser();
         for (User user : userList)
-            System.out.println(user);
+            logger.info(user.toString());
         return userList;
     }
+
+
 
     
 }

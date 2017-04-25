@@ -23,4 +23,5 @@ public class UserServiceImpl implements IUserService{
     public List<User> listUser() {
         return userMapper.selectByExample(null);
     }
+
 }

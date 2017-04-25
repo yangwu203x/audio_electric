@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.audio.electric.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="User">
+  <resultMap id="BaseResultMap" type="com.audio.electric.domain.User">
     <constructor>
-      <idArg column="id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_date" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="level" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="photo" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="is_vip" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="background_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="integral" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="last_login_time" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="token" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="signature" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="login_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="mac" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="register_way" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sex" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="birthday" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="age" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="country" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="provinces" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="city" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="professional" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="identification" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="system" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="version" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="model" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="brand" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,9 +96,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, age
+    id, nickname, username, password, create_date, level, photo, name, is_vip, background_img, 
+    integral, status, last_login_time, token, signature, login_time, mac, register_way, 
+    phone, email, sex, birthday, age, country, provinces, city, professional, identification, 
+    system, version, model, brand
   </sql>
-  <select id="selectByExample" parameterType="UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.audio.electric.domain.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -83,54 +115,246 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="UserExample">
+  <delete id="deleteByExample" parameterType="com.audio.electric.domain.UserExample">
     delete from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="User">
-    insert into user (id, name, age
-      )
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.audio.electric.domain.User">
+    insert into user (id, nickname, username, 
+      password, create_date, level, 
+      photo, name, is_vip, 
+      background_img, integral, status, 
+      last_login_time, token, signature, 
+      login_time, mac, register_way, 
+      phone, email, sex, 
+      birthday, age, country, 
+      provinces, city, professional, 
+      identification, system, version, 
+      model, brand)
+    values (#{id,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{photo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{isVip,jdbcType=VARCHAR}, 
+      #{backgroundImg,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
+      #{loginTime,jdbcType=INTEGER}, #{mac,jdbcType=VARCHAR}, #{registerWay,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, 
+      #{provinces,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{professional,jdbcType=VARCHAR}, 
+      #{identification,jdbcType=VARCHAR}, #{system,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="User">
+  <insert id="insertSelective" parameterType="com.audio.electric.domain.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="isVip != null">
+        is_vip,
+      </if>
+      <if test="backgroundImg != null">
+        background_img,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="signature != null">
+        signature,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="registerWay != null">
+        register_way,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
       </if>
       <if test="age != null">
         age,
       </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="provinces != null">
+        provinces,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="professional != null">
+        professional,
+      </if>
+      <if test="identification != null">
+        identification,
+      </if>
+      <if test="system != null">
+        system,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="model != null">
+        model,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="isVip != null">
+        #{isVip,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundImg != null">
+        #{backgroundImg,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=INTEGER},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="registerWay != null">
+        #{registerWay,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
       <if test="age != null">
         #{age,jdbcType=INTEGER},
       </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="provinces != null">
+        #{provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="identification != null">
+        #{identification,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null">
+        #{system,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="UserExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.audio.electric.domain.UserExample" resultType="java.lang.Integer">
     select count(*) from user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -140,13 +364,100 @@
     update user
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.photo != null">
+        photo = #{record.photo,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
+      <if test="record.isVip != null">
+        is_vip = #{record.isVip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backgroundImg != null">
+        background_img = #{record.backgroundImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integral != null">
+        integral = #{record.integral,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLoginTime != null">
+        last_login_time = #{record.lastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signature != null">
+        signature = #{record.signature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.mac != null">
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerWay != null">
+        register_way = #{record.registerWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
       <if test="record.age != null">
         age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.country != null">
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinces != null">
+        provinces = #{record.provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professional != null">
+        professional = #{record.professional,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identification != null">
+        identification = #{record.identification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.system != null">
+        system = #{record.system,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.model != null">
+        model = #{record.model,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null">
+        brand = #{record.brand,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -155,29 +466,174 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user
-    set id = #{record.id,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=BIGINT},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=INTEGER},
+      photo = #{record.photo,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      age = #{record.age,jdbcType=INTEGER}
+      is_vip = #{record.isVip,jdbcType=VARCHAR},
+      background_img = #{record.backgroundImg,jdbcType=VARCHAR},
+      integral = #{record.integral,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      last_login_time = #{record.lastLoginTime,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      signature = #{record.signature,jdbcType=VARCHAR},
+      login_time = #{record.loginTime,jdbcType=INTEGER},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      register_way = #{record.registerWay,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      country = #{record.country,jdbcType=VARCHAR},
+      provinces = #{record.provinces,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      professional = #{record.professional,jdbcType=VARCHAR},
+      identification = #{record.identification,jdbcType=VARCHAR},
+      system = #{record.system,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      model = #{record.model,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.audio.electric.domain.User">
     update user
     <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isVip != null">
+        is_vip = #{isVip,jdbcType=VARCHAR},
+      </if>
+      <if test="backgroundImg != null">
+        background_img = #{backgroundImg,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=INTEGER},
+      </if>
+      <if test="mac != null">
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="registerWay != null">
+        register_way = #{registerWay,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
       </if>
       <if test="age != null">
         age = #{age,jdbcType=INTEGER},
       </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="provinces != null">
+        provinces = #{provinces,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="professional != null">
+        professional = #{professional,jdbcType=VARCHAR},
+      </if>
+      <if test="identification != null">
+        identification = #{identification,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null">
+        system = #{system,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null">
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="User">
+  <update id="updateByPrimaryKey" parameterType="com.audio.electric.domain.User">
     update user
-    set name = #{name,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER}
-    where id = #{id,jdbcType=VARCHAR}
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      photo = #{photo,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      is_vip = #{isVip,jdbcType=VARCHAR},
+      background_img = #{backgroundImg,jdbcType=VARCHAR},
+      integral = #{integral,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      login_time = #{loginTime,jdbcType=INTEGER},
+      mac = #{mac,jdbcType=VARCHAR},
+      register_way = #{registerWay,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      country = #{country,jdbcType=VARCHAR},
+      provinces = #{provinces,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      professional = #{professional,jdbcType=VARCHAR},
+      identification = #{identification,jdbcType=VARCHAR},
+      system = #{system,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

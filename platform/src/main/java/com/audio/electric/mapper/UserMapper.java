@@ -4,15 +4,13 @@ import com.audio.electric.domain.User;
 import com.audio.electric.domain.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
-@Component
 public interface UserMapper {
     int countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(User record);
 
@@ -20,7 +18,7 @@ public interface UserMapper {
 
     List<User> selectByExample(UserExample example);
 
-    User selectByPrimaryKey(String id);
+    User selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
