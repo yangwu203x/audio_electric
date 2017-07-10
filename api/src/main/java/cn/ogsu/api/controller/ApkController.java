@@ -35,7 +35,7 @@ public class ApkController {
 	@Resource
 	private IApkService apkService;
 	
-	private static final Logger logger=Logger.getLogger(ApkController.class);
+	private static final Logger logger = Logger.getLogger(ApkController.class);
 	/**
 	 * 获取最新的apk信息
 	 */

@@ -485,8 +485,8 @@
 		concat(#{requestParams.content},'%')
 		ORDER
 		BY dbsongs.ordertime DESC
-		LIMIT
-		#{requestParams.page},#{requestParams.dataNum}
+		<!--LIMIT-->
+		<!--#{requestParams.page},#{requestParams.dataNum}-->
 	</select>
 	<!-- 搜索歌曲 name count -->
 	<select id="querySongsByNameLimitCount" parameterType="requestBean"
