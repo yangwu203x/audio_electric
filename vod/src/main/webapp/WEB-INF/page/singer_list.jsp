@@ -168,15 +168,15 @@
 	<script type="text/javascript">
 	
 	//搜索表单
-	function searchForm(){
-		var nameNode=document.getElementById("singer_name");
-		var singerName=nameNode.value;
-		if(singerName==null ||singerName==""){
-			return false;
-		}
-		singerName=singerName.replace(/\s/g,"?");
-		nameNode.value=singerName;
-	}
+//	function searchForm(){
+//		var nameNode=document.getElementById("singer_name");
+//		var singerName=nameNode.value;
+//		if(singerName==null ||singerName==""){
+//			return false;
+//		}
+//		singerName=singerName.replace(/\s/g,"?");
+//		nameNode.value=singerName;
+//	}
 	
 	$(function(){
 		var autoData=null;

@@ -59,7 +59,7 @@ public class ApkController extends ControllerBase{
 	}
 	/**
 	 * 上传apk文件以及保存apk文件信息
-	 * @param file
+	 * @param apkFile
 	 * @return
 	 * @throws Exception
 	 */

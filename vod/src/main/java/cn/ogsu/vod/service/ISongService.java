@@ -60,7 +60,7 @@ public interface ISongService {
 	
 	/**
 	 * 根据歌曲名去获取可能的歌曲编号
-	 * @param singerName
+	 * @param songName
 	 * @return
 	 * @throws Exception
 	 */

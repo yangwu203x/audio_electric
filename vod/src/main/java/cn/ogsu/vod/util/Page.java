@@ -57,7 +57,9 @@ public class Page {
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
-	
+	public static void main(String[] args){
+		System.out.println(new Page().getPageStr());
+	}
 	//拼接分页 页面及JS函数
 	public String getPageStr() {
 		StringBuffer sb = new StringBuffer();

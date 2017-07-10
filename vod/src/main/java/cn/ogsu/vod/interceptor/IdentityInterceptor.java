@@ -31,8 +31,8 @@ public class IdentityInterceptor extends HandlerInterceptorAdapter {
         	if(url.contains("privilegeMenu")){
         		String userRole=user.getString("userRole");
         		if(Const.ADMIN_ROLE.equals(userRole)){
-        			return true;
-        		}
+                    return true;
+                }
         		//当没有权限操作菜单时不允许对菜单进行操作，防止恶意提高权限
         		return false;
         	}

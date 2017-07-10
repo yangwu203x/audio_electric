@@ -488,7 +488,8 @@ public class SongController extends ControllerBase {
 	/**
 	 * 批量上传歌曲文件
 	 * 
-	 * @param songFile
+	 * @param req
+	 * @param resp
 	 * @return
 	 * @throws Exception
 	 */
@@ -517,7 +518,7 @@ public class SongController extends ControllerBase {
 		boolean success = true;
 		String message = "";
 		//待保存的文件目录
-		String savingFileDir=Tools.obtainDirectoryName(absolutePath+Const.FILE_SEPLATOR+Tools.propertiesFileResolve(Const.SONGFILELOCATION));
+		String savingFileDir=Tools.obtainDirectoryName(absolutePath+File.separator+Tools.propertiesFileResolve(Const.SONGFILELOCATION));
 		String saveFileDir=absolutePath+Const.FILE_SEPLATOR+Tools.propertiesFileResolve(Const.SONGFILELOCATION)+Const.FILE_SEPLATOR+savingFileDir;
 		 // 生成上传的文件片段
 		File f = IoUtil.getTokenedFile(saveFileDir, token);

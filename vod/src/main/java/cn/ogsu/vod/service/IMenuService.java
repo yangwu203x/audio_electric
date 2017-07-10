@@ -11,7 +11,7 @@ import cn.ogsu.vod.util.PageData;
 public interface IMenuService {
 	/**
 	 * 增加菜单
-	 * @param 请求数据
+	 * @param menu
 	 * @return 菜单增加是否成功
 	 */
 	public boolean addMenu(Menu menu) throws Exception;
