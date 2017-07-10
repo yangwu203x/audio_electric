@@ -37,4 +37,5 @@ public interface UserMapper {
 
      List<Map<String,String>> getCommentsById(Long id) throws SQLException;
 
+    int userInfo(User user)throws SQLException;
 }

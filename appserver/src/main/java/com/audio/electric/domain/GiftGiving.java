@@ -1,15 +1,19 @@
 package com.audio.electric.domain;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 送礼表
  * Created by Administrator on 2017/3/17 0017.
  */
+@Alias("GiftGiving")
 public class GiftGiving {
     private int id;
     private long userId;
     private int giftId;
     private long portfolioId;
     private String createDate;
+    private int amount;
 
     public GiftGiving() {
     }
@@ -52,5 +56,13 @@ public class GiftGiving {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

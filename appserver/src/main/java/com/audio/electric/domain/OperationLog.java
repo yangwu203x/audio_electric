@@ -1,18 +1,21 @@
 package com.audio.electric.domain;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 操作日志表
  * Created by Administrator on 2017/3/17 0017.
  */
+@Alias("OperationLog")
 public class OperationLog {
     private long id;
     private long userId;//用户id
-    private int operationId;//操作id
+    private int ip;//操作id
     private String createDate;//操作时间
-    private String description;//描述
-
-    public OperationLog() {
-    }
+    private String method;//描述
+    private String url;
+    private String classMethod;
+    private String parameter;
 
     public long getId() {
         return id;
@@ -30,12 +33,12 @@ public class OperationLog {
         this.userId = userId;
     }
 
-    public int getOperationId() {
-        return operationId;
+    public int getIp() {
+        return ip;
     }
 
-    public void setOperationId(int operationId) {
-        this.operationId = operationId;
+    public void setIp(int ip) {
+        this.ip = ip;
     }
 
     public String getCreateDate() {
@@ -46,11 +49,35 @@ public class OperationLog {
         this.createDate = createDate;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMethod() {
+        return method;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getClassMethod() {
+        return classMethod;
+    }
+
+    public void setClassMethod(String classMethod) {
+        this.classMethod = classMethod;
+    }
+
+    public String getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
     }
 }

@@ -2,6 +2,7 @@ package com.audio.electric.util.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author leo_Yang【音特】

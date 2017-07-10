@@ -34,7 +34,17 @@ public enum RetCode {
     REG_EMAIL_IS_NOT_REGISTER(115,"邮箱未注册(或者邮箱不存在)"),
     REG_EMAIL_IS_MISTAKE(116,"邮箱格式有误"),
     REG_EMAIL_MORETHANONE(117,"存在多个邮箱相同的账号"),
-    STATUSEXCEPTION(118,"账号状态异常");
+    STATUSEXCEPTION(118,"账号状态异常"),
+    USERNOTEXIST(119,"用户不存在"),
+    PORTFOLIIONOTEXIST(120,"作品不存在"),
+    GIFTNOTEXIST(121,"礼物不存在"),
+    GIFTNOTENOUGH(122,"礼物不足够"),
+    GOODSALREADY(123,"已经点赞，不能重复点赞"),
+    GOODSNOT(124,"还没点赞，不能取消点赞"),
+    COLLECTIONALREADY(126,"已经收藏，不能重复收藏"),
+    COLLECTIONNOT(127,"还没收藏，不能取消收藏"),
+    ATTENDTIONALREADY(126,"已经关注，不能重复关注"),
+    ATTENDTIONNOT(127,"还没关注，不能取消关注");
 
 
     RetCode(int code, String msg) {

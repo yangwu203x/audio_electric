@@ -10,20 +10,26 @@
 * http://opensource.org/licenses/MIT
 *
 */
-html, body{ height:100%}
-body{font-size:14px}
+html, body{ }
+body{}
 
-.header,.footer{ position:absolute; left:0; right:0; width:100%; z-index:99}
-.header{top:0; height:60px; background:#426374 url(../images/logo.png) no-repeat 0 center}
+.header,.footer{ position:absolute;  left:0; right:0; width:100%; z-index:99}
+.header{top:0; height:60px;  }
 
-.loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../images/admin-login-bg.jpg) no-repeat center}
-.loginBox{ position:absolute; width:617px; height:330px; background:url(../images/admin-loginform-bg.png) no-repeat; left:50%; top:50%; margin-left:-309px; margin-top:-184px; padding-top:38px}
-@media (max-width:617px) {
-	.loginbox{ width:100%; position:static; margin-top:0; margin-left:0;}
-}
-.loginBox .row{margin-top:20px;}
+
+.loginWraper{ position:absolute; width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../images/admin-login-bg.jpg) repeat center}
+.loginBox{  width:350px; height:358px; background:url(../images/admin-loginform-bg.png) no-repeat; float:right;margin-right:118px;margin-top:199px;  text-align:center; }
+.logo{width:168px;height:30px; background:url(../images/logo.png) no-repeat;margin:0 auto;/*z-index:99;position:absolute;bottom:0;margin-bottom: 50px;*/}
+/*@media (max-width:617px) {*/
+	/*.loginbox{ width:100%; position:static; margin-top:0; margin-left:0;}*/
+/*}*/
+/*.loginBox .row{margin-top:20px;}*/
 .loginBox .row .form-label .Hui-iconfont{ font-size:24px}
-.loginBox .input-text{ width:360px}
+.loginBox input{font-size:16px;font-family: "Microsoft Yahei";background-color:transparent}
+.loginBox .enter{height:38px;border-radius:4px;border:1px solid #a0a0a0; padding-left:20px;}
+.loginBox .input-text{ width:260px; margin-top:20px; }
+.loginBox .input-text-code{width:92px;margin-top:20px;}
+.loginBox .btn-success{width:280px;height:42px;border-radius:4px;border:1px solid #a0a0a0;background:#e8334a;margin-top:20px;color:#ffffff;}
 @media (max-width:617px) {
 	.loginBox .input-text{ width:80%}
 }
@@ -35,7 +41,67 @@ body{font-size:14px}
 .hd_msg a{ color:#fff}
 .hd_msg a:hover{ color:#fff; text-decoration:underline}
 
-.footer{ height:46px; line-height:46px; bottom:0; text-align:center; color:#fff; font-size:12px; background-color:#426374}
+.footer{  bottom:104px; text-align:center; color:#ffffff; font-size:24px; }
 
-#ie6-warning{background:#fff url(/jscss/demoimg/201006/warning.gif) no-repeat 3px center;position:absolute;top:0;left:0;font-size:12px;color:#333;width:97%;padding: 2px 15px 2px 23px;text-align:left}
-#ie6-warning a {text-decoration:none}
+/*#ie6-warning{background:#fff url(/jscss/demoimg/201006/warning.gif) no-repeat 3px center;position:absolute;top:0;left:0;font-size:12px;color:#333;width:97%;padding: 2px 15px 2px 23px;text-align:left}*/
+/*#ie6-warning a {text-decoration:none}*/
+
+
+/*validate css*/
+input.error {
+	border: 1px solid red !important;
+}
+label.error {
+	background:url("../images/unchecked.gif") no-repeat 0px 0px;
+	padding-left: 16px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	color: red;
+}
+span.error {
+	background:url("../images/unchecked.gif") no-repeat 0px 0px;
+	padding-left: 16px;
+	padding-bottom: 2px;
+	font-weight: bold;
+	color: red;
+}
+label.checked {
+	background:url("../images/checked.gif") no-repeat 0px 0px;
+}
+.tooltip {
+	position: absolute;
+	z-index: 10200;
+	display: block;
+	visibility: visible;
+	padding: 5px;
+	font-size: 11px;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+
+.tooltip-inner {
+	max-width: 300px;
+	padding: 0px 8px;
+	color: #ffffff;
+	text-align: center;
+	text-decoration: none;
+	background-color: #000000;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 6px;
+}
+form input.error{
+	color:#F00;
+	border: 1px solid #CE7979;
+	background:#FFF7FA;
+}
+form label.error{
+	color:#F00;
+}
+
+
+.arrow-left
+{
+	border-bottom: 10px solid #000000;
+	border-left: 10px solid #ffffff;
+}

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.audio.electric.domain.Role">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_date" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role_add" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_del" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_update" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="role_check" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, role_name, create_date, description, role_add, role_del, role_update, role_check
+  </sql>
+  <select id="selectByExample" parameterType="com.audio.electric.domain.RoleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.audio.electric.domain.RoleExample">
+    delete from role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.audio.electric.domain.Role">
+    insert into role (id, role_name, create_date, 
+      description, role_add, role_del, 
+      role_update, role_check)
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{roleAdd,jdbcType=INTEGER}, #{roleDel,jdbcType=INTEGER}, 
+      #{roleUpdate,jdbcType=INTEGER}, #{roleCheck,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.audio.electric.domain.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="roleAdd != null">
+        role_add,
+      </if>
+      <if test="roleDel != null">
+        role_del,
+      </if>
+      <if test="roleUpdate != null">
+        role_update,
+      </if>
+      <if test="roleCheck != null">
+        role_check,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="roleAdd != null">
+        #{roleAdd,jdbcType=INTEGER},
+      </if>
+      <if test="roleDel != null">
+        #{roleDel,jdbcType=INTEGER},
+      </if>
+      <if test="roleUpdate != null">
+        #{roleUpdate,jdbcType=INTEGER},
+      </if>
+      <if test="roleCheck != null">
+        #{roleCheck,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.audio.electric.domain.RoleExample" resultType="java.lang.Integer">
+    select count(*) from role
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update role
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleName != null">
+        role_name = #{record.roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleAdd != null">
+        role_add = #{record.roleAdd,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleDel != null">
+        role_del = #{record.roleDel,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleUpdate != null">
+        role_update = #{record.roleUpdate,jdbcType=INTEGER},
+      </if>
+      <if test="record.roleCheck != null">
+        role_check = #{record.roleCheck,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update role
+    set id = #{record.id,jdbcType=INTEGER},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      role_add = #{record.roleAdd,jdbcType=INTEGER},
+      role_del = #{record.roleDel,jdbcType=INTEGER},
+      role_update = #{record.roleUpdate,jdbcType=INTEGER},
+      role_check = #{record.roleCheck,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.audio.electric.domain.Role">
+    update role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="roleAdd != null">
+        role_add = #{roleAdd,jdbcType=INTEGER},
+      </if>
+      <if test="roleDel != null">
+        role_del = #{roleDel,jdbcType=INTEGER},
+      </if>
+      <if test="roleUpdate != null">
+        role_update = #{roleUpdate,jdbcType=INTEGER},
+      </if>
+      <if test="roleCheck != null">
+        role_check = #{roleCheck,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.audio.electric.domain.Role">
+    update role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      role_add = #{roleAdd,jdbcType=INTEGER},
+      role_del = #{roleDel,jdbcType=INTEGER},
+      role_update = #{roleUpdate,jdbcType=INTEGER},
+      role_check = #{roleCheck,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

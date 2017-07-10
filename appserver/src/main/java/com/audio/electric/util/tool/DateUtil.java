@@ -1,5 +1,7 @@
 package com.audio.electric.util.tool;
 
+import com.audio.electric.util.constants.Constant;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -7,6 +9,12 @@ import java.util.*;
  * Created by Administrator on 2017/3/17 0017.
  */
 public class DateUtil {
+
+    public static String getCurDatePath(){
+        String rule = Constant.FILE_SEPLATOR + "yyyy" + Constant.FILE_SEPLATOR + "MM" + Constant.FILE_SEPLATOR + "dd" + Constant.FILE_SEPLATOR;
+        SimpleDateFormat sdf = new SimpleDateFormat(rule);
+        return sdf.format(new Date());
+    }
 
     /**
      *

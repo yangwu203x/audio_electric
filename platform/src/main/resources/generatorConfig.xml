@@ -43,10 +43,11 @@
         </javaClientGenerator>
 
 
-        <table schema="mybatis" tableName="user" domainObjectName="User">
+        <table schema="mybatis" tableName="account" domainObjectName="Account">
             <property name="constructorBased" value="true" />
             <property name="useActualColumnNames" value="false" />
             <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>
 </generatorConfiguration>

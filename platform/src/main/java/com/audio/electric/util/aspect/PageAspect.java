@@ -1,7 +1,9 @@
 package com.audio.electric.util.aspect;
 
 import com.audio.electric.util.tool.StringUtils;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -23,7 +25,7 @@ public class PageAspect {
 
     private final static Logger logger = LoggerFactory.getLogger(PageAspect.class);
 
-    @Pointcut("@annotation(com.audio.electric.util.annotation.UserPage)")
+    @Pointcut("@annotation(com.audio.electric.util.annotation.UsePage)")
     public void pageAspect(){
 
     }
@@ -35,7 +37,8 @@ public class PageAspect {
 
         String pageStr = request.getParameter("pageNum");
         String pageSizeStr = request.getParameter("pageSize");
-
+        logger.info("pageNum={}",pageStr);
+        logger.info("pageSize={}",pageSizeStr);
         //默认取第一页，取10条
         int pageNum = 1,pageSize = 10;
         if (StringUtils.isNumeric(pageSizeStr)){
@@ -46,6 +49,14 @@ public class PageAspect {
         }
 
         PageHelper.startPage(pageNum,pageSize);
+    }
+
+    @After("pageAspect()")
+    public void doAfter(){
+        logger.info("============================================");
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+
+
     }
 
 }

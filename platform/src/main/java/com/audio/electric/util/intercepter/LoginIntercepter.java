@@ -1,7 +1,6 @@
 package com.audio.electric.util.intercepter;
 
 import com.audio.electric.domain.Account;
-import com.audio.electric.util.enums.RetCode;
 import com.audio.electric.util.tool.CheckUserLogin;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -24,12 +23,12 @@ public class LoginIntercepter extends HandlerInterceptorAdapter {
                              Object handler) throws Exception {
         //判断是否为公开地址
         String url = request.getRequestURL().toString();
-        if(url.contains("/account/") || url.contains("/error")) {
+        if(url.contains("/account/") || url.contains("/error") || url.endsWith("/login") || url.contains("file")) {
             return true;//是公开地址则放行
         }
         Account account = CheckUserLogin.getloginuser();
         if (account == null){
-            response.sendRedirect("/login.html");
+            response.sendRedirect("/login");
             return false;
         }else{
             return true;

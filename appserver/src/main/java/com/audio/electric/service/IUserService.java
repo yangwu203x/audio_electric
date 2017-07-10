@@ -13,17 +13,19 @@ import java.util.Map;
 public interface IUserService {
 
 
-    public int save(User user);
+     int save(User user);
 
 
-    public int delete(User user);
+     int delete(User user);
 
 
-    public List<Map<String , String>> getAttention(long id, int pageNum, int pageSize);
+     List<Map<String , String>> getAttention(long id, int pageNum, int pageSize);
 
-    public List<Map<String , String>> recommendDynamic(long id, int pageNum, int pageSize);
+     List<Map<String , String>> recommendDynamic(long id, int pageNum, int pageSize);
 
-    public Map<String,String> getPortfolioInfo(Long id);
+     Map<String,String> getPortfolioInfo(Long id);
 
     List<Map<String,String>> getCommentsById(Long id, int pageNum, int pageSize);
+
+    int userInfo(User user);
 }

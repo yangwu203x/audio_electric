@@ -28,7 +28,7 @@ public class User {
     private String signature;//签名
     private Integer loginTime;//登陆次数
     private String mac;//uuid
-    private String regitserWay;//注册方式
+    private String registerWay;//注册方式
     private String phone;//手机号码
     private String email;//电子邮箱
     private String sex;//性别
@@ -185,11 +185,11 @@ public class User {
     }
 
     public String getRegitserWay() {
-        return regitserWay;
+        return registerWay;
     }
 
     public void setRegitserWay(String regitserWay) {
-        this.regitserWay = regitserWay;
+        this.registerWay = regitserWay;
     }
 
     public String getPhone() {

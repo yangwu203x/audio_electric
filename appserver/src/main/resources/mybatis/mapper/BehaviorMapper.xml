@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.BehaviorMapper">
+    
+    <insert id="attention" parameterType="Attention">
+        insert into attention (user_id,be_user_id,modify_date) values (#{userId},#{beUserId},#{createDate})
+    </insert>
+    
+    <delete id="canceAttention" parameterType="Attention">
+        delete from attention where user_id = #{userId} and be_user_id = #{beUserId}
+    </delete>
+    
+    <insert id="goods" parameterType="Goods">
+        insert into portfolio_goods(user_id,portfolio_id,modify_date) values (#{userId},#{portfolioId},#{createDate})
+    </insert>
+    
+    <delete id="canceGoods" parameterType="Goods">
+        delete from portfolio_goods where user_id = #{userId} and portfolio_id = #{portfolioId}
+    </delete>
+    
+    <insert id="collection" parameterType="Collections">
+        insert into portfolio_collection(user_id,portfolio_id,modify_date) values (#{userId},#{portfolioId},#{createDate})
+    </insert>
+
+
+    <delete id="canceCollection" parameterType="Collections">
+        delete from portfolio_collection where user_id = #{userId} and portfolio_id = #{portfolioId}
+    </delete>
+   
+    <insert id="givingGift" parameterType="GiftGiving">
+         insert into gift_giving (user_id,gift_id,portfolio_id,amount,create_date) values (#{userId},#{giftId},#{portfolioId},#{amount},#{createDate})
+    </insert>
+    
+    <insert id="deductMyGift" parameterType="MyGift">
+        insert into mygift(gift_id,amount,user_id,create_date) values (#{giftId},#{amount},#{userId},#{createDate})
+    </insert>
+
+    <insert id="saveSongLack" parameterType="SongLack">
+        insert into song_lack(song_name,singer_name,lang_name,user_id,create_date) values (#{songName},#{singerName},#{langName},#{userId},now())
+    </insert>
+
+    <insert id="saveFeedback" parameterType="feedBack">
+        insert into feed_back(msg,user_id,create_date) values (#{msg},#{userId},now())
+    </insert>
+
+    <insert id="comments" parameterType="PortfolioComments">
+        insert into portfolio_comments(user_id,to_user_id,portfolio_id,content,create_date) values (#{userId},#{toUserId},#{portfolioId},#{content},now())
+    </insert>
+    <insert id="shield" parameterType="Shield">
+        insert into shield(user_id,to_user_id) values (#{userId},#{toUserId})
+    </insert>
+</mapper>

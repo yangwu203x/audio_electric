@@ -1,7 +1,9 @@
 package com.audio.electric.domain;
 
-import java.io.Serializable;
+import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
+@Alias("User")
 public class User implements Serializable {
     private Long id;
 

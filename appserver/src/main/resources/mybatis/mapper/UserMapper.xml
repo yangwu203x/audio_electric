@@ -6,7 +6,35 @@
         UPDATE user set status = {status} where id=#{id}
     </update>
     <insert id="save" parameterType="User" >
-        insert into user (username,email,password,status,mac) values (#{username},#{email},#{password},#{status},#{mac})
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                username,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                #{username},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+        </trim>
     </insert>
 
     <select id="login" parameterType="User" resultType="User">
@@ -25,7 +53,7 @@
     <!--关注的人的动态-->
     <select id="getAttention" parameterType="long" resultType="map">
         select
-            s.name as songName,
+            s.song_name as songName,
             u.is_vip,u.photo,u.nickname ,
             p.video_path,p.audio_path,p.id as portfolioId,p.listening_times ,p.create_date ,p.introduction ,
             vg.goods,vc.collections,vpg.gifts,
@@ -33,7 +61,7 @@
         from attention a
             left join user u on u.id = a.be_user_id
             left join portfolio p on a.be_user_id = p.user_id
-            left join song s on p.song_id = s.id
+            left join db_songs s on p.song_id = s.id
             left join v_portfolio_goods vg on vg.id = p.id
             left join v_portfolio_collection vc on vc.id = p.id
             left join v_portfolio_gifts vpg on vpg.id = p.id
@@ -43,36 +71,45 @@
     <!--推荐动态，排除关注的人-->
     <select id="recommendDynamic"  resultType="map">
         select
-            s.name as songName,ser.name as singerName
-            u.is_vip,u.photo,u.username ,
-            p.video_path ,p.audio_path ,p.id as portfolioId ,p.listening_times ,p.create_date ,p.introduction ,
-            vg.goods ,vc.collections ,vpg.gifts ,
-            vul.level
+        s.song_name as songName,ser.name as singerName
+        u.is_vip,u.photo,u.username ,
+        p.video_path ,p.audio_path ,p.id as portfolioId ,p.listening_times ,p.create_date ,p.introduction ,
+        vg.goods ,vc.collections ,vpg.gifts ,
+        vul.level
         from user u
-            left join portfolio p on u.id = p.user_id
-            left join song s on p.song_id = s.id
-            left join singer ser on p.singer_id = ser.id
-            left join v_portfolio_goods vg on vg.id = p.id
-            left join v_portfolio_collection vc on vc.id = p.id
-            left join v_portfolio_gifts vpg on vpg.id = p.id
-            left join v_user_level vul on vul.user_id = u.id
+        left join portfolio p on u.id = p.user_id
+        left join db_songs s on p.song_id = s.id
+        left join singer ser on p.singer_id = ser.id
+        left join v_portfolio_goods vg on vg.id = p.id
+        left join v_portfolio_collection vc on vc.id = p.id
+        left join v_portfolio_gifts vpg on vpg.id = p.id
+        left join v_user_level vul on vul.user_id = u.id
         where u.id = #{id} and u.id not in (select a.be_user_id from attention a join user u3 on u3.id = a.user_id where u3.id= #{id})
-          order by u.level desc, p.create_date desc
+        order by u.level desc, p.create_date desc
     </select>
 
     <select id="getPortfolioInfo" resultType="map">
         select
-            s.name as songName,
+            s.song_name as songName,
             u.photo,u.level,u.is_vip,
             p.create_date,p.listening_times,p.introduction,
             vpc.comments
         from portfolio p
             left join user u on u.id = p.user_id
-            left join song s on s.id = p.song_id
+            left join db_songs s on s.id = p.song_id
             left join v_portfolio_comments vpc on p.id = vpc.id
         where p.id = #{id}
     </select>
     <select id="getCommentsById" resultType="map">
-        select * from comments where portfolio_id = #{id}
+        select * from portfolio_comments where portfolio_id = #{id}
     </select>
+    <update id="userInfo" parameterType="User">
+        update user
+        <set>
+            <if test="username">
+                username = #{username},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

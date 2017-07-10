@@ -1,2 +1,2 @@
 音特电子后台管理系统
-springboot+mybatis+pagehelper+generato
+springboot+thymeleaf+mybatis+mybatis-pagehelper+mybatis-generator+mongodb

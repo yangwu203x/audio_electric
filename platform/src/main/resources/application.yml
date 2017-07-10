@@ -2,7 +2,7 @@ spring:
   database:
     driverClassName: com.mysql.jdbc.Driver
   datasource:
-    url: jdbc:mysql://localhost:3306/appserver
+    url: jdbc:mysql://192.168.1.107:3306/appserver?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;allowMultiQueries=true&useSSL=true
     password: 123456
     username: root
     type: com.alibaba.druid.pool.DruidDataSource
@@ -10,6 +10,15 @@ spring:
     encoding:
       charset: utf-8
       force: true
+    multipart:
+      max-file-size: 500mb
+      max-request-size: 500mb
+  thymeleaf:
+    cache: false
+    cache-period: 0
+    content-type: text/html
+  template:
+              cache: false
 #mybatis分页插件
 #pagehelper:
 #  helperDialect: mysql

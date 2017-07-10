@@ -9,6 +9,15 @@ import java.util.List;
  * @Date 2017/4/21 0021 14:14
  */
 public interface IUserService {
-    List<User> listUser();
+    List<User> listUser(User user);
 
+    User getUserById(User user);
+
+    int saveUser(User user);
+
+    int editUser(User user);
+
+    int deleteUser(String ids);
+
+    List<String> autoSearch(User user);
 }

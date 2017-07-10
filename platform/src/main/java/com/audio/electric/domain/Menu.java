@@ -1,8 +1,11 @@
 package com.audio.electric.domain;
 
+
+import org.apache.ibatis.type.Alias;
+
 import java.io.Serializable;
 import java.util.List;
-
+@Alias("Menu")
 public class Menu implements Serializable {
     private Integer id;
 
@@ -12,15 +15,26 @@ public class Menu implements Serializable {
 
     private Integer parentMenuId;
 
+    private String menuIcon;
+
     private List<Menu> subMenuList;
+
+    public List<Menu> getSubMenuList() {
+        return subMenuList;
+    }
+
+    public void setSubMenuList(List<Menu> subMenuList) {
+        this.subMenuList = subMenuList;
+    }
 
     private static final long serialVersionUID = 1L;
 
-    public Menu(Integer id, String name, String url, Integer parentMenuId) {
+    public Menu(Integer id, String name, String url, Integer parentMenuId, String menuIcon) {
         this.id = id;
         this.name = name;
         this.url = url;
         this.parentMenuId = parentMenuId;
+        this.menuIcon = menuIcon;
     }
 
     public Menu() {
@@ -59,12 +73,12 @@ public class Menu implements Serializable {
         this.parentMenuId = parentMenuId;
     }
 
-    public List<Menu> getSubMenuList() {
-        return subMenuList;
+    public String getMenuIcon() {
+        return menuIcon;
     }
 
-    public void setSubMenuList(List<Menu> subMenuList) {
-        this.subMenuList = subMenuList;
+    public void setMenuIcon(String menuIcon) {
+        this.menuIcon = menuIcon == null ? null : menuIcon.trim();
     }
 
     @Override
@@ -82,7 +96,8 @@ public class Menu implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
-            && (this.getParentMenuId() == null ? other.getParentMenuId() == null : this.getParentMenuId().equals(other.getParentMenuId()));
+            && (this.getParentMenuId() == null ? other.getParentMenuId() == null : this.getParentMenuId().equals(other.getParentMenuId()))
+            && (this.getMenuIcon() == null ? other.getMenuIcon() == null : this.getMenuIcon().equals(other.getMenuIcon()));
     }
 
     @Override
@@ -93,6 +108,7 @@ public class Menu implements Serializable {
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
         result = prime * result + ((getParentMenuId() == null) ? 0 : getParentMenuId().hashCode());
+        result = prime * result + ((getMenuIcon() == null) ? 0 : getMenuIcon().hashCode());
         return result;
     }
 
@@ -103,6 +119,7 @@ public class Menu implements Serializable {
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
                 ", parentMenuId=" + parentMenuId +
+                ", menuIcon='" + menuIcon + '\'' +
                 ", subMenuList=" + subMenuList +
                 '}';
     }

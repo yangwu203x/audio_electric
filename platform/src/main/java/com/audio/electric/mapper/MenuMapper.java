@@ -6,29 +6,29 @@ import com.audio.electric.domain.MenuExample;
 import java.sql.SQLException;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface MenuMapper {
-    int countByExample(MenuExample example);
+    int countByExample(MenuExample example) throws SQLException;
 
-    int deleteByExample(MenuExample example);
+    int deleteByExample(MenuExample example) throws SQLException;
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer id) throws SQLException;
 
-    int insert(Menu record);
+    int insert(Menu record) throws SQLException;
 
-    int insertSelective(Menu record);
+    int insertSelective(Menu record) throws SQLException;
 
-    List<Menu> listMenuByUserId(String user_id)throws SQLException;
+    List<Menu> selectByExample(MenuExample example) throws SQLException;
 
-    List<Menu> selectByExample(MenuExample example);
+    Menu selectByPrimaryKey(Integer id) throws SQLException;
 
-    Menu selectByPrimaryKey(Integer id);
+    int updateByExampleSelective(@Param("record") Menu record, @Param("example") MenuExample example) throws SQLException;
 
-    int updateByExampleSelective(@Param("record") Menu record, @Param("example") MenuExample example);
+    int updateByExample(@Param("record") Menu record, @Param("example") MenuExample example) throws SQLException;
 
-    int updateByExample(@Param("record") Menu record, @Param("example") MenuExample example);
+    int updateByPrimaryKeySelective(Menu record) throws SQLException;
 
-    int updateByPrimaryKeySelective(Menu record);
-
-    int updateByPrimaryKey(Menu record);
+    int updateByPrimaryKey(Menu record) throws SQLException;
 }

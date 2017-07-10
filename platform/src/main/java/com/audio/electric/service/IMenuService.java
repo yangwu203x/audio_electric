@@ -1,6 +1,8 @@
 package com.audio.electric.service;
 
+import com.audio.electric.domain.Account;
 import com.audio.electric.domain.Menu;
+import com.audio.electric.domain.Role;
 
 import java.util.List;
 
@@ -10,7 +12,21 @@ import java.util.List;
  */
 public interface IMenuService {
 
-    public List<Menu> obtainAllMenu();
+    List<Menu> obtainAllMenu();
 
-    public List<Menu> obtainAccountMenu(String accountNo);
+    List<Menu> listMenuByRole(Role role);
+
+    List<Menu> listMenuByAccount(Account account);
+
+    List<Menu> listMenu(Menu menu);
+
+    Menu getMenu(Menu menu);
+
+    int addMenu(Menu menu);
+
+    int modifyMenu(Menu menu);
+
+    int deleteMenu(String ids);
+
+    List<Integer> listMenuIdByRole(Role role);
 }

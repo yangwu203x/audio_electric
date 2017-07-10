@@ -36,7 +36,6 @@ public class UserMapperTest extends PlatformApplicationTests{
             user.setId((long) i);
             userMapper.insert(user);
         }
-        Assert.isTrue(userMapper.selectByExample(null).size() == 20);
     }
 
     @Test

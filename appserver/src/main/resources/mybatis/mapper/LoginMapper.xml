@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.LoginMapper">
+    <select id="getUserByEmail" resultType="User">
+        select id,email,status,password from user where email = #{email}
+    </select>
+
+    <update id="modifyPwd" parameterType="User">
+        update user set  password = #{password} ,mac = #{mac} where id = #{id}
+    </update>
+
+    <update id="active" parameterType="User">
+        update user set status = #{status} where id = #{id} and mac = #{mac}
+    </update>
+
+    <select id="getUserByEmailandMac" resultType="User">
+        select id,email,status,mac from user where email = #{email} and mac = #{mac}
+    </select>
+
+    <select id="login" resultType="User">
+        select id ,nickname ,photo ,username,level,status  from user where username = #{username} and password = #{password}
+    </select>
+    <insert id="reg" parameterType="User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                username,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="registerWay != null">
+                register_way,
+            </if>
+            <if test="mac != null">
+                mac,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                #{username},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="registerWay != null">
+                #{registerWay},
+            </if>
+            <if test="mac != null">
+                #{mac},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateUser">
+        update user
+            <set>
+                <if test="username != null">
+                    username = #{username},
+                </if>
+                <if test="email != null">
+                    email = #{email},
+                </if>
+                <if test="password != null">
+                    password =  #{password},
+                </if>
+                <if test="status != null">
+                    status =  #{status},
+                </if>
+                <if test="register_way != null">
+                    register_way = #{register_way},
+                </if>
+                <if test="mac != null">
+                    mac =  #{mac},
+                </if>
+            </set>
+        where id = #{id}
+    </update>
+</mapper>

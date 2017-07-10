@@ -19,6 +19,7 @@ import java.util.Map;
  * @Date 2017/4/14 0014 13:28
  */
 @RestController
+@RequestMapping("/dynamic")
 public class DynamicController extends BaseController{
     @Autowired
     private IDynamicService dynamicService;

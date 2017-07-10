@@ -10,6 +10,11 @@ spring:
     encoding:
       charset: utf-8
       force: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+  thymeleaf:
+     content-type: text/html
 #mybatis分页插件
 pagehelper:
   helperDialect: mysql

@@ -1,14 +1,22 @@
 package com.audio.electric.domain;
 
+import org.apache.ibatis.type.Alias;
+
 /**
- * 屏蔽表
- * Created by Administrator on 2017/3/17 0017.
+ * @Author leo_Yang【音特】
+ * @Date 2017/6/13 0013 10:15
  */
+@Alias("Shield")
 public class Shield {
-    private long userId;//用户id
-    private long beUserId;//屏蔽用户的id
+    private long userId;
+    private long toUserId;
 
     public Shield() {
+    }
+
+    public Shield(long userId, long toUserId) {
+        this.userId = userId;
+        this.toUserId = toUserId;
     }
 
     public long getUserId() {
@@ -19,11 +27,11 @@ public class Shield {
         this.userId = userId;
     }
 
-    public long getBeUserId() {
-        return beUserId;
+    public long getToUserId() {
+        return toUserId;
     }
 
-    public void setBeUserId(long beUserId) {
-        this.beUserId = beUserId;
+    public void setToUserId(long toUserId) {
+        this.toUserId = toUserId;
     }
 }

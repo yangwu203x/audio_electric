@@ -4,6 +4,7 @@ import com.audio.electric.util.enums.RetCode;
 import com.audio.electric.util.exception.AppException;
 import com.audio.electric.util.protocol.Body;
 import com.audio.electric.util.protocol.BodyUtil;
+import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -44,8 +45,8 @@ public class GlobalExceptionHandler {
             AppException appException = (AppException) e;
             return BodyUtil.exception(appException.getCode(),appException.getMessage());
         }else{
-            logger.info(e.getLocalizedMessage());
-            return BodyUtil.exception(RetCode.UNKNOWN_ERROR.getCode(),e.getMessage());
+            logger.info(e.getMessage());
+            return BodyUtil.exception(RetCode.UNKNOWN_ERROR.getCode(),RetCode.UNKNOWN_ERROR.getMsg());
         }
     }
 

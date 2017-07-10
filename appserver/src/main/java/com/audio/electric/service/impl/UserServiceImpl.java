@@ -93,4 +93,14 @@ public class UserServiceImpl extends BaseService implements IUserService {
         }
         return null;
     }
+
+    @Override
+    public int userInfo(User user) {
+        try {
+            return userMapper.userInfo(user);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return RetCode.FAILED.getCode();
+    }
 }

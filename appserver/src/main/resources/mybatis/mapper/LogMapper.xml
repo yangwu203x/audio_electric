@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.LogMapper">
+    <insert id="save" parameterType="OperationLog">
+        insert into operationlog(userId,ip,createDate,method,url,classMethod ,parameter) valuse
+        (#{userId},#{ip},#{createDate},#{method},#{url},#{classMethod} ,#{parameter})
+    </insert>
+</mapper>

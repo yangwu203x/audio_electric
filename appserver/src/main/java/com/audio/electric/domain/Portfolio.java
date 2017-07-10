@@ -1,9 +1,12 @@
 package com.audio.electric.domain;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 作品表
  * Created by Administrator on 2017/3/17 0017.
  */
+@Alias("Portfolio")
 public class Portfolio {
     private long id;
     private long userId;//用户id

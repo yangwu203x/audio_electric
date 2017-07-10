@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.SongMapper">
+  <resultMap id="BaseResultMap" type="com.audio.electric.domain.Song">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="mrs_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="midi_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="vod_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="song_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="file_format" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="spell" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="lang_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="new_song" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hot_song" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="classic_song" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="theme_song" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="tv_program" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="scene" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="song_years" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="enter_selected" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="update_date" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="header_path" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="prefix_path" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="server_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="song_zs" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="song_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="singer_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="singer_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="tv_program_enter" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, mrs_id, midi_id, vod_id, song_name, file_format, spell, lang_id, new_song, hot_song, 
+    classic_song, theme_song, tv_program, scene, song_years, enter_selected, update_date, 
+    header_path, prefix_path, server_url, song_zs, song_no, status, singer_id, singer_name, 
+    tv_program_enter
+  </sql>
+  <select id="selectByExample" parameterType="com.audio.electric.domain.SongExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from db_songs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from db_songs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from db_songs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.audio.electric.domain.SongExample">
+    delete from db_songs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.audio.electric.domain.Song">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into db_songs (mrs_id, midi_id, vod_id, 
+      song_name, file_format, spell, 
+      lang_id, new_song, hot_song, 
+      classic_song, theme_song, tv_program, 
+      scene, song_years, enter_selected, 
+      update_date, header_path, prefix_path, 
+      server_url, song_zs, song_no, 
+      status, singer_id, singer_name, 
+      tv_program_enter)
+    values (#{mrsId,jdbcType=VARCHAR}, #{midiId,jdbcType=VARCHAR}, #{vodId,jdbcType=VARCHAR}, 
+      #{songName,jdbcType=VARCHAR}, #{fileFormat,jdbcType=VARCHAR}, #{spell,jdbcType=VARCHAR}, 
+      #{langId,jdbcType=VARCHAR}, #{newSong,jdbcType=VARCHAR}, #{hotSong,jdbcType=VARCHAR}, 
+      #{classicSong,jdbcType=VARCHAR}, #{themeSong,jdbcType=VARCHAR}, #{tvProgram,jdbcType=VARCHAR}, 
+      #{scene,jdbcType=VARCHAR}, #{songYears,jdbcType=VARCHAR}, #{enterSelected,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=VARCHAR}, #{headerPath,jdbcType=VARCHAR}, #{prefixPath,jdbcType=VARCHAR}, 
+      #{serverUrl,jdbcType=VARCHAR}, #{songZs,jdbcType=INTEGER}, #{songNo,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{singerId,jdbcType=VARCHAR}, #{singerName,jdbcType=VARCHAR}, 
+      #{tvProgramEnter,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.audio.electric.domain.Song">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into db_songs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mrsId != null">
+        mrs_id,
+      </if>
+      <if test="midiId != null">
+        midi_id,
+      </if>
+      <if test="vodId != null">
+        vod_id,
+      </if>
+      <if test="songName != null">
+        song_name,
+      </if>
+      <if test="fileFormat != null">
+        file_format,
+      </if>
+      <if test="spell != null">
+        spell,
+      </if>
+      <if test="langId != null">
+        lang_id,
+      </if>
+      <if test="newSong != null">
+        new_song,
+      </if>
+      <if test="hotSong != null">
+        hot_song,
+      </if>
+      <if test="classicSong != null">
+        classic_song,
+      </if>
+      <if test="themeSong != null">
+        theme_song,
+      </if>
+      <if test="tvProgram != null">
+        tv_program,
+      </if>
+      <if test="scene != null">
+        scene,
+      </if>
+      <if test="songYears != null">
+        song_years,
+      </if>
+      <if test="enterSelected != null">
+        enter_selected,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="headerPath != null">
+        header_path,
+      </if>
+      <if test="prefixPath != null">
+        prefix_path,
+      </if>
+      <if test="serverUrl != null">
+        server_url,
+      </if>
+      <if test="songZs != null">
+        song_zs,
+      </if>
+      <if test="songNo != null">
+        song_no,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="singerId != null">
+        singer_id,
+      </if>
+      <if test="singerName != null">
+        singer_name,
+      </if>
+      <if test="tvProgramEnter != null">
+        tv_program_enter,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mrsId != null">
+        #{mrsId,jdbcType=VARCHAR},
+      </if>
+      <if test="midiId != null">
+        #{midiId,jdbcType=VARCHAR},
+      </if>
+      <if test="vodId != null">
+        #{vodId,jdbcType=VARCHAR},
+      </if>
+      <if test="songName != null">
+        #{songName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileFormat != null">
+        #{fileFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null">
+        #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="langId != null">
+        #{langId,jdbcType=VARCHAR},
+      </if>
+      <if test="newSong != null">
+        #{newSong,jdbcType=VARCHAR},
+      </if>
+      <if test="hotSong != null">
+        #{hotSong,jdbcType=VARCHAR},
+      </if>
+      <if test="classicSong != null">
+        #{classicSong,jdbcType=VARCHAR},
+      </if>
+      <if test="themeSong != null">
+        #{themeSong,jdbcType=VARCHAR},
+      </if>
+      <if test="tvProgram != null">
+        #{tvProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="scene != null">
+        #{scene,jdbcType=VARCHAR},
+      </if>
+      <if test="songYears != null">
+        #{songYears,jdbcType=VARCHAR},
+      </if>
+      <if test="enterSelected != null">
+        #{enterSelected,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="headerPath != null">
+        #{headerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixPath != null">
+        #{prefixPath,jdbcType=VARCHAR},
+      </if>
+      <if test="serverUrl != null">
+        #{serverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="songZs != null">
+        #{songZs,jdbcType=INTEGER},
+      </if>
+      <if test="songNo != null">
+        #{songNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="singerId != null">
+        #{singerId,jdbcType=VARCHAR},
+      </if>
+      <if test="singerName != null">
+        #{singerName,jdbcType=VARCHAR},
+      </if>
+      <if test="tvProgramEnter != null">
+        #{tvProgramEnter,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.audio.electric.domain.SongExample" resultType="java.lang.Integer">
+    select count(*) from db_songs
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update db_songs
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mrsId != null">
+        mrs_id = #{record.mrsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.midiId != null">
+        midi_id = #{record.midiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vodId != null">
+        vod_id = #{record.vodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.songName != null">
+        song_name = #{record.songName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileFormat != null">
+        file_format = #{record.fileFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spell != null">
+        spell = #{record.spell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.langId != null">
+        lang_id = #{record.langId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newSong != null">
+        new_song = #{record.newSong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotSong != null">
+        hot_song = #{record.hotSong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classicSong != null">
+        classic_song = #{record.classicSong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.themeSong != null">
+        theme_song = #{record.themeSong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tvProgram != null">
+        tv_program = #{record.tvProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scene != null">
+        scene = #{record.scene,jdbcType=VARCHAR},
+      </if>
+      <if test="record.songYears != null">
+        song_years = #{record.songYears,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterSelected != null">
+        enter_selected = #{record.enterSelected,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headerPath != null">
+        header_path = #{record.headerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prefixPath != null">
+        prefix_path = #{record.prefixPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverUrl != null">
+        server_url = #{record.serverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.songZs != null">
+        song_zs = #{record.songZs,jdbcType=INTEGER},
+      </if>
+      <if test="record.songNo != null">
+        song_no = #{record.songNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.singerId != null">
+        singer_id = #{record.singerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singerName != null">
+        singer_name = #{record.singerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tvProgramEnter != null">
+        tv_program_enter = #{record.tvProgramEnter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update db_songs
+    set id = #{record.id,jdbcType=INTEGER},
+      mrs_id = #{record.mrsId,jdbcType=VARCHAR},
+      midi_id = #{record.midiId,jdbcType=VARCHAR},
+      vod_id = #{record.vodId,jdbcType=VARCHAR},
+      song_name = #{record.songName,jdbcType=VARCHAR},
+      file_format = #{record.fileFormat,jdbcType=VARCHAR},
+      spell = #{record.spell,jdbcType=VARCHAR},
+      lang_id = #{record.langId,jdbcType=VARCHAR},
+      new_song = #{record.newSong,jdbcType=VARCHAR},
+      hot_song = #{record.hotSong,jdbcType=VARCHAR},
+      classic_song = #{record.classicSong,jdbcType=VARCHAR},
+      theme_song = #{record.themeSong,jdbcType=VARCHAR},
+      tv_program = #{record.tvProgram,jdbcType=VARCHAR},
+      scene = #{record.scene,jdbcType=VARCHAR},
+      song_years = #{record.songYears,jdbcType=VARCHAR},
+      enter_selected = #{record.enterSelected,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR},
+      header_path = #{record.headerPath,jdbcType=VARCHAR},
+      prefix_path = #{record.prefixPath,jdbcType=VARCHAR},
+      server_url = #{record.serverUrl,jdbcType=VARCHAR},
+      song_zs = #{record.songZs,jdbcType=INTEGER},
+      song_no = #{record.songNo,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      singer_id = #{record.singerId,jdbcType=VARCHAR},
+      singer_name = #{record.singerName,jdbcType=VARCHAR},
+      tv_program_enter = #{record.tvProgramEnter,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.audio.electric.domain.Song">
+    update db_songs
+    <set>
+      <if test="mrsId != null">
+        mrs_id = #{mrsId,jdbcType=VARCHAR},
+      </if>
+      <if test="midiId != null">
+        midi_id = #{midiId,jdbcType=VARCHAR},
+      </if>
+      <if test="vodId != null">
+        vod_id = #{vodId,jdbcType=VARCHAR},
+      </if>
+      <if test="songName != null">
+        song_name = #{songName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileFormat != null">
+        file_format = #{fileFormat,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null">
+        spell = #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="langId != null">
+        lang_id = #{langId,jdbcType=VARCHAR},
+      </if>
+      <if test="newSong != null">
+        new_song = #{newSong,jdbcType=VARCHAR},
+      </if>
+      <if test="hotSong != null">
+        hot_song = #{hotSong,jdbcType=VARCHAR},
+      </if>
+      <if test="classicSong != null">
+        classic_song = #{classicSong,jdbcType=VARCHAR},
+      </if>
+      <if test="themeSong != null">
+        theme_song = #{themeSong,jdbcType=VARCHAR},
+      </if>
+      <if test="tvProgram != null">
+        tv_program = #{tvProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="scene != null">
+        scene = #{scene,jdbcType=VARCHAR},
+      </if>
+      <if test="songYears != null">
+        song_years = #{songYears,jdbcType=VARCHAR},
+      </if>
+      <if test="enterSelected != null">
+        enter_selected = #{enterSelected,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="headerPath != null">
+        header_path = #{headerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixPath != null">
+        prefix_path = #{prefixPath,jdbcType=VARCHAR},
+      </if>
+      <if test="serverUrl != null">
+        server_url = #{serverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="songZs != null">
+        song_zs = #{songZs,jdbcType=INTEGER},
+      </if>
+      <if test="songNo != null">
+        song_no = #{songNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="singerId != null">
+        singer_id = #{singerId,jdbcType=VARCHAR},
+      </if>
+      <if test="singerName != null">
+        singer_name = #{singerName,jdbcType=VARCHAR},
+      </if>
+      <if test="tvProgramEnter != null">
+        tv_program_enter = #{tvProgramEnter,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.audio.electric.domain.Song">
+    update db_songs
+    set mrs_id = #{mrsId,jdbcType=VARCHAR},
+      midi_id = #{midiId,jdbcType=VARCHAR},
+      vod_id = #{vodId,jdbcType=VARCHAR},
+      song_name = #{songName,jdbcType=VARCHAR},
+      file_format = #{fileFormat,jdbcType=VARCHAR},
+      spell = #{spell,jdbcType=VARCHAR},
+      lang_id = #{langId,jdbcType=VARCHAR},
+      new_song = #{newSong,jdbcType=VARCHAR},
+      hot_song = #{hotSong,jdbcType=VARCHAR},
+      classic_song = #{classicSong,jdbcType=VARCHAR},
+      theme_song = #{themeSong,jdbcType=VARCHAR},
+      tv_program = #{tvProgram,jdbcType=VARCHAR},
+      scene = #{scene,jdbcType=VARCHAR},
+      song_years = #{songYears,jdbcType=VARCHAR},
+      enter_selected = #{enterSelected,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      header_path = #{headerPath,jdbcType=VARCHAR},
+      prefix_path = #{prefixPath,jdbcType=VARCHAR},
+      server_url = #{serverUrl,jdbcType=VARCHAR},
+      song_zs = #{songZs,jdbcType=INTEGER},
+      song_no = #{songNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      singer_id = #{singerId,jdbcType=VARCHAR},
+      singer_name = #{singerName,jdbcType=VARCHAR},
+      tv_program_enter = #{tvProgramEnter,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

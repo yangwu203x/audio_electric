@@ -1,16 +1,18 @@
 package com.audio.electric.util.tool;
 
+import com.audio.electric.util.constants.Constant;
+
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * 工具类
  *
- * @author albert
- * @time 2016年9月27日
  */
 public class Tools {
 	/**
@@ -21,11 +23,47 @@ public class Tools {
 	 */
 	public static String encode(String result) {
 		try {
-			result = Base64.encode(result.getBytes("utf-8"));
+			String isencode = propertiesFileResolve(Constant.ISENCODE);
+			if("1".equals(isencode)){
+				//加密
+				result = Base64.encode(result.getBytes("utf-8"));
+			}
 		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	/**
+	 * 属性文件解析,根据属性名在属性文件中获取属性值
+	 * @param propertyName
+	 * proLocation .properties所在的文件位置
+	 * @return
+	 * @throws Exception
+	 */
+	public static String propertiesFileResolve(String propertyName) throws Exception{
+		//实例化属性文件对象
+		Properties properties=new Properties();
+		//获取流
+		InputStream stream=Tools.class.getResourceAsStream(Constant.PROPERTIESFILENAME);
+		//加载流
+		properties.load(stream);
+		//根据所给的属性名获取值
+		return properties.getProperty(propertyName);
+	}
+
+	/**
+	 * 根据所给的文件名获取文件的名称不包含后缀
+	 * @param fileName
+	 * @return xx.* 返回xx
+	 * @throws Exception
+	 */
+	public static String obtainFileName(String fileName) throws Exception{
+		//找寻最后一个.所在的位置
+		int startIndex=fileName.lastIndexOf(".");
+		return fileName.substring(0,startIndex);
 	}
 
 	/**
@@ -56,7 +94,6 @@ public class Tools {
 		try {
 			Integer.parseInt(num);
 		} catch (Exception e) {
-			// e.printStackTrace();
 			return false;
 		}
 		return true;

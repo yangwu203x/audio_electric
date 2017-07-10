@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.HotSingerMapper">
+    <sql id="hotSingerColumn">
+        s.id as singer_id,s.singer_no as singerNo ,s.singer_name as singerName ,s.header_path,s.prefix_path,s.server_url,
+       hs.rank,hs.id
+    </sql>
+ <select id="listHotSinger" resultMap="hotSingerMap">
+     select
+       <include refid="hotSingerColumn"/>
+     FROM hot_singer hs
+     left join db_singers s on hs.singer_id = s.id
+     order by hs.rank asc
+ </select>
+  <resultMap id="hotSingerMap" type="HotSinger">
+      <id column="id" property="id" />
+      <result property="rank" column="rank"/>
+      <result property="singerId" column="singer_id" />
+      <association property="singer" javaType="Singer">
+          <id property="id" column="singer_id"/>
+        <result property="singerNo" column="singerNo" />
+        <result property="singerName" column="singerName"/>
+          <result property="headerPath" column="header_path"/>
+          <result property="prefixPath" column="prefix_path"/>
+          <result property="serverUrl" column="server_url"/>
+      </association>
+  </resultMap>
+    <insert id="saveHotSinger" parameterType="HotSinger" >
+        insert into hot_singer(singer_id,rank) values (#{singerId},#{rank})
+    </insert>
+
+    <update id="editHotSinger" parameterType="HotSinger">
+        update hot_singer set singer_id = #{singerId},rank=#{rank} where id = #{id}
+    </update>
+
+    <delete id="deleteHotSinger" parameterType="string">
+        delete from hot_singer where id in (${ids})
+    </delete>
+
+    <select id="getHotSingerById" parameterType="HotSinger" resultMap="hotSingerMap">
+        select
+        <include refid="hotSingerColumn"/>
+        FROM
+        hot_singer hs left join db_singers s on hs.singer_id = s.id
+        where hs.id = #{id}
+        order by hs.rank asc
+    </select>
+</mapper>

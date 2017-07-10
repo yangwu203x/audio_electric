@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.CountMapper">
+	<select id="songRank" parameterType="Song" resultType="Song">
+	  SELECT  song.id,song.song_name as songName,song.song_no as songNo,song.singer_id as singerId,
+		  song.singer_name as singerName,record.order_time as orderTime
+      FROM  song_order as record
+      left join db_songs song on record.song_id = song.id ORDER BY record.order_time desc
+	</select>
+
+	<select id="songCollection" parameterType="Song" resultType="Song">
+		select a.collections,
+			song.id, song.song_name as songName, song.song_no as songNo,
+			song.singer_id AS singerId,
+			song.singer_name AS singerName
+		from
+			view_song_collection a
+			left join db_songs song on a.song_id = song.id
+		order by a.collections desc
+	</select>
+
+	<select id="listUserOnline" resultType="User">
+		select u.id,u.username,u.email,uo.login_date as createDate from user_online uo
+			left join user u on uo.user_id = u.id
+	</select>
+</mapper>

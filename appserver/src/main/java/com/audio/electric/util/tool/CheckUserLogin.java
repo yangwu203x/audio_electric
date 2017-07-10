@@ -2,14 +2,7 @@ package com.audio.electric.util.tool;
 
 import com.audio.electric.domain.CookieUser;
 import com.audio.electric.domain.User;
-import com.audio.electric.domain.UserOnline;
-import com.audio.electric.service.IUserService;
 import com.audio.electric.util.constants.Constant;
-import com.audio.electric.util.enums.DataType;
-import com.audio.electric.util.enums.RetCode;
-import com.audio.electric.util.exception.AppException;
-import com.audio.electric.util.protocol.Body;
-import com.audio.electric.util.protocol.BodyUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -17,10 +10,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.util.Date;
 
 
 /**
@@ -34,8 +23,6 @@ public class CheckUserLogin {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     	//判断用户是否已经登陆
     	CookieUser user =(CookieUser) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
-    	if(user == null)
-    	    throw new AppException(RetCode.UNLOGINED);
     	return user;
    }
 

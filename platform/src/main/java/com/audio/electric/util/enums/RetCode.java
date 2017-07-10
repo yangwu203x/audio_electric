@@ -44,7 +44,13 @@ public enum RetCode {
     COLLECTIONALREADY(126,"已经收藏，不能重复收藏"),
     COLLECTIONNOT(127,"还没收藏，不能取消收藏"),
     ATTENDTIONALREADY(126,"已经关注，不能重复关注"),
-    ATTENDTIONNOT(127,"还没关注，不能取消关注");
+    ATTENDTIONNOT(127,"还没关注，不能取消关注"),
+    USERNAMEEXIST(128,"用户名已经存在"),
+    MULTIPARTFILENOTEXIST(129,"MULTIPARTFILE文件不存在"),
+    UPLOADEXCEPTION(130,"上传异常"),
+    UPLOADFILENOTILLEGAL(131,"上传文件格式不正确，必须是mpg，mkv，mrs文件"),
+    UPLOADFILENOTEQUALSONGID(132,"上传文件名不等于歌曲编号"),
+    PAST_AUTHCODE(133,"验证码已过期");
 
 
     RetCode(int code, String msg) {

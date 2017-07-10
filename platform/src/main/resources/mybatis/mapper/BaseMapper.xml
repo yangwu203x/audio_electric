@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.BaseMapper">
+	<select id="listMenuByRole" parameterType="Role" resultType="Menu">
+		select  m.id,m.name,m.url,m.parent_menu_id as parentMenuId
+		from
+		menu m where m.id in
+		(select distinct menu_id
+		  from role_menu rm
+		  where rm.role_id = #{id})
+	</select>
+  <select id="listMenuByAccount" parameterType="Account" resultType="Menu">
+     select  m.id,m.name,m.url,m.parent_menu_id as parentMenuId,m.menu_icon as menuIcon
+ 		from
+ 		menu m where m.id in
+ 			(select distinct menu_id
+ 				from role_menu rm
+				left join role r on rm.role_id = r.id
+				left join role_account ra on ra.role_id = r.id
+				where ra.account_id = #{id})
+  </select>
+
+	<select id="getRoleByAccount" parameterType="Account" resultType="Role">
+		select  r.id,r.role_name as roleName,role_add as roleAdd,role_del as roleDel,role_update as roleUpdate,role_check as roleCheck
+		from role_account ra
+		left join role r on ra.role_id = r.id
+		where ra.account_id =  #{id}
+	</select>
+	<select id="listAccountByRoledel" parameterType="map" resultType="Account">
+		select a.id,a.username from account a
+		where a.id in (select DISTINCT ra.account_id from role_account ra where ra.role_id = #{role_id})
+			<if test="username != null">
+				and a.username like '%'#{username}'%'
+			</if>
+	</select>
+	<select id="listAccountByRoleadd" parameterType="map" resultType="Account">
+		select a.id,a.username from account a
+		where a.id not in (select DISTINCT ra.account_id from role_account ra where ra.role_id = #{role_id})
+		<if test="username != null">
+			and a.username like '%'#{username}'%'
+		</if>
+	</select>
+	<select id="listAccountOfRole" resultType="map">
+		select  group_concat(a.username separator ",") as username,role_id from role_account ra left join account a on a.id = ra.account_id group by role_id
+	</select>
+	<select id="listEnumValueByTitle" parameterType="string" resultType="EnumValue">
+		select ev.id,ev.name,ev.enum_type_id as enumTypeId from enum_type et left join enum_value ev on et.id = ev.enum_type_id
+		where et.type_name =#{_parameter}
+	</select>
+
+	<select id="listAllSong" parameterType="string" resultType="Song">
+		select
+			dbs.mrs_id as mrsId,dbs.midi_id as midiId,dbs.vod_id as vodId,dbs.song_name songName,dbs.singer_name as singerName,dbs.song_zs as songZs,dbs.spell as spell,
+			ev1.name as fileFormat,ev2.name as langId,ev3.name as themeSong,ev4.name as tvProgram,ev5.name as tvProgramEnter,ev6.name as scene,ev7.name as songYears,ev8.name as enterSelected,
+			dbs.update_date as updateDate
+		from db_songs dbs
+			left join enum_value ev1 on dbs.file_format = ev1.id
+			left join enum_value ev2 on dbs.lang_id = ev2.id
+			left join enum_value ev3 on dbs.theme_song = ev3.id
+			left join enum_value ev4 on dbs.tv_program = ev4.id
+			left join enum_value ev5 on dbs.tv_program_enter = ev5.id
+			left join enum_value ev6 on dbs.scene = ev6.id
+			left join enum_value ev7 on dbs.song_years = ev7.id
+			left join enum_value ev8 on dbs.enter_selected = ev8.id
+	</select>
+	<select id="listMapByTitle" parameterType="string" resultType="map">
+		select ev.id,ev.name from enum_type et left join enum_value ev on et.id = ev.enum_type_id
+		where et.type_name = #{_parameter}
+	</select>
+</mapper>

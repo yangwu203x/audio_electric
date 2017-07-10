@@ -2,6 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <logger name="org.springframework.web" level="INFO"/>
+    <!-- show sql --> <logger name="com.audio.electric.mapper" level="DEBUG"/>
     <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>D:/logs/springbootLog.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -15,7 +16,7 @@
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
     </appender>
-    <root level="INFO">
+    <root level="info">
         <appender-ref ref="dailyRollingFileAppender"></appender-ref>
     </root>
 </configuration>

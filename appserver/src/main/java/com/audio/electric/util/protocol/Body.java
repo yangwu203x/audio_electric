@@ -2,9 +2,8 @@ package com.audio.electric.util.protocol;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.audio.electric.domain.User;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.audio.electric.util.enums.DataType;
-import com.audio.electric.util.tool.StringUtils;
 import com.github.pagehelper.Page;
 
 import java.util.List;
@@ -84,7 +83,7 @@ public class Body<T>{
                     sb.append(",\"totalPages\":").append(totalPages);
                 }
             }
-            res = responseData != null ? JSONObject.toJSON(responseData).toString() : responseData;
+            res = responseData != null ? JSON.toJSONString(responseData, SerializerFeature.WriteMapNullValue).toString() : responseData;
         }
         sb.append(", \"responseData\":").append(res).append("}");
         return sb.toString();

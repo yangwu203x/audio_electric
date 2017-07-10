@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.SingerMapper">
+  <resultMap id="BaseResultMap" type="com.audio.electric.domain.Singer">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="singer_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="singer_type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="singer_pinyin" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="singer_odertimes" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="header_path" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="song_count" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="singer_nation" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="prefix_path" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="server_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="singer_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="singer_zs" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="singer_version" javaType="java.util.Date" jdbcType="DATE" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, singer_name, singer_type, singer_pinyin, singer_odertimes, header_path, status, 
+    song_count, singer_nation, prefix_path, server_url, singer_no, singer_zs, singer_version
+  </sql>
+  <select id="selectByExample" parameterType="com.audio.electric.domain.SingerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from db_singers
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from db_singers
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from db_singers
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.audio.electric.domain.SingerExample">
+    delete from db_singers
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.audio.electric.domain.Singer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into db_singers (singer_name, singer_type, singer_pinyin, 
+      singer_odertimes, header_path, status, 
+      song_count, singer_nation, prefix_path, 
+      server_url, singer_no, singer_zs, 
+      singer_version)
+    values (#{singerName,jdbcType=VARCHAR}, #{singerType,jdbcType=VARCHAR}, #{singerPinyin,jdbcType=VARCHAR}, 
+      #{singerOdertimes,jdbcType=INTEGER}, #{headerPath,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{songCount,jdbcType=VARCHAR}, #{singerNation,jdbcType=VARCHAR}, #{prefixPath,jdbcType=VARCHAR}, 
+      #{serverUrl,jdbcType=VARCHAR}, #{singerNo,jdbcType=VARCHAR}, #{singerZs,jdbcType=INTEGER}, 
+      #{singerVersion,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.audio.electric.domain.Singer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into db_singers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="singerName != null">
+        singer_name,
+      </if>
+      <if test="singerType != null">
+        singer_type,
+      </if>
+      <if test="singerPinyin != null">
+        singer_pinyin,
+      </if>
+      <if test="singerOdertimes != null">
+        singer_odertimes,
+      </if>
+      <if test="headerPath != null">
+        header_path,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="songCount != null">
+        song_count,
+      </if>
+      <if test="singerNation != null">
+        singer_nation,
+      </if>
+      <if test="prefixPath != null">
+        prefix_path,
+      </if>
+      <if test="serverUrl != null">
+        server_url,
+      </if>
+      <if test="singerNo != null">
+        singer_no,
+      </if>
+      <if test="singerZs != null">
+        singer_zs,
+      </if>
+      <if test="singerVersion != null">
+        singer_version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="singerName != null">
+        #{singerName,jdbcType=VARCHAR},
+      </if>
+      <if test="singerType != null">
+        #{singerType,jdbcType=VARCHAR},
+      </if>
+      <if test="singerPinyin != null">
+        #{singerPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="singerOdertimes != null">
+        #{singerOdertimes,jdbcType=INTEGER},
+      </if>
+      <if test="headerPath != null">
+        #{headerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="songCount != null">
+        #{songCount,jdbcType=VARCHAR},
+      </if>
+      <if test="singerNation != null">
+        #{singerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixPath != null">
+        #{prefixPath,jdbcType=VARCHAR},
+      </if>
+      <if test="serverUrl != null">
+        #{serverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="singerNo != null">
+        #{singerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="singerZs != null">
+        #{singerZs,jdbcType=INTEGER},
+      </if>
+      <if test="singerVersion != null">
+        #{singerVersion,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.audio.electric.domain.SingerExample" resultType="java.lang.Integer">
+    select count(*) from db_singers
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update db_singers
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.singerName != null">
+        singer_name = #{record.singerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singerType != null">
+        singer_type = #{record.singerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singerPinyin != null">
+        singer_pinyin = #{record.singerPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singerOdertimes != null">
+        singer_odertimes = #{record.singerOdertimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.headerPath != null">
+        header_path = #{record.headerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.songCount != null">
+        song_count = #{record.songCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singerNation != null">
+        singer_nation = #{record.singerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prefixPath != null">
+        prefix_path = #{record.prefixPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serverUrl != null">
+        server_url = #{record.serverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singerNo != null">
+        singer_no = #{record.singerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.singerZs != null">
+        singer_zs = #{record.singerZs,jdbcType=INTEGER},
+      </if>
+      <if test="record.singerVersion != null">
+        singer_version = #{record.singerVersion,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update db_singers
+    set id = #{record.id,jdbcType=INTEGER},
+      singer_name = #{record.singerName,jdbcType=VARCHAR},
+      singer_type = #{record.singerType,jdbcType=VARCHAR},
+      singer_pinyin = #{record.singerPinyin,jdbcType=VARCHAR},
+      singer_odertimes = #{record.singerOdertimes,jdbcType=INTEGER},
+      header_path = #{record.headerPath,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      song_count = #{record.songCount,jdbcType=VARCHAR},
+      singer_nation = #{record.singerNation,jdbcType=VARCHAR},
+      prefix_path = #{record.prefixPath,jdbcType=VARCHAR},
+      server_url = #{record.serverUrl,jdbcType=VARCHAR},
+      singer_no = #{record.singerNo,jdbcType=VARCHAR},
+      singer_zs = #{record.singerZs,jdbcType=INTEGER},
+      singer_version = #{record.singerVersion,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.audio.electric.domain.Singer">
+    update db_singers
+    <set>
+      <if test="singerName != null">
+        singer_name = #{singerName,jdbcType=VARCHAR},
+      </if>
+      <if test="singerType != null">
+        singer_type = #{singerType,jdbcType=VARCHAR},
+      </if>
+      <if test="singerPinyin != null">
+        singer_pinyin = #{singerPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="singerOdertimes != null">
+        singer_odertimes = #{singerOdertimes,jdbcType=INTEGER},
+      </if>
+      <if test="headerPath != null">
+        header_path = #{headerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="songCount != null">
+        song_count = #{songCount,jdbcType=VARCHAR},
+      </if>
+      <if test="singerNation != null">
+        singer_nation = #{singerNation,jdbcType=VARCHAR},
+      </if>
+      <if test="prefixPath != null">
+        prefix_path = #{prefixPath,jdbcType=VARCHAR},
+      </if>
+      <if test="serverUrl != null">
+        server_url = #{serverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="singerNo != null">
+        singer_no = #{singerNo,jdbcType=VARCHAR},
+      </if>
+      <if test="singerZs != null">
+        singer_zs = #{singerZs,jdbcType=INTEGER},
+      </if>
+      <if test="singerVersion != null">
+        singer_version = #{singerVersion,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.audio.electric.domain.Singer">
+    update db_singers
+    set singer_name = #{singerName,jdbcType=VARCHAR},
+      singer_type = #{singerType,jdbcType=VARCHAR},
+      singer_pinyin = #{singerPinyin,jdbcType=VARCHAR},
+      singer_odertimes = #{singerOdertimes,jdbcType=INTEGER},
+      header_path = #{headerPath,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      song_count = #{songCount,jdbcType=VARCHAR},
+      singer_nation = #{singerNation,jdbcType=VARCHAR},
+      prefix_path = #{prefixPath,jdbcType=VARCHAR},
+      server_url = #{serverUrl,jdbcType=VARCHAR},
+      singer_no = #{singerNo,jdbcType=VARCHAR},
+      singer_zs = #{singerZs,jdbcType=INTEGER},
+      singer_version = #{singerVersion,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

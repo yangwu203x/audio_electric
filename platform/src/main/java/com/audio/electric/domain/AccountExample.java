@@ -444,6 +444,276 @@ public class AccountExample {
             return (Criteria) this;
         }
 
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidIsNull() {
+            addCriterion("pid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidIsNotNull() {
+            addCriterion("pid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidEqualTo(String value) {
+            addCriterion("pid =", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidNotEqualTo(String value) {
+            addCriterion("pid <>", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidGreaterThan(String value) {
+            addCriterion("pid >", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidGreaterThanOrEqualTo(String value) {
+            addCriterion("pid >=", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidLessThan(String value) {
+            addCriterion("pid <", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidLessThanOrEqualTo(String value) {
+            addCriterion("pid <=", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidLike(String value) {
+            addCriterion("pid like", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidNotLike(String value) {
+            addCriterion("pid not like", value, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidIn(List<String> values) {
+            addCriterion("pid in", values, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidNotIn(List<String> values) {
+            addCriterion("pid not in", values, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidBetween(String value1, String value2) {
+            addCriterion("pid between", value1, value2, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidNotBetween(String value1, String value2) {
+            addCriterion("pid not between", value1, value2, "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinIsNull() {
+            addCriterion("user_pin is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinIsNotNull() {
+            addCriterion("user_pin is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinEqualTo(String value) {
+            addCriterion("user_pin =", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinNotEqualTo(String value) {
+            addCriterion("user_pin <>", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinGreaterThan(String value) {
+            addCriterion("user_pin >", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinGreaterThanOrEqualTo(String value) {
+            addCriterion("user_pin >=", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinLessThan(String value) {
+            addCriterion("user_pin <", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinLessThanOrEqualTo(String value) {
+            addCriterion("user_pin <=", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinLike(String value) {
+            addCriterion("user_pin like", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinNotLike(String value) {
+            addCriterion("user_pin not like", value, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinIn(List<String> values) {
+            addCriterion("user_pin in", values, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinNotIn(List<String> values) {
+            addCriterion("user_pin not in", values, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinBetween(String value1, String value2) {
+            addCriterion("user_pin between", value1, value2, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinNotBetween(String value1, String value2) {
+            addCriterion("user_pin not between", value1, value2, "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytIsNull() {
+            addCriterion("keyt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytIsNotNull() {
+            addCriterion("keyt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytEqualTo(String value) {
+            addCriterion("keyt =", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytNotEqualTo(String value) {
+            addCriterion("keyt <>", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytGreaterThan(String value) {
+            addCriterion("keyt >", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytGreaterThanOrEqualTo(String value) {
+            addCriterion("keyt >=", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytLessThan(String value) {
+            addCriterion("keyt <", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytLessThanOrEqualTo(String value) {
+            addCriterion("keyt <=", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytLike(String value) {
+            addCriterion("keyt like", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytNotLike(String value) {
+            addCriterion("keyt not like", value, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytIn(List<String> values) {
+            addCriterion("keyt in", values, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytNotIn(List<String> values) {
+            addCriterion("keyt not in", values, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytBetween(String value1, String value2) {
+            addCriterion("keyt between", value1, value2, "keyt");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytNotBetween(String value1, String value2) {
+            addCriterion("keyt not between", value1, value2, "keyt");
+            return (Criteria) this;
+        }
+
         public Criteria andUsernameLikeInsensitive(String value) {
             addCriterion("upper(username) like", value.toUpperCase(), "username");
             return (Criteria) this;
@@ -461,6 +731,21 @@ public class AccountExample {
 
         public Criteria andLastLoginIpLikeInsensitive(String value) {
             addCriterion("upper(last_login_ip) like", value.toUpperCase(), "lastLoginIp");
+            return (Criteria) this;
+        }
+
+        public Criteria andPidLikeInsensitive(String value) {
+            addCriterion("upper(pid) like", value.toUpperCase(), "pid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserPinLikeInsensitive(String value) {
+            addCriterion("upper(user_pin) like", value.toUpperCase(), "userPin");
+            return (Criteria) this;
+        }
+
+        public Criteria andKeytLikeInsensitive(String value) {
+            addCriterion("upper(keyt) like", value.toUpperCase(), "keyt");
             return (Criteria) this;
         }
     }

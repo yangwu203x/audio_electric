@@ -1,12 +1,15 @@
 package com.audio.electric.domain;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 点赞表
  * Created by Administrator on 2017/3/17 0017.
  */
+@Alias("Goods")
 public class Goods {
     private long userId;//用户id
-    private long beUserId;//点赞用户的id
+    private long portfolioId;//点赞用户的id
     private String createDate;//创建时间
 
     public Goods() {
@@ -20,12 +23,12 @@ public class Goods {
         this.userId = userId;
     }
 
-    public long getBeUserId() {
-        return beUserId;
+    public long getPortfolioId() {
+        return portfolioId;
     }
 
-    public void setBeUserId(long beUserId) {
-        this.beUserId = beUserId;
+    public void setPortfolioId(long portfolioId) {
+        this.portfolioId = portfolioId;
     }
 
     public String getCreateDate() {

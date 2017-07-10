@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.audio.electric.mapper.HotSongMapper">
+    <select id="listHotSong" resultMap="hotSongMap">
+        select
+          s.id as song_id,s.song_no as songNo,s.song_name as songName,
+          hs.rank,hs.id
+        FROM
+        hot_song hs left join db_songs s on hs.song_id = s.id
+        order by hs.rank asc
+    </select>
+    <resultMap id="hotSongMap" type="HotSong">
+        <id column="id" property="id" />
+        <result property="rank" column="rank"/>
+        <result property="songId" column="song_id"/>
+        <association property="song" javaType="Song">
+            <id property="id" column="song_id"/>
+            <result property="songNo" column="songNo" />
+            <result property="songName" column="songName"/>
+        </association>
+    </resultMap>
+    <insert id="saveHotSong" parameterType="HotSong" >
+        insert into hot_song(song_id,rank) values (#{songId},#{rank})
+    </insert>
+
+    <update id="editHotSong" parameterType="HotSong">
+        update hot_song set song_id = #{songId},rank=#{rank} where id = #{id}
+    </update>
+
+    <delete id="deleteHotSong" parameterType="string">
+        delete from hot_song where id in (${ids})
+    </delete>
+
+    <select id="getHotSongById" parameterType="HotSong" resultMap="hotSongMap">
+        select
+        s.song_id  ,s.name ,
+        hs.rank,hs.id
+        FROM
+        hot_song hs left join db_songs s on hs.song_id = s.id
+        where hs.id = #{id}
+        order by hs.rank asc
+    </select>
+</mapper>

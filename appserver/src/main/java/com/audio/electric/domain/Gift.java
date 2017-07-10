@@ -1,9 +1,12 @@
 package com.audio.electric.domain;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 礼物表
  * Created by Administrator on 2017/3/17 0017.
  */
+@Alias("Gift")
 public class Gift {
     private int id;
     private String name;//礼物名字

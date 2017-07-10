@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+    <!--<h1 th:text="${user.email}"></h1>-->
+    <!--<h2 th:text="${user.mac}"></h2>-->
+<form th:action="@{${requestUrl}">
+    <div style="">
+        <input type="hidden" th:value="${user.email}" name="email"/>
+        <input type="hidden" th:value="${user.mac}" name="mac"/>
+        <div class="row cl">
+            <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i>密码</label>
+            <div class="formControls col-xs-8">
+                <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L" value = "" required="required"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i>重复密码</label>
+            <div class="formControls col-xs-8">
+                <input id="repassword" name="repassword" type="password" placeholder="重复密码" class="input-text size-L" value = "" required="required"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-3">
+                <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;提&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;"/>
+                <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"/>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

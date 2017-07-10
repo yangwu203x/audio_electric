@@ -46,4 +46,6 @@ public interface ILoginService {
     User login(User user);
 
     Body loginOut();
+
+    Object findPwd(User user);
 }

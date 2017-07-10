@@ -1,6 +1,8 @@
 package com.audio.electric.util.tool;
 
 
+import com.audio.electric.util.constants.Constant;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -47,11 +49,25 @@ public class SendEmail {
      * 发送注册邮件
      * @param email
      */
-    public static void sendRegisterMail(String email,String mac) {
+    public static void sendRegisterMail(String email,String mac) throws Exception {
+        String serverUrl = Tools.propertiesFileResolve(Constant.SERVERURL);
         ///发送注册邮件
         StringBuffer sb = new StringBuffer("Welcome to AudioElectric<br/>");
         sb.append("To get started, please click on the href below to confirm your account:<br/>");
-        sb.append("http://127.0.0.1:8080/login/active?action=activate&email=");
+        sb.append(serverUrl +"/login/active?action=activate&email=");
+        sb.append(email);
+        sb.append("&mac=");
+        sb.append(mac);
+        //发送激活邮箱
+        SendEmail.send(email, sb.toString(), "Please validate your account");
+    }
+
+    public static void sendFindPwdMail(String email,String mac) throws Exception {
+        String serverUrl = Tools.propertiesFileResolve(Constant.SERVERURL);
+        ///发送注册邮件
+        StringBuffer sb = new StringBuffer("Welcome to AudioElectric<br/>");
+        sb.append("To get started, please click on the href below to confirm your account:<br/>");
+        sb.append(serverUrl + "/login/toChangePwd?email=");
         sb.append(email);
         sb.append("&mac=");
         sb.append(mac);

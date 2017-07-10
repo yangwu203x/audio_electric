@@ -16,7 +16,7 @@ public class CheckUserLogin {
     public static Account getloginuser() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //判断用户是否已经登陆
-        Account account =(Account) request.getSession().getAttribute(Constant.CURRENT_LOGIN_USER);
+        Account account =(Account) request.getSession().getAttribute(Constant.CURRENT_LOGIN_ACCOUNT);
         return account;
     }
 }

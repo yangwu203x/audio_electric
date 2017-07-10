@@ -36,6 +36,7 @@ public class LoginServiceImpl extends BaseService implements ILoginService {
     @Override
     public Body doReg(User user) {
         int result = RetCode.FAILED.getCode();
+        try {
         String email = user.getEmail();//邮箱
         checkEmail(email);
         String password = user.getPassword();//密码
@@ -67,14 +68,18 @@ public class LoginServiceImpl extends BaseService implements ILoginService {
             user.setRegitserWay(Constant.REGISTERBYMAIL);
             user.setMac(mac);
             user.setStatus(Constant.UNACTIVESTATUS);
-            try {
-                result = loginMapper.reg(user);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
+            result = loginMapper.reg(user);
+
         }
-        //发送注册邮件
-        SendEmail.sendRegisterMail(email , mac);
+            //发送注册邮件
+            SendEmail.sendRegisterMail(email , mac);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return BodyUtil.result(result);
     }
 
@@ -174,11 +179,35 @@ public class LoginServiceImpl extends BaseService implements ILoginService {
         return BodyUtil.result(result);
     }
 
+    @Override
+    public Object findPwd(User user){
+        try {
+            List<User> list = loginMapper.getUserByEmail(user);
+            if (list != null && list.size() >0){
+                user = list.get(0);
+                User temp = new User();
+                temp.setId(user.getId());
+                temp.setMac(UUID.randomUUID().toString());
+                loginMapper.updateUser(temp);
+                SendEmail.sendFindPwdMail(user.getEmail() , temp.getMac());
+            }else{
+                throw  new AppException(RetCode.REG_EMAIL_IS_NOT_REGISTER);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void checkEmail(String email) {
         if(StringUtils.isNull(email))//不为空
             throw new AppException(RetCode.REG_EMPTY_EMAIL);
         if(!RegExpValidatorUtils.isEmail(email))//校验格式
             throw new AppException(RetCode.REG_EMAIL_IS_MISTAKE);
     }
+
+
 
 }
