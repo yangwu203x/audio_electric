@@ -4,6 +4,7 @@ function parseValue(){
     var formatNodes = $("."+"containAccount");
     $.ajax({
         url:'/role/getAccountOfRole',
+        // data:{role_id:role_id},
         type:"POST",
         async:false,
         cache: false,

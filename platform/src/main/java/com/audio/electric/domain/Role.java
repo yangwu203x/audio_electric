@@ -13,17 +13,19 @@ public class Role implements Serializable {
 
     private String description;
 
-    private Integer roleAdd = 0;
+    private Integer roleAdd;
 
-    private Integer roleDel = 0;
+    private Integer roleDel;
 
-    private Integer roleUpdate = 0;
+    private Integer roleUpdate;
 
-    private Integer roleCheck = 0;
+    private Integer roleCheck;
+
+    private Integer roleExport;
 
     private static final long serialVersionUID = 1L;
 
-    public Role(Integer id, String roleName, String createDate, String description, Integer roleAdd, Integer roleDel, Integer roleUpdate, Integer roleCheck) {
+    public Role(Integer id, String roleName, String createDate, String description, Integer roleAdd, Integer roleDel, Integer roleUpdate, Integer roleCheck, Integer roleExport) {
         this.id = id;
         this.roleName = roleName;
         this.createDate = createDate;
@@ -32,6 +34,7 @@ public class Role implements Serializable {
         this.roleDel = roleDel;
         this.roleUpdate = roleUpdate;
         this.roleCheck = roleCheck;
+        this.roleExport = roleExport;
     }
 
     public Role() {
@@ -102,6 +105,14 @@ public class Role implements Serializable {
         this.roleCheck = roleCheck;
     }
 
+    public Integer getRoleExport() {
+        return roleExport;
+    }
+
+    public void setRoleExport(Integer roleExport) {
+        this.roleExport = roleExport;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -121,7 +132,8 @@ public class Role implements Serializable {
             && (this.getRoleAdd() == null ? other.getRoleAdd() == null : this.getRoleAdd().equals(other.getRoleAdd()))
             && (this.getRoleDel() == null ? other.getRoleDel() == null : this.getRoleDel().equals(other.getRoleDel()))
             && (this.getRoleUpdate() == null ? other.getRoleUpdate() == null : this.getRoleUpdate().equals(other.getRoleUpdate()))
-            && (this.getRoleCheck() == null ? other.getRoleCheck() == null : this.getRoleCheck().equals(other.getRoleCheck()));
+            && (this.getRoleCheck() == null ? other.getRoleCheck() == null : this.getRoleCheck().equals(other.getRoleCheck()))
+            && (this.getRoleExport() == null ? other.getRoleExport() == null : this.getRoleExport().equals(other.getRoleExport()));
     }
 
     @Override
@@ -136,6 +148,7 @@ public class Role implements Serializable {
         result = prime * result + ((getRoleDel() == null) ? 0 : getRoleDel().hashCode());
         result = prime * result + ((getRoleUpdate() == null) ? 0 : getRoleUpdate().hashCode());
         result = prime * result + ((getRoleCheck() == null) ? 0 : getRoleCheck().hashCode());
+        result = prime * result + ((getRoleExport() == null) ? 0 : getRoleExport().hashCode());
         return result;
     }
 }

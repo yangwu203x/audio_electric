@@ -614,6 +614,66 @@ public class RoleExample {
             return (Criteria) this;
         }
 
+        public Criteria andRoleExportIsNull() {
+            addCriterion("role_export is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportIsNotNull() {
+            addCriterion("role_export is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportEqualTo(Integer value) {
+            addCriterion("role_export =", value, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportNotEqualTo(Integer value) {
+            addCriterion("role_export <>", value, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportGreaterThan(Integer value) {
+            addCriterion("role_export >", value, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportGreaterThanOrEqualTo(Integer value) {
+            addCriterion("role_export >=", value, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportLessThan(Integer value) {
+            addCriterion("role_export <", value, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportLessThanOrEqualTo(Integer value) {
+            addCriterion("role_export <=", value, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportIn(List<Integer> values) {
+            addCriterion("role_export in", values, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportNotIn(List<Integer> values) {
+            addCriterion("role_export not in", values, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportBetween(Integer value1, Integer value2) {
+            addCriterion("role_export between", value1, value2, "roleExport");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleExportNotBetween(Integer value1, Integer value2) {
+            addCriterion("role_export not between", value1, value2, "roleExport");
+            return (Criteria) this;
+        }
+
         public Criteria andRoleNameLikeInsensitive(String value) {
             addCriterion("upper(role_name) like", value.toUpperCase(), "roleName");
             return (Criteria) this;

@@ -28,4 +28,6 @@ public interface ISingerService {
     List<Map<String,String>> findIdByName(Singer singer);
 
     List<Map<String,String>> findIdById(String ids);
+
+    void addOrUpdateSinger(Singer singer);
 }

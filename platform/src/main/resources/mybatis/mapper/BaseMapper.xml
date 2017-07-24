@@ -40,8 +40,8 @@
 			and a.username like '%'#{username}'%'
 		</if>
 	</select>
-	<select id="listAccountOfRole" resultType="map">
-		select  group_concat(a.username separator ",") as username,role_id from role_account ra left join account a on a.id = ra.account_id group by role_id
+	<select id="listAccountOfRole" parameterType="int" resultType="map">
+		select  group_concat(a.username separator ",") as username,role_id from  account a left join  role_account ra on a.id = ra.account_id group by role_id
 	</select>
 	<select id="listEnumValueByTitle" parameterType="string" resultType="EnumValue">
 		select ev.id,ev.name,ev.enum_type_id as enumTypeId from enum_type et left join enum_value ev on et.id = ev.enum_type_id

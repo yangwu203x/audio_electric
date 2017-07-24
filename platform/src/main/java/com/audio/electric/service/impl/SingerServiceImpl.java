@@ -158,6 +158,24 @@ public class SingerServiceImpl extends BaseService implements ISingerService{
         return idList;
     }
 
+    @Override
+    public void addOrUpdateSinger(Singer singer) {
+        System.out.println(singer.toString());
+        SingerExample singerExample = new SingerExample();
+        singerExample.or().andSingerNameEqualTo(singer.getSingerName());
+        try {
+            List<Singer> singerList = singerMapper.selectByExample(singerExample);
+            if (singerList != null && singerList.size() == 1){
+                singer.setId(singerList.get(0).getId());
+                singerMapper.updateByPrimaryKey(singer);
+            }else{
+                singerMapper.insertSelective(singer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 多选标签
      * @param idList

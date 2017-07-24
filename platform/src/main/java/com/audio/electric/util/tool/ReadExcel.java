@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import jxl.Cell;
 import jxl.Sheet;
@@ -63,7 +63,7 @@ public class ReadExcel {
 				nums = rsRows;
 			for(int i=1;i<nums;i++){//读取行
 				log.info("========执行第========"+i+"行");
-				Map<Integer,Object> map = new HashMap<>();
+				Map<Integer,Object> map = new ConcurrentHashMap<>();
 				for(int j=0;j<rsCols;j++){
 					Cell coo=rs.getCell(j, i);//单元格定位列，再定位行
 					String strc=coo.getContents();//读取内容
@@ -96,16 +96,16 @@ public class ReadExcel {
 			XSSFSheet st = xwb.getSheetAt(0);  //读取sheet的第一个工作表
 			int rows=st.getLastRowNum();//总行数
 			int cols;//总列数
-			log.info("========行========"+rows);
+//			log.info("========行========"+rows);
 			if (nums == -1)
 				nums = rows;
 			for(int i=0;i<nums;i++){
 				XSSFRow row=st.getRow(i);//读取某一行数据
 				if(row!=null){
-					Map<Integer,Object> map = new HashMap<>();
+					Map<Integer,Object> map = new ConcurrentHashMap<>();
 					//获取行中所有列数据
 					cols=row.getLastCellNum();
-					log.info("========行========"+rows+"=====列========"+cols);
+//					log.info("========行========"+rows+"=====列========"+cols);
 					for(int j=0;j<cols;j++){
 						XSSFCell cell=row.getCell(j);
 						if(cell==null){
@@ -160,10 +160,10 @@ public class ReadExcel {
 		try {
 			str = new FileInputStream(realPath);
 			List<Map<Integer,Object>> list = parseSuccexx(str, fileName ,nums);
-			System.out.println(list.size());
-			System.out.println(list.get(0).toString());
-			System.out.println(list.get(1).get(1));
-			System.out.println(list.get(2).toString());
+//			System.out.println(list.size());
+//			System.out.println(list.get(0).toString());
+//			System.out.println(list.get(1).get(1));
+//			System.out.println(list.get(2).toString());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

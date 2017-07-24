@@ -217,4 +217,24 @@ public class Singer implements Serializable {
         result = prime * result + ((getSingerVersion() == null) ? 0 : getSingerVersion().hashCode());
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Singer{" +
+                "id=" + id +
+                ", singerName='" + singerName + '\'' +
+                ", singerType='" + singerType + '\'' +
+                ", singerPinyin='" + singerPinyin + '\'' +
+                ", singerOdertimes=" + singerOdertimes +
+                ", headerPath='" + headerPath + '\'' +
+                ", status='" + status + '\'' +
+                ", songCount='" + songCount + '\'' +
+                ", singerNation='" + singerNation + '\'' +
+                ", prefixPath='" + prefixPath + '\'' +
+                ", serverUrl='" + serverUrl + '\'' +
+                ", singerNo='" + singerNo + '\'' +
+                ", singerZs=" + singerZs +
+                ", singerVersion=" + singerVersion +
+                '}';
+    }
 }

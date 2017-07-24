@@ -194,6 +194,8 @@ public class SongServiceImpl extends BaseService implements ISongService {
                 String song_years = "" +  dataList.get(i).get(17);
                 String enter_selected = "" +  dataList.get(i).get(18);
                 String update_date = "" +  dataList.get(i).get(19);
+                if (StringUtils.isNotNull(update_date))
+                update_date = formatDigit2(update_date);//转化日期
                 int songZs = Integer.parseInt(song_zs);
                 String singer_name = "" +  dataList.get(i).get(4);//歌星名
                 String singerId  = getSingerIdBySingerName( singer_name);
@@ -262,6 +264,39 @@ public class SongServiceImpl extends BaseService implements ISongService {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * 日期字符串中的汉字转换为数字
+     * @param sign
+     * @return
+     */
+    public static String formatDigit2(String sign){
+        if("一月".equals(sign))
+            sign = "1";
+        if("二月".equals(sign))
+            sign = "2";
+        if("三月".equals(sign))
+            sign = "3";
+        if("四月".equals(sign))
+            sign = "4";
+        if("五月".equals(sign))
+            sign = "5";
+        if("六月".equals(sign))
+            sign = "6";
+        if("七月".equals(sign))
+            sign = "7";
+        if("八月".equals(sign))
+            sign = "8";
+        if("九月".equals(sign))
+            sign = "9";
+        if("十月".equals(sign))
+            sign = "10";
+        if("十一月".equals(sign))
+            sign = "11";
+        if("十二月".equals(sign))
+            sign = "12";
+        return sign;
     }
 
     /**

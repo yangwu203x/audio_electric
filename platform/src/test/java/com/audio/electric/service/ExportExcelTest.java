@@ -1,13 +1,19 @@
 package com.audio.electric.service;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @Author leo_Yang【音特】
  * @Date 2017/6/21 0021 9:55
  */
+
 public class ExportExcelTest {
-    public static void main(String[] args){
+
+    public static void main(String[] args) throws ParseException {
         String path = "d:/test.xlsx";
         try {
 //            BufferedWriter buff = new BufferedWriter(new FileWriter(path));
