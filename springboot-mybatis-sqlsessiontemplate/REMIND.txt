@@ -1,1 +1,0 @@
-spirngboot对mybatis集成，采用mybatis的sqlsessiontemplate调用mapper.xml文件
