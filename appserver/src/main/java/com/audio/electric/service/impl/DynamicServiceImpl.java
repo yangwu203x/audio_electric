@@ -30,6 +30,9 @@ public class DynamicServiceImpl extends BaseService implements IDynamicService{
     @Override
     public List<Map<String, String>> listDynamicInfo(String type) {
         CookieUser user = CheckUserLogin.getloginuser();
+        if(user == null){
+            throw new AppException(RetCode.UNLOGINED);
+        }
         List<Map<String, String>> listMap = null;
         if("0".equals(type)){
             //关注的人

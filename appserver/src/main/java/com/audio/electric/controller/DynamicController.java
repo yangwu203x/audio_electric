@@ -53,6 +53,7 @@ public class DynamicController extends BaseController{
      * @param portfolio_id
      * @return
      */
+    @GetMapping("/getCommentsById")
     public String getCommentsById(Long portfolio_id){
         List<Map<String, String>> listComments = dynamicService.getCommentsById(portfolio_id);
         return BodyUtil.sucess(listComments,DataType.Array).toString();

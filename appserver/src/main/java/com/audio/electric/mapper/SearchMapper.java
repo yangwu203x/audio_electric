@@ -58,4 +58,9 @@ public interface SearchMapper {
     List<Integer> getChildSong(@Param("date") String date,@Param("enumValueId") Integer enumValueId);
 
     List<EnumValue> getSongTheme(@Param("songtheme")String songtheme);
+
+
+    List<Map> searchSingerByKeyWord(String keyWord);
+
+    List<Map> searchSongByKeyWord(String keyWord);
 }

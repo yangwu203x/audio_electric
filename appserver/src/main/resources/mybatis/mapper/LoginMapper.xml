@@ -18,7 +18,7 @@
     </select>
 
     <select id="login" resultType="User">
-        select id ,nickname ,photo ,username,level,status  from user where username = #{username} and password = #{password}
+        select id ,nickname ,photo ,username,background_img,level,status,is_vip,last_login_time  from user where username = #{username} and password = #{password}
     </select>
     <insert id="reg" parameterType="User">
         insert into user

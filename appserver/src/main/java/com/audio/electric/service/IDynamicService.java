@@ -10,10 +10,9 @@ import java.util.Map;
  */
 public interface IDynamicService {
 
-    public List<Map<String , String>> listDynamicInfo(String type);
+    List<Map<String , String>> listDynamicInfo(String type);
 
-
-    public Map<String,String> getPortfolioInfo(Long portfolio_id);
+    Map<String,String> getPortfolioInfo(Long portfolio_id);
 
     List<Map<String,String>> getCommentsById(Long id);
 }

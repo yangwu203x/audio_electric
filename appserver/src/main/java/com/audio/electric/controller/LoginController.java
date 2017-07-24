@@ -53,7 +53,7 @@ public class LoginController extends BaseController {
         return loginService.loginOut().toString();
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     @ResponseBody
     public String login(User user) throws IOException {
 
@@ -110,7 +110,7 @@ public class LoginController extends BaseController {
     }
 
     /**
-     * 调到重置密码页面
+     * 跳到重置密码页面
      * @param user
      * @param model
      * @return

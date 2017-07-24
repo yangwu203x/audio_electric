@@ -311,4 +311,42 @@ public class User {
     public void setPortfolioList(List<Portfolio> portfolioList) {
         this.portfolioList = portfolioList;
     }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", username='" + username + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", level=" + level +
+                ", photo='" + photo + '\'' +
+                ", name='" + name + '\'' +
+                ", isVip='" + isVip + '\'' +
+                ", backgroundImg='" + backgroundImg + '\'' +
+                ", integral=" + integral +
+                ", status='" + status + '\'' +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
+                ", token='" + token + '\'' +
+                ", signature='" + signature + '\'' +
+                ", loginTime=" + loginTime +
+                ", mac='" + mac + '\'' +
+                ", registerWay='" + registerWay + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", age=" + age +
+                ", country='" + country + '\'' +
+                ", provinces='" + provinces + '\'' +
+                ", city='" + city + '\'' +
+                ", professional='" + professional + '\'' +
+                ", identification='" + identification + '\'' +
+                ", system='" + system + '\'' +
+                ", version='" + version + '\'' +
+                ", model='" + model + '\'' +
+                ", brand='" + brand + '\'' +
+                '}';
+    }
 }

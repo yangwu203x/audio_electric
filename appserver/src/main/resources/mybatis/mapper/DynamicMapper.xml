@@ -6,7 +6,7 @@
     s.song_name as songName,
     u.is_vip,u.photo,u.nickname ,
     p.video_path,p.audio_path,p.id as portfolioId,p.listening_times ,p.create_date ,p.introduction ,
-    vul.level,vpgift.amount as giftCount,vpca.amount as collCount,vpga.amount as goodsCount
+    vul.level,vul.logo,vpgift.amount as giftCount,vpca.amount as collCount,vpga.amount as goodsCount
 </sql>
     <!--关注的人的动态-->
     <select id="listAttention" parameterType="User" resultType="map">
@@ -40,7 +40,7 @@
     <select id="getPortfolioInfo" parameterType="long" resultType="map">
         select
             s.song_name as songName,
-            u.photo,vl.level,vl.logo,u.is_vip,
+            u.photo,u.is_vip,u.nickname,vl.level,vl.logo,
             p.create_date,p.listening_times,p.introduction,p.picture,p.backgroundimg,
             vpc.comments
         from portfolio p

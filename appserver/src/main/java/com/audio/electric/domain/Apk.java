@@ -15,6 +15,7 @@ public class Apk {
     private String apkPath;//apk文件路径
     private String serverUrl;//服务器下载
     private int status;//状态,1:线上版本
+    private int type ;//类型
 
     public Apk(int id, String apkName, String apkVersion, String apkPath, String serverUrl, int status) {
         this.id = id;
@@ -74,5 +75,13 @@ public class Apk {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

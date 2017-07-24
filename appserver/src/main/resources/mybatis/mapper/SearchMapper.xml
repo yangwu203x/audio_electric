@@ -2,19 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.audio.electric.mapper.SearchMapper">
 
-    <sql id="friend">
+    <sql id="friend" >
         u.id,u.photo,u.username,u.nickname,vul.level,vul.logo
     </sql>
-    <sql id="condition">
-        <if test="username != null and &amp;&amp; != username.trim()">
-            and u.username like CONCAT('%',#{username},'%')
-        </if>
-        <if test="nickname != null and &amp;&amp; != nickname.trim()">
-            and u.nickname like CONCAT('%',#{nickname},'%')
-        </if>
-        <if test="name != null and &amp;&amp; != name.trim()">
-            and u.name like CONCAT('%',#{name},'%')
-        </if>
+    <sql id="condition" >
+        <trim prefix="and" prefixOverrides="or">
+            <if test="username != null and ''!= username.trim()">
+                u.username like CONCAT('%',${username},'%')
+            </if>
+            <if test="nickname != null and ''!= nickname.trim()">
+                u.nickname like CONCAT('%',${nickname},'%')
+            </if>
+            <if test="name != null and ''!= name.trim()">
+                u.name like CONCAT('%',${name},'%')
+            </if>
+        </trim>
     </sql>
     <select id="searchAttentionUser" parameterType="User" resultType="map">
         select
@@ -22,24 +24,69 @@
         from
         user u left join attention a on u.id = a.be_user_id
         left join v_user_level vul on vul.user_id = u.id
-        <where>
+        where
             a.user_id = #{id}
-            <include refid="condition"/>
-        </where>
+        <trim prefix="and (" suffix=")" prefixOverrides="and | or">
+            <if test="username != null and ''!= username.trim()">
+                u.username like CONCAT('%',#{username},'%')
+            </if>
+            <if test="nickname != null and ''!= nickname.trim()">
+                or u.nickname like CONCAT('%',#{nickname},'%')
+            </if>
+            <if test="name != null and ''!= name.trim()">
+                or u.name like CONCAT('%',#{name},'%')
+            </if>
+        </trim>
+
     </select>
 
     <select id="searchFriends" parameterType="User" resultType="map">
-        select <include refid="friend"/> from
+        select
+        u.id,u.photo,u.username,u.nickname,vul.level,vul.logo
+        from
         user u left join v_user_level vul on vul.user_id = u.id
-        <where>
-            <include refid="condition"/>
-        </where>
+        <trim prefix="where (" suffix = ")" prefixOverrides="and | or">
+            <if test="username != null and ''!= username.trim()">
+               u.username like CONCAT('%',#{username},'%')
+            </if>
+            <if test="nickname != null and ''!= nickname.trim()">
+               or u.nickname like CONCAT('%',#{nickname},'%')
+            </if>
+            <if test="name != null and ''!= name.trim()">
+               or u.name like CONCAT('%',#{name},'%')
+            </if>
+        </trim>
     </select>
 
     <!--作品名或者作者昵称或备注来搜索动态-->
     <select id="searchDynamic" parameterType="map" resultType="map">
-        select * from portfolio
+        select * from
+        user u
+        left join attention a on u.id = a.be_user_id
+        left join v_user_level vul on vul.user_id = u.id
+        left join portfolio p on p.user_id = a.user_id
+        where
+        a.user_id = #{id}
+        <trim prefix="and (" suffix=")" prefixOverrides="and | or">
+            <if test="keyword != null and ''!= keyword.trim()">
+                 p.description like CONCAT('%',#{description},'%')
+            </if>
+            <if test="keyword != null and ''!= keyword.trim()">
+               or p.name like CONCAT('%',#{pname},'%')
+            </if>
+            <if test="keyword != null and ''!= keyword.trim()">
+               or u.username like CONCAT('%',#{username},'%')
+            </if>
+            <if test="keyword != null and ''!= keyword.trim()">
+                or u.nickname like CONCAT('%',#{nickname},'%')
+            </if>
+            <if test="keyword != null and ''!= keyword.trim()">
+                or u.name like CONCAT('%',#{name},'%')
+            </if>
+        </trim>
+
     </select>
+
     <select id="searchSong" parameterType="map" resultType="map">
       select * from song
     </select>
@@ -83,5 +130,13 @@
 
     <select id="getSongTheme" parameterType="string" resultType="EnumValue">
         select ev.id, ev.name  from enum_type et left join enum_value ev on et.id = ev.enum_type_id where et.type_name = 'songtheme'
+    </select>
+
+    <select id="searchSongByKeyWord" parameterType="string" resultType="map">
+        select * from db_singers singer where singer.singer_name like '%周杰伦%' or singer.singer_pinyin like '%zjl%'
+    </select>
+
+    <select id="searchSingerByKeyWord" parameterType="string" resultType="map">
+        select * from  db_songs song where song.song_name like '%%' or song.singer_name like '%%' or song.spell like '%%'
     </select>
 </mapper>

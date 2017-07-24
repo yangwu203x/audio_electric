@@ -57,7 +57,8 @@ public class SearchServiceImpl extends BaseService implements ISearchService{
             user.setUsername(keyword);
             user.setNickname(keyword);
             user.setName(keyword);
-            return searchMapper.searchFriends(user);
+            List<Map> list = searchMapper.searchFriends(user);
+            return list;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -97,6 +98,15 @@ public class SearchServiceImpl extends BaseService implements ISearchService{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public List<Map> searchByKeyWord(String keyWord) {
+        //歌星
+        List<Map> dataSinger = searchMapper.searchSingerByKeyWord(keyWord);
+        //歌曲
+        List<Map> dataSong = searchMapper.searchSongByKeyWord(keyWord);
         return null;
     }
 

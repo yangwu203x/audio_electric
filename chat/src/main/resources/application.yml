@@ -1,0 +1,18 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+#  database:
+#    driverClassName: com.mysql.jdbc.Driver
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/appserver
+#    password: 123456
+#    username: root
+#    type: com.alibaba.druid.pool.DruidDataSource
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+#mybatis:
+#  mapper-locations: mybatis/mapper/*.xml
+#  type-aliases-package: com.audio.electric.domain

@@ -60,10 +60,11 @@ public class BehaviorController {
 
     /**
      * 作品评论
-     * @param portfolioComments
+     * @param portfolioComments 评论内容
+     * @param be_user_id 评论对象id
      * @return
      */
-    public Object comment(PortfolioComments portfolioComments){
+    public Object comment(PortfolioComments portfolioComments,String be_user_id){
         int result = behaviorService.comments(portfolioComments);
         return BodyUtil.result(result);
     }

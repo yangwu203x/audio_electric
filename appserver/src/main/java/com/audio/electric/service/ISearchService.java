@@ -1,6 +1,5 @@
 package com.audio.electric.service;
 
-import com.audio.electric.util.annotation.UserPage;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import java.util.Map;
  */
 public interface ISearchService {
 
-    @UserPage
     List<Map> searchAttentionUser(String keyword);
 
     List<Map> searchFriends(String keyword);
@@ -20,4 +18,5 @@ public interface ISearchService {
 
     List<Map> searchSong(String keyword);
 
+    List<Map> searchByKeyWord(String keyWord);
 }

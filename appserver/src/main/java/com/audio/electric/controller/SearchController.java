@@ -29,7 +29,7 @@ public class SearchController {
      * @param keyword
      * @return
      */
-    @PostMapping(value="/searchAttentionUser")
+    @GetMapping(value="/searchAttentionUser")
     @ResponseBody
     public String searchAttentionUser(String keyword){
         List<Map> data = searchService.searchAttentionUser(keyword);
@@ -43,7 +43,7 @@ public class SearchController {
      * @param keyword
      * @return
      */
-    @PostMapping("/searchFriends")
+    @GetMapping("/searchFriends")
     @ResponseBody
     public String searchFriends(String keyword){
         List<Map> data = searchService.searchFriends(keyword);
@@ -56,7 +56,7 @@ public class SearchController {
      * @param keyword 作品名或者作者昵称或备注来搜索动态
      * @return
      */
-    @PostMapping("/searchDynamic")
+    @GetMapping("/searchDynamic")
     @ResponseBody
     public String searchDynamic(String keyword){
         List<Map> data = searchService.searchDynamic(keyword);
@@ -81,9 +81,10 @@ public class SearchController {
      * 搜索歌曲名，歌星名，首字母
      * @return
      */
-    @RequestMapping("/searchSinger")
-    public Object searchSinger(){
+    @RequestMapping("/searchByKeyWord")
+    public Object searchByKeyWord(String keyWord){
         //TODO
+        List<Map> data = searchService.searchByKeyWord(keyWord);
         return null;
     }
 
