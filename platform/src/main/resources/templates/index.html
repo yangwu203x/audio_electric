@@ -71,15 +71,27 @@
 </header>
 <aside class="Hui-aside">
 	<div class="menu_dropdown bk_2">
-		<dl th:each="menu:${menuList}">
-			<dt>
+		<dl th:each="menu:${menuList}" class="firstdl">
+			<dt class="firstdt">
 				<i th:class="${menu.menuIcon}" style="font-size:20px;"></i>
 				&nbsp;&nbsp;[[${menu.name}]]
 				<i class="Hui-iconfont menu_dropdown-arrow" >&#xe6d5;</i>
 			</dt>
-			<dd>
+			<dd class="firstdd">
 				<ul th:each="subMenu:*{menu.subMenuList}">
-					<li><a  th:attr="data-title=*{subMenu.name},data-href=*{subMenu.url}" th:text="*{subMenu.name}" href="javascript:void(0)"></a></li>
+					<li th:style="${subMenu.url == '/enum/listDict'}?'display:none':''"><a  th:attr="data-title=*{subMenu.name},data-href=*{subMenu.url}" th:text="*{subMenu.name}" href="javascript:void(0)"></a></li>
+					<dl class="seconddl" th:style="${subMenu.url != '/enum/listDict'}?'display:none':''">
+						<dt class="seconddt">
+							<i class="Hui-iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${subMenu.name}]]<i class="Hui-iconfont menu_dropdown-arrow">&nbsp;&nbsp;&nbsp;&nbsp;&#xe6d5;</i>
+						</dt>
+						<dd class="seconddd">
+							<ul th:each="enum:*{enumList}">
+								<li>
+									<a  th:attr="data-title=*{enum.name},data-href=*{enum.url}"  href="javascript:void(0)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[[${enum.name}]]</a>
+								</li>
+							</ul>
+						</dd>
+					</dl>
 				</ul>
 			</dd>
 	</dl>
@@ -115,7 +127,7 @@
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" th:src="@{/lib/jquery/1.9.1/jquery.min.js}"></script>
 <script type="text/javascript" th:src="@{/lib/layer/2.4/layer.js}"></script>
-<script type="text/javascript" th:src="@{/h-ui/js/H-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/h-ui/js/H-ui.js}"></script>
 <script type="text/javascript" th:src="@{/h-ui.admin/js/H-ui.admin.js}"></script>
 <!--/_footer 作为公共模版分离出去-->
 

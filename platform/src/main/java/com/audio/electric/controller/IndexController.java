@@ -1,7 +1,9 @@
 package com.audio.electric.controller;
 
 import com.audio.electric.domain.Account;
+import com.audio.electric.domain.EnumType;
 import com.audio.electric.domain.Menu;
+import com.audio.electric.service.IDictService;
 import com.audio.electric.service.IMenuService;
 import com.audio.electric.util.constant.Constant;
 import com.audio.electric.util.tool.CheckUserLogin;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +24,8 @@ import java.util.List;
 public class IndexController extends BaseController{
     @Autowired
     private IMenuService menuService;
+    @Autowired
+    private IDictService dictService;
 
     @RequestMapping("/")
     public String login1() {
@@ -62,6 +67,15 @@ public class IndexController extends BaseController{
                 List<Menu> menuList = menuService.listMenuByAccount(account);
                 model.addAttribute("menuList", menuList);
             }
+            List<EnumType> dictList = dictService.listEnumType(new EnumType());
+            List<Menu> enumList = new ArrayList<>();
+            for (EnumType enumType : dictList){
+                Menu menu = new Menu();
+                menu.setName(enumType.getName());
+                menu.setUrl("/enum/listEnumValue?enumTypeId="+enumType.getId()+"&title="+enumType.getName());
+                enumList.add(menu);
+            }
+            model.addAttribute("enumList",enumList);
             return "index";
         }
     }

@@ -57,7 +57,7 @@ public class MenuServiceImpl extends BaseService implements IMenuService {
     @Override
     public List<Integer> listMenuIdByRole(Role role) {
         List<Integer> idsList = new ArrayList<>();
-        List<Menu> menuList = null;
+        List<Menu> menuList;
         try {
             MenuExample menuExample = new MenuExample();
             menuList = baseMapper.listMenuByRole(role);

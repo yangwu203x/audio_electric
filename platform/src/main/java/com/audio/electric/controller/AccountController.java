@@ -39,7 +39,7 @@ public class AccountController extends BaseController{
 
     @PostMapping("/login")
     @ResponseBody
-    public Object login(Account account ,String authCode, Model model ,HttpServletRequest request){
+    public Object login(Account account ,String authCode,HttpServletRequest request){
         String sessionAuthCode = (String) request.getSession().getAttribute(Constant.CURRENT_USER_VALIDATE_CODE_KEY);
         logger.info("authCode="+authCode+",sessionAuthCode="+sessionAuthCode);
         if(StringUtils.isNull(sessionAuthCode))

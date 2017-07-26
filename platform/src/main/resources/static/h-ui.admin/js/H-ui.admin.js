@@ -261,8 +261,10 @@ $(function(){
 		}
 	});
 	/*左侧菜单*/
-	$.Huifold(".menu_dropdown dl dt",".menu_dropdown dl dd","fast",1,"click");
-	
+	$.Huifold(".menu_dropdown .firstdl .firstdt",".menu_dropdown .firstdl .firstdd","fast",1,"click");
+
+    $.Huifold2(".menu_dropdown .seconddl .seconddt",".menu_dropdown .seconddl .seconddd","fast",1,"click");
+
 	/*选项卡导航*/
 	$(".Hui-aside").on("click",".menu_dropdown a",function(){
 		Hui_admin_tab(this);
