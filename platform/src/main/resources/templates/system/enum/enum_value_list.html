@@ -21,6 +21,7 @@
 		<link  th:href="@{/css/reset/reset.css}" rel="stylesheet" type="text/css"/>
 	</head>
 	<body>
+	<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span>系统管理<span class="c-gray en">&gt;</span>数据字典<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 		<div class="page-container">
 			<form th:action="@{${requestUrl}}" method="post" id="stuForm">
 				<input type="hidden" id="enumTypeId" name="enumTypeId" th:value="${enumTypeId}"/>
@@ -33,6 +34,12 @@
 						</a>
 						<a href="javascript:;" th:style="${session.current_role.getRoleAdd() == 0}?'display:none':''" onclick="enum_value_add()" class="btn btn-primary radius">
 							<i class="Hui-iconfont">&#xe600;</i> 添加字典
+						</a>
+						<a href="javascript:;" th:style="${session.current_role.getRoleDel() == 0}?'display:none':''" onclick="enum_type_del()" class="btn btn-danger radius">
+							<i class="Hui-iconfont">&#xe6e2;</i>字典类型删除
+						</a>
+						<a href="javascript:;" th:style="${session.current_role.getRoleAdd() == 0}?'display:none':''" onclick="enum_type_add()" class="btn btn-primary radius">
+							<i class="Hui-iconfont">&#xe600;</i> 添加字典类型
 						</a>
 				</span>
 				<span class="r">共有数据：<strong th:text="${pagehelper.total}"></strong> 条</span>

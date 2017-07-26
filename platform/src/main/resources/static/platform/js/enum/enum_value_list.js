@@ -22,6 +22,28 @@ function enum_value_edit(id){
     layer_show(title,url,width,height);
 }
 
+/*字典类型-增加*/
+function enum_type_add(){
+    //请求的路径
+    var url="/enum/showEnumType";
+    var title="添加字典类型";
+    var width="";
+    var height="510";
+    url+="?operateType=1";
+    layer_show(title,url,width,height);
+}
+
+/*字典类型-删除*/
+function enum_type_del(){
+    //请求的路径
+    var url="/enum/listEnumTypeByPage";
+    var title="删除字典类型";
+    var width="";
+    var height="650";
+    layer_show(title,url,width,height);
+}
+
+
 /*批量删除*/
 function batchDel(){
     //保存一组选中的编号

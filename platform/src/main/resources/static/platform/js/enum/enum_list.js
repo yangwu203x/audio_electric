@@ -83,7 +83,7 @@ function enum_type_add(){
 function enum_type_del(){
     //请求的路径
     var url="/enum/listEnumTypeByPage";
-    var title="添加字典类型";
+    var title="删除字典类型";
     var width="";
     var height="650";
     layer_show(title,url,width,height);
