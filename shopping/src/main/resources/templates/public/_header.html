@@ -1,0 +1,129 @@
+<div class="container" xmlns:th="http://www.thymeleaf.org">
+    <div class="navIcons pull-left">
+        <span class="line_icons"></span>
+        <span class="line_icons"></span>
+        <span class="line_icons"></span>
+    </div>
+    <a class="logo" th:href="@{/user/index}"><img th:src="@{/images/logo.png}"></a>
+    <div class="navShopBar pull-right">
+        <i class="iconfont icon-gerenzhongxin1" title="个人中心" id="js_showPerson"></i><span class="badge shopCart_badge" id="totalNum">0</span>
+        <div id="personBlock" class="personCenterBlock">
+            <ul>
+                <li class="personList">
+                    <a class="clearfix" th:href="@{/trolley/listMyTrolley}"><i class="iconfont icon-gouwuche"></i>购物车</a>
+                </li>
+                <li class="personList">
+                    <a class="clearfix" th:href="@{/order/listMyOrder}"><i class="iconfont icon-dingdan"></i>我的订单</a>
+                </li>
+                <li class="personList">
+                    <a class="clearfix" th:href="@{/user/index}"><i class="iconfont icon-shangcheng"></i>我的商城</a>
+                </li>
+                <li class="personList">
+                    <a class="clearfix" th:href="@{/login}"><i class="iconfont icon-gerenzhongxin"></i>登录/注册</a>
+                </li>
+            </ul>
+        </div>
+        <i class="iconfont icon-gouwuche1" title="购物车" id="js_showCart"></i>
+        <!--购物车-->
+        <div class="shopCartBlock" id="shopCartBlock">
+            <!--购物车有商品的状态-->
+            <div class="withGoods" id="withGoods">
+                <div class="shopCart_pro">
+                    <ul class="cartList" id="cartList">
+                    </ul>
+                </div>
+                <div class="shopCart_goBuy clearfix">
+                    <div class="cartFooter" id="cartFooter">
+                        <p>共<span class="totalNum"></span>件商品</p>
+                        <p class="totalYuan"><span class="yuanIcon"></span></p>
+                    </div>
+                    <a class="addCart_a" th:href="@{/trolley/listMyTrolley}">立即结算</a>
+                </div>
+            </div>
+            <!--购物车没有商品的状态-->
+            <div class="f-16 text-center" id="noGoods" style="display: none;">
+                购物车还没有商品，赶紧选购吧！
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url:'/trolley/productCountFromTrolley',
+            type:"POST",
+            ContentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if(data.responseCode == 1){
+                    $("#totalNum").html(data.responseData);
+                }
+
+            },
+            error:function (error) {
+                //弹出错误信息
+            }
+        });
+        /*--点击购物车部分--*/
+    var $el = $("#js_showCart");
+    var $cart = $('#shopCartBlock');
+    var $showPerson = $("#js_showPerson");
+    var $person = $("#personBlock");
+    $el.click(function(e){
+        e.stopPropagation();
+        $.ajax({
+            url:'/trolley/ajaxToMyTrolley',
+            type:"POST",
+            ContentType: "application/json; charset=utf-8",
+            success: function (data) {
+                try {
+                    if(data.responseCode != 1){
+                        window.location.href="/login"
+                        return;
+                    }
+                    var obj = data.responseData;
+                    var innerHtml = "";
+                    var price = 0;
+                    var num = 0;
+                    for(var i = 0;i < obj.length; i++){
+                        var itemHtml = "<li class='clearfix'><a class='pull-left' href='/product/findProductById?productId=" + obj[i].product.id
+                            + "'><img width='38px' height='30px' src="+obj[i].product.thumbnail +"></a><div class='cartRight'><p class='cartInfo'><a class='cartGoodsName' href='/product/findProductById?productId="+
+                            + obj[i].product.id + " '>" + obj[i].product.name+"</a>" +
+                            "<span class='cartGoodsNum'>X"+ obj[i].count + "</span></p><p class='cartGoodsMoney'>¥" + obj[i].product.priceSale + "</p></div>";
+                        innerHtml += itemHtml;
+                        price += obj[i].product.priceSale * obj[i].count;
+                        num += obj[i].count;
+                    }
+                    $("#cartList").html(innerHtml);
+                    var totalHtml = "<p>共<span class='totalNum'>"+ num +"</span>件商品</p><p class='totalYuan'><span class='yuanIcon'>¥</span>"+ price +"</p>"
+                    $("#cartFooter").html(totalHtml);
+                    $("#totalNum").html(num);
+                } catch (e) {
+                    window.location.href="/login";
+                }
+
+
+
+            },
+            error:function (error) {
+                //弹出错误信息
+            }
+        });
+        $person.fadeOut('fast');
+        $cart.fadeToggle('fast');//  点击购物车标志，出现购物车
+    });
+    $showPerson.click(function(e){
+        e.stopPropagation();
+        $cart.fadeOut('fast');
+        $person.fadeToggle('fast');//  点击个人中心标志，出现个人中心列表
+    });
+    $(document).on('click',function(e){
+        if(($(e.target) != $el) && (!$cart.is(':hidden'))){
+            $cart.fadeOut('fast'); // 点击页面任何其他地方，购物车消失
+        }
+        if(($(e.target) != $showPerson) && (!$person.is(':hidden'))){
+            $person.fadeOut('fast'); // 点击页面任何其他地方，个人中心
+        }
+    });
+    /*--点击购物车部分-end!--*/
+
+    </script>
+</div>

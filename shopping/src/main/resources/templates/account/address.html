@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="title" content="音特"/>
+    <meta name="keywords" content="音特，音特电子，话筒"/>
+    <meta name="description" content="音特电子，话筒"/>
+    <title>音特电子</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <!-- 通用头部-->
+    <header class="header" th:include="/public/_header"></header>
+    <!-- 内容区-->
+    <section class="content">
+        <div class="container">
+            <!--位置导航-->
+            <div class="navAdd">
+                <div class="navAdd-block">
+                    <a class="navAdd-a" href="index.html">首页</a>
+                    <span class="navAdd-dot"></span>
+                    <a class="navAdd-a" href="my_orders.html">会员中心</a>
+                    <span class="navAdd-dot"></span>
+                    <a class="navAdd-a" href="address.html">收货地址</a>
+                </div>
+            </div>
+            <!--个人中心-->
+            <div class="person">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="personBlock">
+                            <div class="userInfo">
+                                <img class="male" th:src="@{/images/male.jpg}">
+                                <p class="userName" th:text="${session.login_user.name}"></p>
+                            </div>
+                            <ul class="personNav">
+                                <li><a class="personNav_a" th:href="@{/order/listMyOrder}">我的订单</a></li>
+                                <li><a class="personNav_a" th:href="@{/order/afterService}" >售后服务</a></li>
+                                <li><a class="personNav_a" th:href="@{/discount}">优惠券</a></li>
+                                <li><a class="personNav_a active" th:href="@{/address/listMyAddress}" >收货地址</a></li>
+                                <li><a class="personNav_a" th:href="@{/user/accountInfo}">账户资料</a></li>
+                            </ul>
+                            <div class="personBg"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="myOrder">
+                            <div class="orderTitle discountTitle clearfix">
+                                <span class="f-24">收货地址</span>
+                            </div>
+                            <div class="orderAddList addressBlock clearfix">
+                                <div class="row">
+                                    <!--/*@thymesVar id="addressList" type="java.util.ArrayList"*/-->
+                                    <!--/*@thymesVar id="address" type="com.enter.entity.Address"*/-->
+                                    <div  th:class="${address.selected == 1} ? 'col-md-4 defaultAdd' : 'col-md-4'"  th:each="address:${addressList}">
+                                        <div class="addMenu">
+                                            <input type="hidden" th:value="${address.id}" />
+                                            <p class="clearfix"><span class="addName" th:text="${address.name}"></span><span class="addNum pull-right" th:text="${address.tel}"></span></p>
+                                            <p class="addMenu-add" th:text="${address.addressInfo.province + ' ' + address.addressInfo.city + ' ' + address.addressInfo.area + ' ' + address.addressInfo.detailPosition}"></p>
+                                            <p class="defaultTip">
+                                                <span class="change_tip" th:text="${address.selected == 1} ? '默认地址' : '【设为默认地址】'"></span>
+                                                <span class="edit_tip js_editModal" th:onclick="'edit(' + ${address.id} + ')'">编辑</span>
+                                                <span class="delete_tip">删除</span></p>
+                                            <img class="addGou" th:src="@{/images/addgou.png}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="addMenu-new" onclick="add()">
+                                            <div class="addMenu-div">
+                                                <i class="iconfont icon-jiahao"></i>
+                                                <p>添加新地址</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- footer-->
+    <footer id="footer" th:include="/public/_footer">
+    </footer>
+</div>
+<!-- deleteModal -->
+<input type="hidden" id="common_confirm_btn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#deleteModal">
+<div class="modal myInfoModal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title deleteModal_t" id="deleteModalLabel">确定删除该地址?</h4>
+                <div class="modal-btns">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn-qx ok" data-dismiss="modal">确定</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn-red cancel" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- addModal -->
+<div class="modal myInfoModal addressModal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+                <h4 class="modal-title" id="addModalLabel">添加新地址</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="addAddress_form" action="/address/addAddress" method="post">
+                    <div class="form-group">
+                        <input type="hidden" id="addressId" name="id"/>
+                        <label for="inputUser" class="col-sm-2 control-label"><span class="redColor">*</span>收货人：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputUser" name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone" class="col-sm-2 control-label"><span class="redColor">*</span>手机号码：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPhone" name="tel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><span class="redColor">*</span>收货地址：</label>
+                        <div class="col-sm-10">
+                            <div class="address-box clearfix" id="select-area">
+                                <input type="hidden" id="provinceVal" name="addressInfo.province"/>
+                                <input type="hidden" id="cityVal" name="addressInfo.city"/>
+                                <input type="hidden" id="areaVal" name="addressInfo.area"/>
+                                <select class="form-control" id="province" name="addressInfo.provinceId"></select>
+                                <select class="form-control" id="city" name="addressInfo.cityId"></select>
+                                <select class="form-control" id="area" name="addressInfo.areaId"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddDetail" class="col-sm-2 control-label"><span class="redColor">*</span>详细地址：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputAddDetail" name="addressInfo.detailPosition">
+                        </div>
+                    </div>
+                    <div class="form-group addModal_form">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <input class="check-one check" type="checkbox" id="choose1"/>
+                                <label for="choose1"><span></span>设为默认地址</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="btn-submit" type="submit" class="btn-red" >完成</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.form.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<script type="text/javascript">
+    var addModals = $('#addModal');
+    var provinceVal = $('#provinceVal');
+    var cityVal = $('#cityVal');
+    var areaVal = $('#areaVal');
+    $(function () {
+        // 收货地址点击删除效果
+        $('.delete_tip').click(function (e) {
+            e.stopPropagation();
+            var element = $(this).parents('.col-md-4');
+            Common.confirm({
+                operate: function (reselt) {
+                    if (reselt) {
+                        var addressId = element.find('input').val();
+                        $.ajax({
+                            url:'/address/delAddress',
+                            data:{addressId:addressId},
+                            success:function(data){
+                                if (data.responseCode == 1){
+                                    element.remove();
+                                }else if(data.responseCode == 2){
+                                    window.location.href='/login';
+                                }else{
+                                    alert(data.resultMessage);
+                                }
+                            }
+                        });
+                    }
+                }
+            })
+        });
+        // 收货地址点击'设为默认地址'效果
+        $('.change_tip').click(function () {
+            $('.change_tip').not(this).text("【设为默认地址】");
+            $(this).text("【默认地址】");
+        });
+        // 点击添加新地址弹窗
+
+        $("#select-area").selectAddress();//初始化省市区联动select
+
+        $('#select-area').on('change',function () {
+            provinceVal.val($("#province option:selected").text());
+            cityVal.val($("#city option:selected").text());
+            areaVal.val($("#area option:selected").text());
+        });
+
+    });
+
+    function add(){
+        addModals.modal();
+        $("#addAddress_form")[0].reset(); //表单弹出前初始化表单
+        $('#addAddress_form').attr("action",'/address/addAddress');
+        $('#addModalLabel').html("添加新地址");
+        $('#province').find("option[value=0]").attr("selected",true);
+        $('#city').find("option[value=0]").attr("selected",true);
+        $('#area').find("option[value=0]").attr("selected",true);
+        $('#addressId').val('');
+    }
+
+
+    function edit(addressId){
+        $('#addAddress_form').attr("action",'/address/editAddress');
+        $('#addModalLabel').html("编辑地址");
+        addModals.modal();
+        $.ajax({
+            url:'/address/findAddressById',
+            data:{addressId:addressId},
+            success:function(data){
+                if (data.responseCode == 1){
+                    var address = data.responseData;
+                    var addressInfo = address.addressInfo;
+                    var provinceCode = addressInfo.provinceId;
+                    var cityCode = addressInfo.cityId;
+                    var areaCode = addressInfo.areaId;
+                    $('#addressId').val(address.id);
+                    $('#inputUser').val(address.name);
+                    $('#inputPhone').val(address.tel);
+                    $('#inputAddDetail').val(addressInfo.detailPosition);
+                    writePlace(provinceCode,cityCode,areaCode);
+                }else if(data.responseCode == 2){
+                    window.location.href='/login';
+                }else{
+                    alert(data.resultMessage);
+                }
+            }
+        });
+    }
+
+
+
+    /**
+     * 渲染地址
+     * @param provinceCode
+     * @param cityCode
+     * @param areaCode
+     */
+    function writePlace(provinceCode,cityCode,areaCode){
+        var provinceOption = "province[postcode=" + provinceCode + "]";
+        var cityOption = provinceOption + " " + "city[postcode=" + cityCode + "]"
+        var city = $('#city');
+        var area = $('#area');
+        var province = $('#province');
+        province.find("option[value='" + provinceCode + "']").attr("selected",true);
+        $.ajax({
+            url:"/extands/areas/areas.xml",datatype:"xml",type:"GET",
+            success:function(xmlDoc){
+                var cityList = $(xmlDoc).find(provinceOption).children(city);
+                $(cityList).each(function(){
+                    city.append("<option value='"+$(this).attr("postcode")+"'>"+$(this).attr("name")+"</option>");
+                });
+                city.find("option[value='" + cityCode + "']").attr("selected",true);
+                var areaList = $(xmlDoc).find(cityOption).children(area);
+                $(areaList).each(function(){
+                    area.append("<option value='"+$(this).attr("postcode")+"'>"+$(this).attr("name")+"</option>");
+                });
+                area.find("option[value='" + areaCode + "']").attr("selected",true);
+                $('#provinceVal').val($("#province option:selected").text());
+                $('#cityVal').val($("#city option:selected").text());
+                $('#areaVal').val($("#area option:selected").text());
+            }
+        });
+    }
+
+
+    //  自定义提示框
+    var Common = {
+        confirm:function(params){
+            var model = $("#deleteModal");
+            $("#common_confirm_btn").click();
+            //每次都将监听先关闭，防止多次监听发生，确保只有一次监听
+            model.find(".cancel").die("click");
+            model.find(".ok").die("click");
+            model.find(".ok").live("click",function(){
+                params.operate(true)
+            });
+
+            model.find(".cancel").live("click",function(){
+                params.operate(false)
+            })
+        }
+    }
+</script>
+</body>
+</html>

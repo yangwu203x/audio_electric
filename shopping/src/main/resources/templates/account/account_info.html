@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="title" content="音特"/>
+    <meta name="keywords" content="音特，音特电子，话筒"/>
+    <meta name="description" content="音特电子，话筒"/>
+    <title>音特电子</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <!-- 通用头部-->
+    <header class="header" th:include="/public/_header"></header>
+    <!-- 内容区-->
+    <section class="content">
+        <div class="container">
+            <!--位置导航-->
+            <div class="navAdd">
+                <div class="navAdd-block">
+                    <a class="navAdd-a" href="index.html">首页</a>
+                    <span class="navAdd-dot"></span>
+                    <a class="navAdd-a" href="my_orders.html">会员中心</a>
+                    <span class="navAdd-dot"></span>
+                    <a class="navAdd-a" th:href="@{/user/accountInfo}">账户资料</a>
+                </div>
+            </div>
+            <!--个人中心-->
+            <div class="person">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="personBlock">
+                            <div class="userInfo">
+                                <img class="male" th:src="@{/images/male.jpg}">
+                                <p class="userName" th:text="${session.login_user.name}"></p>
+                            </div>
+                            <ul class="personNav">
+                                <li><a class="personNav_a" th:href="@{/order/listMyOrder}">我的订单</a></li>
+                                <li><a class="personNav_a" th:href="@{/user/sale_services/service_after}" >售后服务</a></li>
+                                <li><a class="personNav_a" th:href="@{/discount}">优惠券</a></li>
+                                <li><a class="personNav_a" th:href="@{/address/listMyAddress}">收货地址</a></li>
+                                <li><a class="personNav_a active" th:href="@{/user/accountInfo}">账户资料</a></li>
+                            </ul>
+                            <div class="personBg"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="myOrder">
+                            <div class="orderTitle myInfoTitle">
+                                <span class="f-24">账户资料</span>
+                            </div>
+                            <div class="myInfoContent">
+                                <div class="myInfoBlock">
+                                    <p class="myInfoBlock_p clearfix">音特账号：
+                                        <span class="accountNum" th:text="${account.username}"></span>
+                                        <a class="pull-right" th:href="@{/account/logout}">退出账号</a>
+                                    </p>
+                                    <p class="myInfoBlock_p clearfix">账户昵称：
+                                        <span class="accountName" th:text="${account.name}"></span>
+                                        <a class="pull-right" id="js_changeName" data-toggle="modal" data-target="#nameModal">修改昵称</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="myInfoContent">
+                                <div class="myInfoBlock clearfix">
+                                    <div class="pull-left">
+                                        <p class="myInfoBlock_p">账户密码</p>
+                                        <p class="myInfoBlock_s">可通过原密码修改密码</p>
+                                    </div>
+                                    <a class="myInfoBlock_a pull-right" id="changePwd" data-toggle="modal" data-target="#pwdModal">修改</a>
+                                </div>
+                            </div>
+                            <div class="myInfoContent">
+                                <div class="myInfoBlock clearfix">
+                                    <div class="pull-left">
+                                        <p class="myInfoBlock_p">绑定手机：
+                                            <span class="accountCall" th:text="${account.username}">188****3369</span>
+                                        </p>
+                                        <p class="myInfoBlock_s">绑定手机可用来登录音特账号，重置密码或者其他安全验证</p>
+                                    </div>
+                                    <a class="myInfoBlock_a pull-right" id="changeCall">修改</a>
+                                </div>
+                            </div>
+                            <div class="myInfoContent">
+                                <div class="myInfoBlock clearfix">
+                                    <div class="pull-left">
+                                        <p class="myInfoBlock_p">绑定邮箱：
+                                            <span class="accountEmail" th:text="${account.email}">188****3369@163.com</span>
+                                        </p>
+                                        <p class="myInfoBlock_s">绑定邮箱可用来登录音特账号，重置密码或者其他安全验证</p>
+                                    </div>
+                                    <a class="myInfoBlock_a pull-right" id="changeEmail">修改</a>
+                                </div>
+                            </div>
+                            <div class="myInfoContent">
+                                <div class="myInfoBlock clearfix">
+                                    <div class="pull-left">
+                                        <p class="myInfoBlock_p">绑定QQ：
+                                            <span class="no_qq">未绑定</span>
+                                        </p>
+                                        <p class="myInfoBlock_s">绑定QQ后可用来快速登录音特账号</p>
+                                    </div>
+                                    <a class="myInfoBlock_a pull-right" id="bd_qq">绑定</a>
+                                </div>
+                            </div>
+                            <div class="myInfoContent">
+                                <div class="myInfoBlock clearfix">
+                                    <div class="pull-left">
+                                        <p class="myInfoBlock_p">绑定微信：
+                                            <span class="bd_weixin">已绑定</span>
+                                        </p>
+                                        <p class="myInfoBlock_s">绑定微信后可用来快速登录音特账号</p>
+                                    </div>
+                                    <a class="myInfoBlock_a pull-right" id="changeWechat">解绑</a>
+                                </div>
+                            </div>
+                            <div class="myInfoContent">
+                                <div class="myInfoBlock clearfix">
+                                    <div class="pull-left">
+                                        <p class="myInfoBlock_p">绑定微博：
+                                            <span class="bd_weixin">未绑定</span>
+                                        </p>
+                                        <p class="myInfoBlock_s">绑定微博后可用来快速登录音特账号</p>
+                                    </div>
+                                    <a class="myInfoBlock_a pull-right" id="changeWebo">绑定</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- footer-->
+    <footer id="footer" th:include="/public/_footer">
+    </footer>
+</div>
+<!-- nameModal -->
+<div class="modal myInfoModal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+                <h4 class="modal-title" id="nameModalLabel">修改昵称</h4>
+            </div>
+            <div class="modal-body">
+                <form id="nameForm" data-toggle="validator" role="form" action="/user/editName">
+                    <div class="form-group has-feedback newPwd-group">
+                        <input type="text" class="form-control" id="second_name" placeholder="请输入新的昵称" data-error="昵称已有人使用" data-delay="50" required>
+                        <span class="iconfont form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </form>
+                <button type="button" class="btn-red" data-dismiss="modal">完成</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- pwdModal -->
+<div class="modal myInfoModal fade" id="pwdModal" tabindex="-1" role="dialog" aria-labelledby="pwdModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+                <h4 class="modal-title" id="pwdModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <form id="pwdForm" role="form">
+                    <div class="form-group has-feedback">
+                        <label class="form-label" for="originPwd">原密码</label>
+                        <input type="password" class="form-control" id="originPwd" placeholder="请输入原密码" data-minlength="6" data-maxlength="16" data-delay="500" data-error="密码输入不正确" data-required-error="密码不能为空" required>
+                        <span class="iconfont form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="form-label" for="newPwd">新密码</label>
+                        <input type="password" class="form-control" id="newPwd" placeholder="请输入新密码（6-16位字母和数字组合）" data-minlength="6" data-maxlength="16" data-required-error="密码不能为空" required>
+                        <span class="iconfont form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group has-feedback newPwd-group">
+                        <input type="password" class="form-control" id="newPwd2" placeholder="请再次确认密码" data-match="#newPwd" data-match-error="两次输入密码不一致" data-required-error="密码不能为空" required>
+                        <span class="iconfont form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </form>
+                <button type="submit" class="btn-red">完成</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- callModal -->
+<div class="modal myInfoModal fade" id="callModal" tabindex="-1" role="dialog" aria-labelledby="callModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+                <h4 class="modal-title" id="callModalLabel">绑定手机</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" data-toggle="validator">
+                    <div class="form-group has-feedback newPwd-group">
+                        <input type="text" class="form-control" id="callNum" placeholder="请输入要绑定的手机号" pattern="^[1][358][0-9]{9}$" data-error="请输入有效的手机号" required>
+                        <span class="iconfont form-control-feedback" aria-hidden="true"></span>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入短信验证码" id="codeMsg">
+                        <span class="input-group-btn"><button class="btn btn-yz" type="button" id="sendCode" onclick="sends.send();">获取验证码</button></span>
+                    </div>
+                </form>
+                <button type="button" class="btn-red" data-dismiss="modal" onclick="sends.conform();" id="submitBtn">完成</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- codeModal -->
+<div class="modal myInfoModal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+                <h4 class="modal-title" id="codeModalLabel">身份验证</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label class="form-label">验证码已经发送至<span class="bd_call">188****3369</span></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="请输入短信验证码">
+                        <span class="input-group-btn"><button class="btn btn-yz btn-grey" type="button" id="newYzBtn" onclick="sendsYz.send();">重新获取（60）</button></span>
+                    </div>
+                </form>
+                <button type="button" class="btn-red" data-dismiss="modal" onclick="sendsYz.conform();" id="yzBtn">验证</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- qqModal -->
+<div class="modal myInfoModal fade" id="qqModal" tabindex="-1" role="dialog" aria-labelledby="qqModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title" id="qqModalLabel">确定解除绑定QQ?</h4>
+                <p class="modal-tips">解除绑定后将不能用此QQ快捷登录音特账号</p>
+                <div class="modal-btns">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn-red">确定</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn-qx" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/validator.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<script type="text/javascript">
+    $(function () {
+        // 修改账户昵称
+
+
+        // 修改账户密码
+        $('#pwdForm').validator().on('submit', function (e) {
+            if (e.isDefaultPrevented()) {
+                // handle the invalid form...
+            } else {
+                $('#pwdModal').modal('hide')
+            }
+        });
+        // 绑定手机和邮箱
+        $('#changeCall').click(function () {
+            $('#callModal').modal();
+        });
+
+
+        // 验证手机和邮箱
+        $('#changeEmail').click(function () {
+            $('#codeModal').modal();
+        });
+        // 解绑qq/微信/微博
+        $('#changeWechat').click(function () {
+            $('#qqModal').modal();
+        });
+
+    });
+    var sends = {
+        checked:1,
+        send:function(){
+            var numbers = /^1\d{10}$/;
+            var val = $('#callNum').val().replace(/\s+/g,""); //获取输入手机号码
+            if(numbers.test(val)){
+                var time = 60;
+                function timeCountDown(){
+                    if(time==0){
+                        clearInterval(timer);
+                        $('#sendCode').removeClass('btn-grey').html("发送验证码");
+                        $('#submitBtn').removeAttr('disabled');
+                        sends.checked = 1;
+                        return true;
+                    }
+                    $('#sendCode').html("重新获取" + "（ " + time +" ）");
+                    time--;
+                    return false;
+                    sends.checked = 0;
+                }
+                $('#sendCode').addClass('btn-grey');
+
+                $('#submitBtn').attr('disabled','disabled');
+                timeCountDown();
+                var timer = setInterval(timeCountDown,1000);
+            }
+        }
+    };
+    var sendsYz = {
+        checked:1,
+
+        send:function(){
+                var time = 60;
+                function timeCountDown(){
+                    if(time==0){
+                        clearInterval(timer);
+                        $('#newYzBtn').removeClass('btn-grey').html("发送验证码");
+                        $('#yzBtn').removeAttr('disabled');
+                        sends.checked = 1;
+                        return true;
+                    }
+                    $('#newYzBtn').html("重新获取" + "（ " + time +" ）");
+                    time--;
+                    return false;
+                    sends.checked = 0;
+                }
+                $('#newYzBtn').addClass('btn-grey');
+
+                $('#yzBtn').attr('disabled','disabled');
+                timeCountDown();
+                var timer = setInterval(timeCountDown,1000);
+            }
+    }
+
+</script>
+</body>
+</html>

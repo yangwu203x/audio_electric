@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="title" content="音特"/>
+    <meta name="keywords" content="音特，音特电子，话筒"/>
+    <meta name="description" content="音特电子，话筒"/>
+    <title>音特电子</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/theme/default/laydate.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <!-- 通用头部-->
+    <header class="header" th:include="/public/_header"></header>
+    <!-- 内容区-->
+    <section class="content">
+        <div class="container">
+            <!--位置导航-->
+            <div class="navAdd">
+                <div class="navAdd-block">
+                    <a class="navAdd-a" href="index.html">首页</a>
+                    <span class="navAdd-dot"></span>
+                    <a class="navAdd-a" href="personCenter.html">会员中心</a>
+                    <span class="navAdd-dot"></span>
+                    <a class="navAdd-a" th:href="@{/order/listMyOrder}">我的订单</a>
+                </div>
+            </div>
+            <!--个人中心-->
+            <div class="person">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="personBlock">
+                            <div class="userInfo">
+                                <img class="male" th:href="@{images/male.jpg}">
+                                <p class="userName" th:text="${session.login_user.name}"></p>
+                            </div>
+                            <ul class="personNav">
+                                <li><a class="personNav_a active" th:href="@{/order/listMyOrder}">我的订单</a></li>
+                                <li><a class="personNav_a" th:href="@{/order/afterService}">售后服务</a></li>
+                                <li><a class="personNav_a" th:href="@{discount}">优惠券</a></li>
+                                <li><a class="personNav_a" th:href="@{/address/listMyAddress}">收货地址</a></li>
+                                <li><a class="personNav_a" href="myInfo.html">账户资料</a></li>
+                            </ul>
+                            <div class="personBg"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="myOrder">
+                            <div class="orderTitle">
+                                <span class="f-24">申请售后</span>
+                            </div>
+                            <div class="orderDetailBlock">
+                                <div class="tableHead applyServiceHead">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div>商品</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div>包装清单</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div>赠品</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div>购买数量</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tableContent">
+                                    <div class="myOrderList">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="product orderGoods clearfix">
+                                                    <div class="product-img"><img th:href="@{images/product1.png}" alt=""/></div>
+                                                    <p class="product-name">卡拉OK E5</p>
+                                                    <p class="product-color">颜色：黑色</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="myOrderAccess">
+                                                    麦克风×1、底座×1、遥控器×1、电源适配器×1、
+                                                    音频线×1、U盘×1、使用手册×1、电池×6
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="myOrderGift"><span class="no_gift"></span></div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="myOrderQuality">1</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="orderDetail_content applyService_content">
+                                    <p class="orderDetail_content_t">服务类型</p>
+                                    <ul class="choose clearfix" id="serviceKind">
+                                        <li>
+                                            <input name="service" type="radio" id="kind1" value="退货">
+                                            <label for="kind1">
+                                                退货
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input name="service" type="radio" id="kind2" value="换货">
+                                            <label for="kind2">
+                                                换货
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input name="service" type="radio" id="kind3" value="维修">
+                                            <label for="kind3">
+                                                维修
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="orderDetail_content">
+                                    <p class="orderDetail_content_t">提交数量</p>
+                                    <div class="btn-group" role="group" aria-label="..." id="applyNum">
+                                        <button type="button" class="btn btn-default" onclick="m_subtract(this)">-</button>
+                                        <input type="text" class="btn btn-default inputNum" value="1">
+                                        <button type="button" class="btn btn-default" onclick="m_add(this)">+</button>
+                                    </div>
+                                </div>
+                                <div class="orderDetail_content">
+                                    <p class="orderDetail_content_t">问题描述</p>
+                                    <textarea rows="5" class="sureOrder-text" style="color:#898888" onfocus="if(this.value=='7天无理由包退（限200字）') {this.value='';}this.style.color='#030304';" onblur="if(this.value=='') {this.value='7天无理由包退（限200字）';this.style.color='#898888';}" maxlength="200">7天无理由包退（限200字）</textarea>
+                                    <div class="uploadImg">
+                                        <div class="img_div"></div>
+                                        <a href="javascript:;" class="a-upload">
+                                            <input type="file" name="myFile" id="myFile" multiple="multiple" /><i class="iconfont icon-add"></i>
+                                        </a>
+                                    </div>
+                                    <p class="orderDetail_tips">为了更快帮您解决问题，请上传图片（最多可上传5张）</p>
+                                </div>
+                                <div class="orderDetail_content applyService_content">
+                                    <p class="orderDetail_content_t">商品退回方式</p>
+                                    <ul class="choose clearfix" id="returnKind">
+                                        <li>
+                                            <input name="return" type="radio" id="return1" value="上门取件" checked>
+                                            <label for="return1">
+                                                上门取件
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input name="return" type="radio" id="return2" value="自找快递">
+                                            <label for="return2">
+                                                自找快递
+                                            </label>
+                                        </li>
+                                    </ul>
+                                    <div class="orderDetail_tips" id="orderDetail_tips1">
+                                        取件时间：
+                                        <input type="text" id="date" class="calendarInput"><label for="date"><i class="iconfont icon-rili"></i></label>
+                                    </div>
+                                </div>
+                                <div class="orderDetail_content">
+                                    <p class="orderDetail_content_t"><span class="address_t">取件地址</span> <a class="edit" href="#" id="js_edit" data-toggle="modal" data-target="#addModal">编辑</a></p>
+                                    <p>收货人：<span class="clientName">吴滴用</span></p>
+                                    <p>手机号： <span class="clientNum">18022823329</span></p>
+                                    <p>收货地址：<span class="clientAdd">广东省深圳市宝安区西乡街道永丰社区9区</span></p>
+                                </div>
+                                <div class="orderDetail_content">
+                                    <a class="gotoBuy offerReview" href="#">提交审核</a>
+                                    <span>提交服务订单后，售后专员会与您电话沟通，请保持手机畅通</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- footer-->
+    <footer id="footer" th:include="/public/_footer">
+    </footer>
+</div>
+<!-- addModal -->
+<div class="modal myInfoModal addressModal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+                <h4 class="modal-title" id="addModalLabel">添加新地址</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputUser" class="col-sm-2 control-label"><span class="redColor">*</span>收货人：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputUser">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPhone" class="col-sm-2 control-label"><span class="redColor">*</span>手机号码：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPhone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"><span class="redColor">*</span>收货地址：</label>
+                        <div class="col-sm-10">
+                            <div class="address-box clearfix" id="select-area">
+                                <select class="form-control" id="province"></select>
+                                <select class="form-control" id="city"></select>
+                                <select class="form-control" id="country"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddDetail" class="col-sm-2 control-label"><span class="redColor">*</span>详细地址：</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputAddDetail">
+                        </div>
+                    </div>
+                    <div class="form-group addModal_form">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <input class="check-one check" type="checkbox" id="choose1"/>
+                                <label for="choose1"><span></span>设为默认地址</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn-red" data-dismiss="modal">完成</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/laydate.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+<script type="text/javascript">
+    $(function() {
+        var objUrl;
+        var img_html;
+        $("#myFile").change(function() {
+            var img_div = $(".img_div");
+            var filepath = $("input[name='myFile']").val();
+            for(var i = 0; i < this.files.length; i++) {
+                objUrl = getObjectURL(this.files[i]);
+                var extStart = filepath.lastIndexOf(".");
+                var ext = filepath.substring(extStart, filepath.length).toUpperCase();
+                /*鉴定每个图片上传尾椎限制 */
+                if(ext != ".BMP" && ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG") {
+                    $(".shade").fadeIn(500);
+                    $(".text_span").text("图片限于bmp,png,gif,jpeg,jpg格式");
+                    this.value = "";
+                    $(".img_div").html("");
+                    return false;
+                } else{
+                    /*
+                     若规则全部通过则在此提交url到后台数据库
+                     * */
+                    img_html = "<div class='isImg'><img src='" + objUrl + "' style='height: 100%; width: 100%;' /><button class='removeBtn' onclick='javascript:removeImg(this)'>x</button></div>";
+                    img_div.append(img_html);
+                }
+
+            }
+            /*鉴定每个图片大小总和*/
+            var file_size = 0;
+            var all_size = 0;
+            for(var j = 0; j < this.files.length; j++) {
+                file_size = this.files[j].size;
+                all_size = all_size + this.files[j].size;
+                var size = all_size / 1024;
+                if(size > 500) {
+                    $(".shade").fadeIn(500);
+                    $(".text_span").text("上传的图片大小不能超过100k！");
+                    this.value = "";
+                    $(".img_div").html("");
+                    return false;
+                }
+            }
+            return true;
+        });
+        /*鉴定每个浏览器上传图片url 目前没有合并到Ie*/
+        function getObjectURL(file) {
+            var url = null;
+            if(window.createObjectURL != undefined) { // basic
+                url = window.createObjectURL(file);
+            } else if(window.URL != undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file);
+            } else if(window.webkitURL != undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file);
+            }
+            //console.log(url);
+            return url;
+        }
+
+
+        /**商品退回方式选择**/
+        $('#returnKind li').eq(0).click(function () {
+             $('#orderDetail_tips1').css('display','block');
+            $('.address_t').html('取件地址');
+            $('#js_edit').css('display','inline');
+        });
+        $('#returnKind li').eq(1).click(function () {
+            $('#orderDetail_tips1').css('display','none');
+            $('.address_t').html('退货地址');
+            $('#js_edit').css('display','none');
+        });
+        /**商品退回方式选择---end!**/
+
+        // 点击添加新地址弹窗
+        $('#addModal').on('show.bs.modal', function() {
+            $("#select-area").selectAddress();
+        })
+    });
+    /*上传图片附带删除 再次地方可以加上一个ajax进行提交到后台进行删除 */
+    function removeImg(r){
+        $(r).parent().remove();
+    }
+
+    laydate.render({
+        elem: '#date', //指定元素
+        theme:'#ff5400',
+        value: new Date(),
+        showWeeks: true
+    });
+
+</script>
+</body>
+</html>

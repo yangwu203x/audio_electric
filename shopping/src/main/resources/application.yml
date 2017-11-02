@@ -1,0 +1,36 @@
+spring:
+  database:
+    driverClassName: com.mysql.jdbc.Driver
+  datasource:
+    url: jdbc:mysql://192.168.1.120:3306/appserver?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;allowMultiQueries=true&useSSL=true
+    password: 123456
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jackson:
+    serialization:
+      indent-output: true
+  thymeleaf:
+    cache: false
+    cache-period: 0
+    content-type: text/html
+    mode: LEGACYHTML5
+  template:
+              cache: false
+  mail:
+    host: smtp.sina.com
+    username: 153615406404yw@sina.com
+    password: yangwu123456
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8

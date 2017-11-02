@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header class="header" th:include="/public/_header">
+<p class="url">访问url</p>
+<div class="form-group">
+    <p th:text="${url}"></p>
+</div>
+<p class="exception">异常原因</p>
+<div class="form-group">
+    <p th:text="${exception}"></p>
+</div>
+
+</body>
+</html>

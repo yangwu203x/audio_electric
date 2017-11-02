@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html lang="zh-cn" class="ie6 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7 ]>
+<html lang="zh-cn" class="ie7 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8 ]>
+<html lang="zh-cn" class="ie8 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 9 ]>
+<html lang="zh-cn" class="ie9 ie" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="zh-cn" class="normal" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="title" content="音特"/>
+    <meta name="keywords" content="音特，音特电子，话筒"/>
+    <meta name="description" content="音特电子，话筒"/>
+    <title>音特电子</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <!-- 通用头部-->
+    <header class="header" th:include="/public/_header">
+    </header>
+    <!--banner-->
+    <section class="banner">
+        <img th:src="@{/images/activityBg.jpg}">
+    </section>
+    <!-- 内容区-->
+    <div class="content">
+        <section id="news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="newsDiv">
+                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                <img th:src="@{/images/activityImg.jpg}" alt="活动">
+                            </a>
+                            <div class="newsBlock">
+                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                    <span class="activityTitle">重阳节抽奖活动，一等奖：48寸液晶电视机</span>
+                                </a>
+                                <div class="activityDate">
+                                    <i class="iconfont icon-rili"></i>
+                                    <span class="newsTime">2017.10.17—2017.10.30</span>
+                                </div>
+                                <div class="activityTips">
+                                    距离活动结束还剩2天
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="newsDiv">
+                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                <img th:src="@{/images/activityImg.jpg}" alt="活动">
+                            </a>
+                            <div class="newsBlock">
+                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                    <span class="activityTitle">重阳节抽奖活动，一等奖：48寸液晶电视机</span>
+                                </a>
+                                <div class="activityDate">
+                                    <i class="iconfont icon-rili"></i>
+                                    <span class="newsTime">2017.10.17—2017.10.30</span>
+                                </div>
+                                <div class="activityTips">
+                                    活动已经结束
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="newsDiv">
+                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                <img th:src="@{/images/activityImg.jpg}" alt="活动">
+                            </a>
+                            <div class="newsBlock">
+                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                    <span class="activityTitle">重阳节抽奖活动，一等奖：48寸液晶电视机</span>
+                                </a>
+                                <div class="activityDate">
+                                    <i class="iconfont icon-rili"></i>
+                                    <span class="newsTime">2017.10.17—2017.10.30</span>
+                                </div>
+                                <div class="activityTips">
+                                    距离活动结束还剩2天
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="newsDiv">
+                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                <img th:src="@{/images/activityImg.jpg}" alt="活动">
+                            </a>
+                            <div class="newsBlock">
+                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                    <span class="activityTitle">重阳节抽奖活动，一等奖：48寸液晶电视机</span>
+                                </a>
+                                <div class="activityDate">
+                                    <i class="iconfont icon-rili"></i>
+                                    <span class="newsTime">2017.10.17—2017.10.30</span>
+                                </div>
+                                <div class="activityTips">
+                                    活动已经结束
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="newsDiv">
+                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                <img th:src="@{/images/activityImg.jpg}" alt="活动">
+                            </a>
+                            <div class="newsBlock">
+                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                    <span class="activityTitle">重阳节抽奖活动，一等奖：48寸液晶电视机</span>
+                                </a>
+                                <div class="activityDate">
+                                    <i class="iconfont icon-rili"></i>
+                                    <span class="newsTime">2017.10.17—2017.10.30</span>
+                                </div>
+                                <div class="activityTips">
+                                    距离活动结束还剩2天
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="newsDiv">
+                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                <img th:src="@{/images/activityImg.jpg}" alt="活动">
+                            </a>
+                            <div class="newsBlock">
+                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                                    <span class="activityTitle">重阳节抽奖活动，一等奖：48寸液晶电视机</span>
+                                </a>
+                                <div class="activityDate">
+                                    <i class="iconfont icon-rili"></i>
+                                    <span class="newsTime">2017.10.17—2017.10.30</span>
+                                </div>
+                                <div class="activityTips">
+                                    活动已经结束
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="addMore text-center" id="addMore">
+                    <button class="load_more" id="load_more_button"><img th:src="@{/images/addMore.png}" class="addMoreImg" alt="加载更多"></button>
+                    <div class="animation_image" style="display:none;"><img th:src="@{/images/sy-loader.gif}"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- footer-->
+    <footer id="footer" th:include="/public/_footer">
+        
+    </footer>
+</div>
+<!-- Modal -->
+<div class="modal newsModal" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="activityContent">
+                <img th:src="@{/images/activityPageImg.jpg}">
+            </div>
+        </div>
+    </div>
+    <a class="closeImg" data-dismiss="modal" aria-label="Close"><img class="close-img" th:src="@{/images/closeImg.png}"></a>
+</div>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.easing.1.3.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
+<script type="text/javascript" th:src="@{plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //  点击加载更多
+        var track_click = 0; //跟踪点击事件，定义一个点击次数
+
+        var total_pages = '<?php echo $total_pages; ?>';//从后台获取到的总页码数
+        $('#activity .row').load("fetch_pages.php", {'page':track_click}, function() {track_click++;}); //加载内部数据
+
+        $(".load_more").click(function (e) { //点击加载按钮
+
+            $(this).hide(); //隐藏点击加载按钮
+            $('.animation_image').show(); //展示加载中动画
+
+            if(track_click <= total_pages) //确保用户点击数始终小于数据的总页数
+            {
+                //后台获取页码数和返回的加载数据到页面news里
+                $.post('fetch_pages.php',{'page': track_click}, function(data) {
+
+                    $(".load_more").show(); //展示点击加载更多按钮
+
+                    $("#activity .row").append(data); //将服务器获取到的数据展示在页面#news .row 下面
+
+                    //滚动页面到加载按钮处
+                    $("html, body").animate({scrollTop: $("#load_more_button").offset().top}, 500);
+
+                    //隐藏加载中按钮
+                    $('.animation_image').hide(); //只要获取到了数据就隐藏加载中的按钮
+
+                    track_click++; //点击加载事件+1
+
+                }).fail(function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError); //如果请求出现错误弹出任何返回错误信息
+                    $(".load_more").show(); //展示点击加载按钮
+                    $('.animation_image').hide(); //隐藏加载中按钮
+                });
+
+
+                if(track_click >= total_pages-1)
+                {
+                    //所有的加载完毕则关闭加载按钮
+                    $(".load_more").attr("disabled", "disabled");
+                }
+            }
+
+        });
+    });
+</script>
+</body>
+</html>

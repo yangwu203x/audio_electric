@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html lang="zh-cn" class="ie6 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7 ]>
+<html lang="zh-cn" class="ie7 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8 ]>
+<html lang="zh-cn" class="ie8 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 9 ]>
+<html lang="zh-cn" class="ie9 ie" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="zh-cn" class="normal" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="title" content="音特"/>
+    <meta name="keywords" content="音特，音特电子，话筒"/>
+    <meta name="description" content="音特电子，话筒"/>
+    <title>音特电子</title>
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" >
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <!-- 通用头部-->
+    <header class="header" th:include="/public/_header">
+    </header>
+    <!--banner-->
+    <section class="index-banner">
+        <div id="focusBar" class="clearfix">
+            <a href="javascript:void(0)" class="arrL" onclick="prePage()"><i class="iconfont icon-zuofanhui"></i></a>
+            <a href="javascript:void(0)" class="arrR" onclick="nextPage()"><i class="iconfont icon-right-arrow"></i></a>
+            <ul class="mypng">
+                <li th:id="'focusIndex'+${item.index+1}" style="background:url(/images/bannerBg1.jpg) repeat-x;" th:each="banner,item:${banners}">
+                    <div class="focusL"><a href="#"><img th:src="${banner.picUrl}"/></a></div>
+                    <div class="focusR"><a href="#"><img th:src="${banner.picUrl2}"/></a></div>
+                </li>
+                <!--<li id="focusIndex2" style="background:url(/images/bannerBg1.jpg) repeat-x;">-->
+                    <!--<div class="focusL"><a href="#"><img th:src="@{/images/banner1-1.png}"/></a></div>-->
+                    <!--<div class="focusR"><a href="#"><img th:src="@{/images/banner1-2.png}"/></a></div>-->
+                <!--</li>-->
+                <!--<li id="focusIndex3" style="background:url(/images/bannerBg1.jpg) repeat-x;">-->
+                    <!--<div class="focusL"><a href="#"><img th:src="@{/images/banner1-1.png}"/></a></div>-->
+                    <!--<div class="focusR"><a href="#"><img th:src="@{/images/banner1-2.png}"/></a></div>-->
+                <!--</li>-->
+            </ul>
+        </div>
+        <ol class="paginations">
+            <li class="liDot active"><a class="dot" href="#"></a></li>
+            <li class="liDot"><a class="dot" href="#"></a></li>
+            <li class="liDot"><a class="dot" href="#"></a></li>
+        </ol>
+    </section>
+    <!-- 内容区-->
+    <section class="content_index">
+        <!--APP应用-->
+        <div class="app">
+            <div class="container">
+                <h2 class="pro_kinds">服务支持</h2>
+                <p class="pro_kinds_words">音特专利技术，造就品质生活娱乐</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="app_div">
+                            <a class="app_a" href="#">
+                                <div class="app_circle">
+                                    <img th:src="@{/images/gk.png}" alt="songs">
+                                    <div class="shadow">
+                                        <p class="checkMore">查看详情</p>
+                                    </div>
+                                </div>
+                                <p class="app_songs">30万云端歌库</p>
+                                <p class="app_songs_detail">音特电子拥有超过30万全球歌曲的云端歌库一流配置的服务器，保证唱歌绝对的流......</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="app_div">
+                            <a class="app_a" href="#">
+                                <div class="app_circle">
+                                    <img th:src="@{/images/lmt.png}" alt="streaming">
+                                    <div class="shadow">
+                                        <p class="checkMore">查看详情</p>
+                                    </div>
+                                </div>
+                                <p class="app_songs">30万云端歌库</p>
+                                <p class="app_songs_detail">音特电子拥有超过30万全球歌曲的云端歌库一流配置的服务器，保证唱歌绝对的流......</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="app_div">
+                            <a class="app_a" href="#">
+                                <div class="app_circle">
+                                    <img th:src="@{/images/gp.png}" alt="musicScore">
+                                    <div class="shadow">
+                                        <p class="checkMore">查看详情</p>
+                                    </div>
+                                </div>
+                                <p class="app_songs">输出乐谱</p>
+                                <p class="app_songs_detail">音特电子拥有同类产品中独有的输出乐谱的技术，每首歌曲都有相对应的乐谱......</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--APP介绍-->
+        <div class="apps">
+            <div id="carousel-app" class="carousel slide">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" style="overflow: visible;">
+                    <div class="item active">
+                        <div class="sings">
+                            <img class="sing_t" th:src="@{/images/sing.png}">
+                            <p class="slider_p">音特电子采用MIDI音源,高清音质,悦享高品质K歌娱乐！</p>
+                            <div class="sing_slider">
+                                <div class="carousels">
+                                    <img class="phoneImg" th:src="@{/images/iphone.png}" alt="phone"/>
+                                    <div class="slides">
+                                        <div><img alt="" th:src="@{/images/rr-img1.png}"><span class="cover"></span></div>
+                                        <div><img alt="" th:src="@{/images/rr-img2.png}"><span class="cover"></span></div>
+                                        <div><img alt="" th:src="@{/images/rr-img3.png}"><span class="cover"></span></div>
+                                        <div><img alt="" th:src="@{/images/rr-img4.png}"><span class="cover"></span></div>
+                                        <div><img alt="" th:src="@{/images/rr-img3.png}"><span class="cover"></span></div>
+                                        <div><img alt="" th:src="@{/images/rr-img2.png}"><span class="cover"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="sings">
+                            <img class="sing_t" th:src="@{/images/sing.png}">
+                            <p class="slider_p">音特电子采用MIDI音源,高清音质,悦享高品质K歌娱乐！</p>
+                            <div class="sing_slider">
+                                <img th:src="@{/images/renren.png}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="sings">
+                            <img class="sing_t" th:src="@{/images/sing.png}">
+                            <p class="slider_p">音特电子采用MIDI音源,高清音质,悦享高品质K歌娱乐！</p>
+                            <div class="sing_slider">
+                                <img th:src="@{/images/renren.png}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="prev_btn" href="#carousel-app" data-slide="next">
+                    <div class="circle_btn">
+                        <div class="out1"></div>
+                        <div class="out2"></div>
+                        <div class="out3">
+                            <i class="iconfont icon-right-arrow"></i>
+                        </div>
+                    </div>
+                    <p class="prev_btn_p">安装人人唱</p>
+                </a>
+            </div>
+        </div>
+        <!--商城-家庭娱乐-->
+        <div class="index-shop">
+            <div class="singBao">
+                <img class="makfong" th:src="@{/images/feng.png}" alt="maikefeng">
+                <a class="singBao_a" href="#">使用K歌宝唱歌<i class="iconfont icon-right"></i></a>
+            </div>
+            <div class="container">
+                <h2 class="pro_kinds">我们的产品</h2>
+                <p class="pro_kinds_words">音特专利技术，造就品质生活娱乐</p>
+                <div class="row">
+                    <div class="col-md-12 col-lg-6" >
+                        <div class="productDiv mp30">
+                            <a th:href="'/product/findProductById?productId=' + ${flyProduct.id}">
+                                <div class="pro-img">
+                                    <img class="product_img" th:src="${flyProduct.thumbnail}">
+                                </div>
+                                <div class="indexPro_info">
+                                    <h3 class="indexPro_name" th:text="${flyProduct.name}">MP30</h3>
+                                    <div class="indexPro_footer">
+                                        <p class="indexPro_adv">随时随地  想唱就唱</p>
+                                        <p class="indexPro_ass">蓝牙智能音响麦克风系列</p>
+                                        <p class="indexPro_money" th:text="${flyProduct.priceSale}">¥1999</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3" th:each="item:${ktvProduct}">
+                        <div class="productDiv">
+                            <a th:href="'/product/findProductById?productId=' + ${item.id}">
+                                <div class="pro-img">
+                                    <img class="product_img" th:src="${item.thumbnail}">
+                                </div>
+                                <div class="indexPro_info">
+                                    <h3 class="indexPro_name" th:text="${item.name}">E1</h3>
+                                    <div class="indexPro_footer">
+                                        <p class="indexPro_adv">让智能生活娱乐到家</p>
+                                        <p class="indexPro_ass">智能麦克风点歌机系列</p>
+                                        <p class="indexPro_money" th:text="${item.priceSale}">¥1999</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="indexPro_more">
+                    <a class="singBao_a" href="#">查看更多<i class="iconfont icon-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <!--迷你KTV-->
+        <div class="miniKtv">
+            <div id="content">
+                <div id="sdw-wrap">
+                    <div class="block sdw-container">
+                        <div class="sdw-animate" data-speed="3000" data-delay="0" data-occur="1">
+                            <img class="miniKtvBg" th:src="@{/images/miniKtv.jpg}" alt="miniKtv">
+                        </div>
+                        <div class="block-words">
+                            <div class="block-words-right">
+                                <p class="title30 sdw-animate miniKtv_t" data-start='{"transform":"translate3d(0,50px,0) "}' data-end='{"transform":"translate3d(0,0px,0) "}' data-speed="1500" data-delay="0s" data-occur="1">音特迷你KTV唱歌房</p>
+                                <p class="ctx sdw-animate miniKtv_p1" data-start='{"transform":"translate3d(0,50px,0) "}' data-end='{"transform":"translate3d(0,0px,0) "}' data-speed="1500" data-delay="0.2s" data-occur="1">我和音乐有个约会，想唱就唱，一台会唱歌的房子</p>
+                                <p class="sup sdw-animate miniKtv_p2" data-start='{"transform":"translate3d(0,50px,0) "}' data-end='{"transform":"translate3d(0,0px,0) "}' data-speed="1500" data-delay="0.4s" data-occur="1">迷你KTV房唱歌机，是一款全新的自主空间娱乐吧，以耳机体验为主集唱歌、练歌、录歌为一体，通过微信分享的物联网设备，满足消费者享受音乐和社交分享的需求！</p>
+                                <img class="sdw-animate miniktv_gn" th:src="@{/images/gn.png}" data-start='{"transform":"translate3d(0,50px,0) "}' data-end='{"transform":"translate3d(0,0px,0) "}' data-speed="1500" data-delay="0.6s" data-occur="1">
+                                <p class="miniKtv_btn1 sdw-animate" data-start='{"opacity":"0"}' data-end='{"opacity":"1"}' data-speed="1500" data-delay="0.8s" data-occur="1" >
+                                    <a class="btn-sing" href="http://118.190.204.56/app/download/rrc/EveryoneSingChn1.apk">
+                                        <img class="iconImg" th:src="@{/images/andro.png}">使用人人唱点歌<img class="iconRight" th:src="@{/images/right2.png}">
+                                    </a>
+                                </p>
+                                <p class="miniKtv_btn2 sdw-animate" data-start='{"opacity":"0"}' data-end='{"opacity":"1"}' data-speed="1500" data-delay="1s" data-occur="1"  >
+                                    <a class="btn-sing" href="#"><img class="iconImg" th:src="@{/images/sousuo.png}">查看附近的设备<img class="iconRight" th:src="@{/images/right2.png}"></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- footer-->
+    <footer id="footer" th:include="/public/_footer">
+    </footer>
+</div>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.easing.1.3.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/modernizr-custom.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.carousel-1.1.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/sdw_hw.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/bannerSlider.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#carousel-app').carousel('pause');//人人唱轮播
+        $('.carousels').carousels({ //人人唱app轮播
+            directionNav:true,
+            speed:200,
+            carouselsWidth:950,
+            carouselsHeight:390,
+            frontWidth:223,
+            frontHeight:390,
+            hAlign:'center',
+            vAlign:'center',
+            autoplay:true,
+            autoplayInterval:2000,
+            shadow:true,
+            pauseOnHover:false,
+            reflection:false,
+            reflectionHeight:0.2,
+            reflectionOpacity:0.5,
+            description:false,
+            descriptionContainer:'.carousels_description'
+        });
+    });
+
+
+</script>
+</body>
+</html>
