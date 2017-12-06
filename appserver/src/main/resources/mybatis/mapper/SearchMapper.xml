@@ -123,13 +123,10 @@
         select s.id as songId
         from  db_songs s
         where s.theme_song = #{enumValueId}
-        <if test="date != null">
-            and s.update_date > #{date}
-        </if>
     </select>
 
     <select id="getSongTheme" parameterType="string" resultType="EnumValue">
-        select ev.id, ev.name  from enum_type et left join enum_value ev on et.id = ev.enum_type_id where et.type_name = 'songtheme'
+        select ev.id, ev.name ,ev.ename from enum_type et left join enum_value ev on et.id = ev.enum_type_id where et.type_name = 'songtheme'
     </select>
 
     <select id="searchSongByKeyWord" parameterType="string" resultType="map">
@@ -138,5 +135,8 @@
 
     <select id="searchSingerByKeyWord" parameterType="string" resultType="map">
         select * from  db_songs song where song.song_name like '%%' or song.singer_name like '%%' or song.spell like '%%'
+    </select>
+    <select id="getLastUpdateDate" resultType="string">
+        select max(update_date ) from db_songs;
     </select>
 </mapper>

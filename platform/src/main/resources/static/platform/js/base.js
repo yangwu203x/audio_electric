@@ -84,7 +84,7 @@ function ajaxToJson(obj,param){
         }
         layer.msg(param.successMsg,{icon:1,time:1000});
     }else{
-        layer.msg(param.failureMsg+status.resultMessage,{icon:2,time:2000});
+        layer.msg(param.failureMsg+status.responseMessage,{icon:2,time:2000});
     }
 }
     //判断元素是否是数组

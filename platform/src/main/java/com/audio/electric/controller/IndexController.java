@@ -75,6 +75,10 @@ public class IndexController extends BaseController{
                 menu.setUrl("/enum/listEnumValue?enumTypeId="+enumType.getId()+"&title="+enumType.getName());
                 enumList.add(menu);
             }
+            Menu menu = new Menu();
+            menu.setName("字典类型查询");
+            menu.setUrl("/enum/listEnumTypeByPage");
+            enumList.add(menu);
             model.addAttribute("enumList",enumList);
             return "index";
         }

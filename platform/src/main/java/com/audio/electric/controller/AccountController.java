@@ -74,7 +74,7 @@ public class AccountController extends BaseController{
     /**
      * 获取验证码
      */
-    @RequestMapping(value = "/captcha", method = RequestMethod.GET)
+    @GetMapping(value = "/captcha")
     public void validateImages(HttpServletResponse response ,HttpServletRequest request) throws IOException {
         Random random = new Random();
         int codeType = (random.nextInt(3)+1)%3 + 1;
@@ -82,6 +82,7 @@ public class AccountController extends BaseController{
         BufferedImage image = vCode.getBuffImg();
         String validateCode = vCode.getCode();
         request.getSession().setAttribute(Constant.CURRENT_USER_VALIDATE_CODE_KEY, validateCode);
+        response.setCharacterEncoding("utf-8");
         ImageIO.write(image, "png", response.getOutputStream());
     }
 

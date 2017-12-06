@@ -52,7 +52,7 @@ function singleDel(obj,id){
             }
             layer.msg('已删除!',{icon:1,time:1000});
         }else{
-            layer.msg('删除失败!,'+status.resultMessage,{icon:2,time:2000});
+            layer.msg('删除失败!,'+status.responseMessage,{icon:2,time:2000});
         }
     });
 }

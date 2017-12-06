@@ -124,7 +124,7 @@ function passCheck(id){
                     location.replace(location.href);
                 },300);
             }else{
-                layer.msg("审核失败!,原因为："+result.resultMessage);
+                layer.msg("审核失败!,原因为："+result.responseMessage);
             }
         }
     });

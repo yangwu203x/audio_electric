@@ -27,6 +27,9 @@
 			</form>
 			<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 				<span class="l">
+						<a href="javascript:;" th:style="${session.current_role.getRoleAdd() == 0}?'display:none':''" onclick="enum_type_add()" class="btn btn-primary radius">
+							<i class="Hui-iconfont">&#xe600;</i> 添加字典类型
+						</a>
 						<a href="javascript:;" th:style="${session.current_role.getRoleDel() == 0}?'display:none':''" onclick="batchDel()" class="btn btn-danger radius">
 							<i class="Hui-iconfont">&#xe6e2;</i>批量删除
 						</a>

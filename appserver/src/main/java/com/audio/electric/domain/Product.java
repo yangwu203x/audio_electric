@@ -12,12 +12,14 @@ public class Product {
     private String type;
     private String expirydate;
     private String mac;
+    private String serialNo;
 
-    public Product(int id, String type, String expirydate, String mac) {
+    public Product(int id, String type, String expirydate, String mac, String serialNo) {
         this.id = id;
         this.type = type;
         this.expirydate = expirydate;
         this.mac = mac;
+        this.serialNo = serialNo;
     }
 
     public Product() {
@@ -53,5 +55,13 @@ public class Product {
 
     public void setMac(String mac) {
         this.mac = mac;
+    }
+
+    public String getSerialNo() {
+        return serialNo;
+    }
+
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo;
     }
 }

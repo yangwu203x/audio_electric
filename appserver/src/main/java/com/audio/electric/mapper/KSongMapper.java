@@ -7,5 +7,5 @@ import org.springframework.stereotype.Component;
  * @Date 2017/6/28 0028 16:33
  */
 @Component
-public class KSongMapper {
+public interface KSongMapper {
 }

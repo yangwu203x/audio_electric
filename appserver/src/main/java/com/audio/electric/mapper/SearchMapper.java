@@ -63,4 +63,6 @@ public interface SearchMapper {
     List<Map> searchSingerByKeyWord(String keyWord);
 
     List<Map> searchSongByKeyWord(String keyWord);
+
+    String getLastUpdateDate();
 }

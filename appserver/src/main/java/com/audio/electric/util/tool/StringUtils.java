@@ -67,7 +67,6 @@ public class StringUtils {
 		if(str == null || str.trim().equals("") || str.trim().equals("null")){
 			return false;
 		}
-		
 		return true;
 	}
 	

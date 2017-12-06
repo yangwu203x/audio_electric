@@ -20,7 +20,7 @@ $.validator.setDefaults({
                 var index = parent.layer.getFrameIndex(window.name);
                 parent.layer.close(index);
             } else {
-                layer.msg("提交失败!原因为："+result.resultMessage);
+                layer.msg("提交失败!原因为："+result.responseMessage);
             }
         });
     }

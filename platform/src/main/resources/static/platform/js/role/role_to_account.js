@@ -55,7 +55,7 @@ console.log("url="+url+",msg="+msg+",data="+data+',operation='+operation);
                     $(obj).parents("tr").remove();
                     layer.msg(returnmsg,{icon:1,time:1000});
                 }else{
-                    layer.msg('操作失败!'+data.resultMessage,{icon:5,time:1000});
+                    layer.msg('操作失败!'+data.responseMessage,{icon:5,time:1000});
                 }
             },
             error:function(data) {

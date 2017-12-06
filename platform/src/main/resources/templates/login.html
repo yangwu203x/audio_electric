@@ -40,13 +40,13 @@
       <div class="row cl" >
         <!--<label class="form-label col-xs-3"><i class="Hui-iconfont" style="font-weight:bold;">&#xe62d;</i></label>-->
         <div class="formControls col-xs-8" >
-          <input id="username" name="username" type="text" placeholder="账户" class="input-text enter" width="200px"  value = "" required="required" />
+          <input id="username" name="username" type="text" placeholder="账户" class="input-text enter" width="200px"  value = "admin" required="required" />
         </div>
       </div>
       <div class="row cl">
         <!--<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe63f;</i></label>-->
         <div class="formControls col-xs-8" >
-          <input id="password" name="password" type="password" placeholder="密码"  class="input-text enter" required="required" />
+          <input id="password" name="password" type="password" placeholder="密码" value="123456"  class="input-text enter" required="required" />
         </div>
       </div>
       <div class="row cl">
@@ -89,7 +89,7 @@
         submitHandler: function() {
             $("#edit_form").ajaxSubmit(function (result) {
                 var code = result.responseCode;
-                var msg = result.resultMessage;
+                var msg = result.responseMessage;
                 if (code == '1') {
                     location.href = "/index";
                 } else {

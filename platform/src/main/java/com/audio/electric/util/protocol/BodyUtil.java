@@ -25,7 +25,7 @@ public class BodyUtil {
     public static Body sucess(Object object , DataType dataType){
         Body body = new Body();
         body.setResponseCode(RetCode.SUCCESS.getCode());
-        body.setResultMessage(RetCode.SUCCESS.getMsg());
+        body.setResponseMessage(RetCode.SUCCESS.getMsg());
         body.setDataType(dataType.getType());
         body.setResponseData(object);
         return body;
@@ -44,7 +44,7 @@ public class BodyUtil {
     public static Body exception(Integer code, String message){
         Body body = new Body();
         body.setResponseCode(code);
-        body.setResultMessage(message);
+        body.setResponseMessage(message);
         body.setDataType(DataType.Object.getType());
         body.setResponseData(null);
         return body;
@@ -59,7 +59,7 @@ public class BodyUtil {
     public static Body error(RetCode retCode){
         Body body = new Body();
         body.setResponseCode(retCode.getCode());
-        body.setResultMessage(retCode.getMsg());
+        body.setResponseMessage(retCode.getMsg());
         body.setDataType(DataType.Object.getType());
         body.setResponseData(null);
         return body;

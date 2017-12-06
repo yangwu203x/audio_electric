@@ -30,9 +30,12 @@ public class SongServiceImpl extends BaseService implements ISongService{
         Map data = new HashMap();
         //查询歌曲类型，含歌曲id
         List<SongType> songTypes = getSongTypes(date);
+        //查一下歌曲最后更新时间
+        String lastUpdateDate = searchMapper.getLastUpdateDate();
         //查询所有歌曲
         List<SongResponse> songs = searchMapper.getSong(date);
         wrapSongCollections(songs,1l);
+        data.put("lastUpdateDate",lastUpdateDate);
         data.put("songType",songTypes);
         data.put("songs",songs);
         return data;
@@ -41,6 +44,7 @@ public class SongServiceImpl extends BaseService implements ISongService{
 
     private List<SongType> getSongTypes(String date) {
         List<SongType> songTypes = new ArrayList<>();
+
         //经典老歌
         List<Integer> classicSongs = searchMapper.getClassicSong(date);
         SongType classicSong = new SongType("classic","经典歌曲",classicSongs);
@@ -54,6 +58,7 @@ public class SongServiceImpl extends BaseService implements ISongService{
         for (EnumValue enumValue : enumTypeList){
             List<Integer> themeSongs = searchMapper.getChildSong(date,enumValue.getId());
             SongType childSong = new SongType(enumValue.getEname(),enumValue.getName(),themeSongs);
+            childSong.setTypeName(enumValue.getEname());
             songTypes.add(childSong);
         }
         return songTypes;

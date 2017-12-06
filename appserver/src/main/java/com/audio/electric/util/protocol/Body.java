@@ -1,7 +1,6 @@
 package com.audio.electric.util.protocol;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.audio.electric.util.enums.DataType;
 import com.github.pagehelper.Page;
@@ -17,7 +16,7 @@ public class Body<T>{
      * 参见枚举类RetCode
      */
     private int responseCode;
-    private String resultMessage;
+    private String responseMessage;
     /**
      * 0:常量，1:json对象，2:json对象数组
      */
@@ -39,12 +38,12 @@ public class Body<T>{
         this.responseCode = responseCode;
     }
 
-    public String getResultMessage() {
-        return resultMessage;
+    public String getResponseMessage() {
+        return responseMessage;
     }
 
-    public void setResultMessage(String resultMessage) {
-        this.resultMessage = resultMessage;
+    public void setResponseMessage(String responseMessage) {
+        this.responseMessage = responseMessage;
     }
 
     public int getDataType() {
@@ -67,7 +66,7 @@ public class Body<T>{
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("{\"responseCode\":").append(responseCode);
-        sb.append(",\"resultMessage\":\"").append(resultMessage).append("\"");
+        sb.append(",\"responseMessage\":\"").append(responseMessage).append("\"");
         sb.append(",\"dataType\":").append(dataType);
         Object res = null;
         if (responseData != null){
@@ -89,7 +88,7 @@ public class Body<T>{
         return sb.toString();
 //                "{" +
 //                "\"responseCode\":" + responseCode +
-//                ", \"resultMessage\":\"" + resultMessage + '\"' +
+//                ", \"responseMessage\":\"" + responseMessage + '\"' +
 //                ", \"dataType\":" + dataType +
 //                ", \"responseData\":" + res +
 //                '}';

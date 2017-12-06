@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 public class BehaviorControllerTest extends AppserverApplicationTests{
     @Autowired
     BehaviorController behaviorController;
+
     @Test
     public void attention() throws Exception {
         String be_user_id = "2";

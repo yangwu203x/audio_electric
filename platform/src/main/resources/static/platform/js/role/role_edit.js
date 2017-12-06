@@ -2,7 +2,7 @@ $.validator.setDefaults({
     submitHandler: function() {
         $("#edit_form").ajaxSubmit(function (result) {
             var code = result.responseCode;
-            var msg = result.resultMessage;
+            var msg = result.responseMessage;
             if (code == '1') {
                 layer.msg("提交成功！");
                 setTimeout(function(){

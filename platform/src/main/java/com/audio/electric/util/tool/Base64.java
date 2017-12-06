@@ -265,8 +265,5 @@ public final class Base64 {
 		}
 		return newSize;
 	}
-	public static void main(String[] args){
-		System.out.println();
-	}
 
 }

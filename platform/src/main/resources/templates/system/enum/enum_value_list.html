@@ -35,12 +35,6 @@
 						<a href="javascript:;" th:style="${session.current_role.getRoleAdd() == 0}?'display:none':''" onclick="enum_value_add()" class="btn btn-primary radius">
 							<i class="Hui-iconfont">&#xe600;</i> 添加字典
 						</a>
-						<a href="javascript:;" th:style="${session.current_role.getRoleDel() == 0}?'display:none':''" onclick="enum_type_del()" class="btn btn-danger radius">
-							<i class="Hui-iconfont">&#xe6e2;</i>字典类型删除
-						</a>
-						<a href="javascript:;" th:style="${session.current_role.getRoleAdd() == 0}?'display:none':''" onclick="enum_type_add()" class="btn btn-primary radius">
-							<i class="Hui-iconfont">&#xe600;</i> 添加字典类型
-						</a>
 				</span>
 				<span class="r">共有数据：<strong th:text="${pagehelper.total}"></strong> 条</span>
 			</div>
