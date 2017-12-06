@@ -14,6 +14,12 @@ public class ShoppingException extends RuntimeException {
         this.code = retCode.getCode();
     }
 
+    public ShoppingException(RetCode retCode,String msg) {
+        super(msg);
+        this.code = retCode.getCode();
+    }
+
+
     public Integer getCode() {
         return code;
     }

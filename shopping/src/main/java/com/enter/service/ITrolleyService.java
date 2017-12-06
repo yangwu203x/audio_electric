@@ -1,6 +1,5 @@
 package com.enter.service;
 
-import com.enter.annotations.LoginVerify;
 import com.enter.entity.Trolley;
 
 import java.util.List;
@@ -11,9 +10,9 @@ import java.util.List;
  */
 public interface ITrolleyService {
 
-    Trolley addToTrolley(Long productId,Integer count);
+    Trolley addToTrolley(Long productId,Integer count,String colorNo,String series);
 
-    void deleteFromTrolley(Long productId,Integer count);
+    void deleteFromTrolley(Long trolleyIdt);
 
     Trolley findOne(Long trolleyId);
 
@@ -21,5 +20,7 @@ public interface ITrolleyService {
 
     List<Trolley> listMyTrolley();
 
-    int productCountFromTrolley();
+    String getTrolleyNum();
+
+    void bacthDeleteFromTrolley(String trolleyIds);
 }

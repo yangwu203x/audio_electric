@@ -1,7 +1,8 @@
 package com.enter.service;
 
-import com.enter.entity.OrderDetail;
+import com.enter.entity.StateCount;
 import com.enter.entity.Orders;
+import com.enter.entity.Trolley;
 
 import java.util.List;
 
@@ -15,20 +16,23 @@ public interface IOrdersService {
 
     Orders getOrdersById(Long ordersId);
 
-    /**
-     * 添加单个子订单
-     * @param trolleyId
-     * @return
-     */
-    OrderDetail addToOrderDetail(Long trolleyId);
 
-    List<OrderDetail> addAllToOrderDetail(String trolleyIds);
+    List<Trolley> addAllToOrderDetail(String trolleyIds);
 
-    List<Orders> listMyOrder();
+    List<Orders> listMyOrder(String orderState);
 
-    List<OrderDetail> listMyOrderDetailByTrolleyId(String trolleyIds);
+    List<Trolley> listMyTrolleyTrolleyId(String trolleyIds);
 
     Orders generatedTotalOrder(String trolleyIds, Long addressId);
 
     Orders findOrdersByOrderNum(String orderNum);
+
+    Orders findOrderById(Long orderId);
+
+
+    List<StateCount> getOrdersStateCount();
+
+    void cancerOrders(String orderNum);
+
+    Trolley nowBuy(Long productId,Integer count,String colorNo,String series);
 }

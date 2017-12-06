@@ -1,9 +1,8 @@
 package com.enter.shopping;
 
-import com.enter.entity.Product;
-import com.enter.entity.OrderDetail;
-import com.enter.entity.Orders;
-import com.enter.entity.Trolley;
+import com.alibaba.fastjson.JSONObject;
+import com.enter.entity.*;
+import com.enter.repository.OrdersRepository;
 import com.enter.service.IOrdersService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -26,6 +24,20 @@ public class OrdersServiceTest {
     @Autowired
     private IOrdersService ordersService;
 
+    @Autowired
+    private OrdersRepository ordersRepository;
+
+    @Test
+    public void getOrderStateCount(){
+        User user = new User();
+        user.setId(1);
+        List<StateCount> list = ordersRepository.getOrdersStateCount(user);
+
+        for (StateCount map : list){
+           System.out.println(JSONObject.toJSON(map));
+        }
+
+    }
 
     @Test
     public void generateOrder(){
@@ -40,14 +52,6 @@ public class OrdersServiceTest {
         product2.setId(2l);
         Product product3 = new Product();
         product3.setId(3l);
-        OrderDetail orderDetail1 = new OrderDetail();
-        OrderDetail orderDetail2 = new OrderDetail();
-        OrderDetail orderDetail3 = new OrderDetail();
-        Set<OrderDetail> orderDetails = new HashSet<>();
-        orderDetails.add(orderDetail1);
-        orderDetails.add(orderDetail2);
-        orderDetails.add(orderDetail3);
-        order.setOrderDetails(orderDetails);
         Orders persisent = ordersService.saveOrders(order);
         System.out.println(persisent);
     }

@@ -13,6 +13,8 @@ public class Trolley {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "order_id")
+    private Long orderId;
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
@@ -25,6 +27,14 @@ public class Trolley {
     private User user;
     @Column(name = "status",columnDefinition = "0")
     private int status;//购物车状态
+    @Column(name = "date_str")
+    private String dateStr;
+    @Column(name = "property_id")
+    private Long propertyId;
+    @Column(name = "color_name")
+    private String colorName;
+    @Column(name="series")
+    private String series;
 
     public Long getId() {
         return id;
@@ -73,6 +83,46 @@ public class Trolley {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getDateStr() {
+        return dateStr;
+    }
+
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
+    }
+
+    public Long getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
     }
 
     @Override

@@ -2,11 +2,16 @@ package com.enter.controller;
 
 import com.enter.entity.Banner;
 import com.enter.entity.Product;
+import com.enter.entity.User;
+import com.enter.exception.PageException;
 import com.enter.service.IBannerService;
 import com.enter.service.IProductService;
+import com.enter.util.CheckUserLogin;
+import com.enter.util.enums.RetCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -23,15 +28,41 @@ public class StaticController {
     @Autowired
     private IBannerService bannerService;
 
+
     @RequestMapping("/")
     public String index(Model model){
-        List<Product> flyProduct = productService.findProductByCategoryId(1l);
-        List<Product> ktvProduct = productService.findProductByCategoryId(2l);
-        List<Banner> banners = bannerService.findAll();
+        List<Product> flyProduct = productService.findProductByCategoryId(2);
+        List<Product> ktvProduct = productService.findProductByPosition(1);
+        List<Banner> banners = bannerService.findBannerByCategory("index");
         model.addAttribute("flyProduct",flyProduct.get(0));
         model.addAttribute("ktvProduct",ktvProduct);
         model.addAttribute("banners",banners);
-        return "index";
+        return "/index";
+    }
+
+    @RequestMapping("/about")
+    public String about(){
+        return "/about/about";
+    }
+
+    @RequestMapping("/deliveryInfo")
+    public String deliveryInfo(){
+        return "/delivery/delivery_info";
+    }
+
+    @RequestMapping("/songs")
+    public String songs(){
+        return "/songs/songs";
+    }
+
+    @RequestMapping("/music")
+    public String music(){
+        return "/music/music";
+    }
+
+    @RequestMapping("/media")
+    public String media(){
+        return "/media/media";
     }
 
     @RequestMapping("/contact")
@@ -56,6 +87,9 @@ public class StaticController {
 
     @RequestMapping("/discount")
     public String discount(){
+        User user = CheckUserLogin.getloginuser();
+        if (user == null)
+            throw new PageException(RetCode.UNLOGINED);
         return "/coupon/discount";
     }
 }

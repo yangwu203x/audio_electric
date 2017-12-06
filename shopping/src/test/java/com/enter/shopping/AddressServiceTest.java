@@ -1,16 +1,15 @@
 package com.enter.shopping;
 
 import com.enter.entity.*;
+import com.enter.repository.AddressRepository;
 import com.enter.service.IAddressService;
-import com.enter.service.IOrdersService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
@@ -23,19 +22,25 @@ public class AddressServiceTest {
 
     @Autowired
     private IAddressService addressService;
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Test
+    @Transactional
+    public void updateSelected(){
+        User user  = new User();
+        user.setId(1l);
+        addressRepository.updateAllSelected(user);
+    }
 
     @Test
     public void saveAddress(){
-        AddressInfo addressInfo = new AddressInfo();
-        addressInfo.setProvinceId("440000");
-        addressInfo.setProvince("北京");
-        addressInfo.setCityId("440300");
-        addressInfo.setCity("北京");
-        addressInfo.setAreaId("440306");
-        addressInfo.setArea("丰台区");
-        addressInfo.setDetailPosition("叮叮当但");
         Address address = new Address();
-        address.setAddressInfo(addressInfo);
+        address.setAbsoluteAddress("00000");
+        address.setDetailPosition("dsdfdsdf");
+        address.setProvinceId("440000");
+        address.setCityId("440300");
+        address.setAreaId("440306");
         User user = new User();
         user.setId(1l);
         address.setUser(user);
@@ -47,10 +52,6 @@ public class AddressServiceTest {
     @Test
     public void updateAddress(){
         Address address = addressService.findAddressById(2l);
-        AddressInfo addressInfo = address.getAddressInfo();
-        addressInfo.setArea("宝安区");
-        addressInfo.setAreaId("440306");
-        address.setAddressInfo(addressInfo);
         addressService.addAddress(address);
     }
 

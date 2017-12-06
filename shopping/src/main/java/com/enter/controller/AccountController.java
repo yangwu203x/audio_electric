@@ -2,51 +2,72 @@ package com.enter.controller;
 
 import com.enter.entity.User;
 import com.enter.service.IAccountService;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.enter.util.CheckUserLogin;
+import com.enter.util.enums.DataType;
+import com.enter.util.protocol.BodyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author leo_Yang【音特】
  * @Date 2017/10/16 0016 17:55
  */
 @Controller
-@RequestMapping("/account")
+@RequestMapping("/user")
 public class AccountController {
 
     @Autowired
     private IAccountService accountService;
 
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout(){
         accountService.logout();
         return "redirect:/login";
     }
 
-    @RequestMapping("/login")
+    @PostMapping("/login")
     @ResponseBody
-    public String login(String email,String password){
-        return accountService.login(email,password).toString();
+    public Object login(String email,String password){
+        User user = accountService.login(email,password);
+        String retUrl= CheckUserLogin.getRefenceUrl();
+        return BodyUtil.success(null, DataType.Object,retUrl);
     }
 
-    @RequestMapping("/checkValidCode")
+    @GetMapping("/checkValidCode")
     @ResponseBody
-    public String checkValidCode(String email,String validCode){
-        return accountService.checkValidCode(email,validCode).toString();
+    public Object checkValidCode(String email,String validCode,String type){
+        accountService.checkValidCode(email,validCode,type);
+        return BodyUtil.success();
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/validCode/email")
     @ResponseBody
-    public String register(User user){
-        return accountService.doReg(user).toString();
+    public Object sendValidCode(String email,String type){
+        accountService.sendValidCode(email,type);
+        return BodyUtil.success();
     }
 
-    @RequestMapping("/sendValidCode")
+    @GetMapping("/validCode/message/{tel}")
     @ResponseBody
-    public String sendValidCode(User user){
-        return accountService.sendValidCode(user).toString();
+    public Object sendDxCode(@PathVariable("tel")String tel){
+        //TODO  发送短信
+        accountService.sendDxCode(tel);
+        return BodyUtil.success();
     }
+
+    @PostMapping("/register")
+    @ResponseBody
+    public Object register(User user){
+        accountService.doReg(user);
+        return BodyUtil.success(null,DataType.Object,"/");
+    }
+
+    @PostMapping("/changePwd")
+    @ResponseBody
+    public Object changePwd(User user){
+        accountService.changePwd(user);
+        return BodyUtil.success(null,DataType.Object,"/login");
+    }
+
 }

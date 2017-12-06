@@ -22,17 +22,28 @@ public class BodyUtil {
      * @param dataType
      * @return
      */
-    public static Body sucess(Object object , DataType dataType){
+    public static Body success(Object object , DataType dataType){
+        return success(object,dataType,null);
+    }
+
+    /**
+     * 成功
+     * @param object
+     * @param dataType
+     * @return
+     */
+    public static Body success(Object object , DataType dataType, String url){
         Body body = new Body();
-        body.setResponseCode(RetCode.SUCCESS.getCode());
-        body.setResultMessage(RetCode.SUCCESS.getMsg());
-        body.setDataType(dataType.getType());
-        body.setResponseData(object);
+        body.setCode(RetCode.SUCCESS.getCode());
+        body.setMsg(RetCode.SUCCESS.getMsg());
+        body.setType(dataType.getType());
+        body.setData(object);
+        body.setUrl(url);
         return body;
     }
 
     public static Body success(){
-        return sucess(null,DataType.Constant);
+        return success(null,DataType.Constant);
     }
 
     /**
@@ -43,10 +54,20 @@ public class BodyUtil {
      */
     public static Body exception(Integer code,String message){
         Body body = new Body();
-        body.setResponseCode(code);
-        body.setResultMessage(message);
-        body.setDataType(DataType.Object.getType());
-        body.setResponseData(null);
+        body.setCode(code);
+        body.setMsg(message);
+        body.setType(DataType.Object.getType());
+        body.setData(null);
+        return body;
+    }
+
+    public static Body unLoginException(){
+        Body body = new Body();
+        body.setCode(RetCode.UNLOGINED.getCode());
+        body.setMsg(RetCode.UNLOGINED.getMsg());
+        body.setType(DataType.Object.getType());
+        body.setData(null);
+        body.setUrl("/login");
         return body;
     }
 
@@ -58,10 +79,10 @@ public class BodyUtil {
      */
     public static Body error(RetCode retCode){
         Body body = new Body();
-        body.setResponseCode(retCode.getCode());
-        body.setResultMessage(retCode.getMsg());
-        body.setDataType(DataType.Object.getType());
-        body.setResponseData(null);
+        body.setCode(retCode.getCode());
+        body.setMsg(retCode.getMsg());
+        body.setType(DataType.Object.getType());
+        body.setData(null);
         return body;
     }
 }

@@ -16,7 +16,9 @@ public class Product {
     @Column(name = "name")
     private String name;
     @Column(name = "category_id")
-    private Long categoryId;
+    private Integer categoryId;
+    @Column(name = "category_name")
+    private String categoryName;
     @Column(name = "price_sale")
     private Double priceSale;//商城价
     @Column(name = "price_market")
@@ -31,20 +33,34 @@ public class Product {
     private Double weight;
     @Column(name = "content")
     private String content;
+    @Column(name = "title")
+    private String title;
     @Column(name = "is_up")
     private Short isUp;//是否上架
     @Column(name = "is_freight")
     private Short isFreight;//是否免邮费
-    @Column(name = "warn_inventory")
-    private Integer warnInventory;//库存
+
     @Column(name = "shelf_date")
     private Timestamp shelfDate;//发布时间
     @Column(name = "thumbnail")
-    private String thumbnail;//大缩略图
+    private String thumbnail;//商城缩略图图
+    @Column(name = "thumbnail2")
+    private String thumbnail2;//首页缩略图图
+    @Column(name = "thumbnail3")
+    private String thumbnail3;//订单缩略图图
+    @Column(name = "thumbnail4")
+    private String thumbnail4;//详情缩略图图
     @Column(name = "sn")
     private String sn;//商品编号
     @Column(name = "color")
     private String color;//颜色
+    @Column(name = "warn_inventory")
+    private Integer warnInventory;//库存
+    @Column(name = "color_url")
+    private String colorUrl;//颜色图片
+
+    @Column(name = "position")
+    private Integer position;//商城摆放位置
 
     @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "product_id")
@@ -55,6 +71,9 @@ public class Product {
         joinColumns=@JoinColumn(name="product_set_id", referencedColumnName="ID"),
         inverseJoinColumns=@JoinColumn(name="parts_set_id", referencedColumnName="ID"))
     private Set<Parts> partsSet;
+
+    @Transient
+    private Set<Property> propertySet;
 
     public Long getId() {
         return id;
@@ -72,11 +91,11 @@ public class Product {
         this.name = name;
     }
 
-    public Long getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -206,6 +225,70 @@ public class Product {
 
     public void setPartsSet(Set<Parts> partsSet) {
         this.partsSet = partsSet;
+    }
+
+    public Integer getPosition() {
+        return position;
+    }
+
+    public void setPosition(Integer position) {
+        this.position = position;
+    }
+
+    public String getColorUrl() {
+        return colorUrl;
+    }
+
+    public void setColorUrl(String colorUrl) {
+        this.colorUrl = colorUrl;
+    }
+
+    public String getThumbnail2() {
+        return thumbnail2;
+    }
+
+    public void setThumbnail2(String thumbnail2) {
+        this.thumbnail2 = thumbnail2;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Set<Property> getPropertySet() {
+        return propertySet;
+    }
+
+    public void setPropertySet(Set<Property> propertySet) {
+        this.propertySet = propertySet;
+    }
+
+    public String getThumbnail3() {
+        return thumbnail3;
+    }
+
+    public void setThumbnail3(String thumbnail3) {
+        this.thumbnail3 = thumbnail3;
+    }
+
+    public String getThumbnail4() {
+        return thumbnail4;
+    }
+
+    public void setThumbnail4(String thumbnail4) {
+        this.thumbnail4 = thumbnail4;
     }
 
     @Override

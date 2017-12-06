@@ -10,6 +10,8 @@
     <meta name="keywords" content="音特，音特电子，话筒"/>
     <meta name="description" content="音特电子，话筒"/>
     <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}">
@@ -21,84 +23,104 @@
 <body>
 <div class="wrapper" id="shopCart">
     <!-- 通用头部-->
-    <header class="header" th:include="/public/_header"></header>
+    <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
     <!-- 内容区-->
-    <section class="content">
-        <div class="container">
+    <section class="content" th:switch="${trolleyList.size() > 0}">
+        <div class="container" >
             <!--位置导航-->
             <div class="navAdd">
                 <div class="navAdd-block">
-                    <a class="navAdd-a" href="index.html">首页</a>
+                    <a class="navAdd-a" th:href="@{/}">首页</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" href="#">购物车</a>
+                    <a class="navAdd-a active" href="#">购物车</a>
                 </div>
             </div>
-            <!--标题-->
+        </div>
+        <!--标题-->
+        <div class="container">
             <div class="shopCart-top clearfix">
                 <span class="f-24">购物车</span>
-                <a class="goBuy pull-right" th:href="@{/user/index}">继续购物 <i class="iconfont icon-right f-24"></i> </a>
+                <a class="goBuy pull-right" th:href="@{/product/view}">继续购物 <i class="iconfont icon-right f-24"></i> </a>
             </div>
-            <!--购物车结算-->
-            <div class="catbox shopCartBox">
-                <div id="cartTable">
-                    <div class="carHead">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="carHead_left">
-                                    <input class="check-all check" type="checkbox" id="all"/>
-                                    <label for="all"><span></span>全选</label>
+        </div>
+
+        <!--购物车结算-->
+        <div th:case="true" class="catbox shopCartBox">
+            <div id="cartTable">
+                <div class="container">
+                    <div class="table_row">
+                        <div class="carHead">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="carHead_left">
+                                        <input class="check-all check" type="checkbox" id="all"/>
+                                        <label for="all"><span></span>全选</label>
+                                    </div>
                                 </div>
+                                <div class="col-md-4">商品</div>
+                                <div class="col-md-2">单价</div>
+                                <div class="col-md-2">数量</div>
+                                <div class="col-md-2">小计</div>
+                                <div class="col-md-1"><div class="carHead_right">操作</div></div>
                             </div>
-                            <div class="col-md-3">商品</div>
-                            <div class="col-md-2">单价</div>
-                            <div class="col-md-2">数量</div>
-                            <div class="col-md-2">小计</div>
-                            <div class="col-md-1"><div class="carHead_right">操作</div></div>
                         </div>
-                    </div>
-                    <div class="item" th:each="item,itemStat:${trolleyList}">
-                        <div class="row">
-                            <div class="col-md-1 item_left">
-                                <div class="checkbox">
-                                    <input class="check-one check" type="checkbox" th:id="'choose'+${itemStat.index+1}" name="trolleyIdCheck" th:value="${item.id}"/>
-                                    <label th:attr="for='choose'+${itemStat.index+1}" ><span></span></label>
+                        <!--/*@thymesVar id="trolleyList" type="java.util.ArrayList"*/-->
+                        <!--/*@thymesVar id="trolley" type="com.enter.entity.Trolley"*/-->
+                        <!--/*@thymesVar id="product" type="com.enter.entity.Product"*/-->
+                        <div class="item" th:each="trolley,itemStat:${trolleyList}">
+                            <div class="row">
+                                <div class="col-md-1 item_left">
+                                    <div class="checkbox">
+                                        <input class="check-one check" type="checkbox" th:id="'choose'+${itemStat.index+1}" name="trolleyIdCheck" th:value="${trolley.id}"/>
+                                        <label th:attr="for='choose'+${itemStat.index+1}" ><span></span></label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 item_img">
-                                <div class="goods">
-                                    <div class="goods-img"><img th:src="@{/images/product1.png}" alt=""/></div>
-                                    <p class="goods-name" th:text="${item.product.name}">卡拉OK E5</p>
-                                    <p class="goods-color" th:text="${item.product.color}">颜色：黑色</p>
+                                <div class="col-md-4 item_img">
+                                    <div class="goods">
+                                        <a th:href="'/product/view/id/'+${trolley.getProduct().getId()}">
+                                            <div class="goods-img"><img  th:src="${trolley.getProduct().getThumbnail3()}" alt=""/></div>
+                                            <p class="goods-name" th:text="${trolley.product.categoryName+ ' '+trolley.product.name}"></p>
+                                            <p class="goods-color" th:text="'颜色：'+${trolley.product.color}"></p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2 item_height">￥<span class="price" id="price" th:text="${item.product.priceSale}"></span></div>
-                            <div class="col-md-2 item_height">
-                                <div class="count">
-                                    <span class="reduce"></span>
-                                    <input class="count-input" type="text" th:value="${item.count}"/>
-                                    <span class="add">+</span>
+                                <div class="col-md-2 item_height">￥<span class="price" id="price" th:text="${trolley.product.priceSale}"></span></div>
+                                <div class="col-md-2 item_height">
+                                    <div class="count">
+                                        <span class="reduce"></span>
+                                        <input class="count-input" name="count" type="text" readonly="readonly" th:value="${trolley.count}"/>
+                                        <span class="add">+</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-2 item_height"><span class="subtotal" id="subtotal" th:text="${item.product.priceSale*item.count}"></span></div>
-                            <div class="col-md-1 item_height">
-                                <div class="operation"><span class="delete iconfont icon-close"></span></div>
+                                <input type="hidden" name="productId" th:value="${trolley.product.id}"/>
+                                <div class="col-md-2 item_height"><span class="subtotal" id="subtotal" th:text="${trolley.product.priceSale*trolley.count}"></span></div>
+                                <div class="col-md-1 item_height">
+                                    <div class="operation"><span class="delete iconfont icon-close" th:title="${trolley.id}"></span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="foot fixed-bottom" id="foot">
-                    <div class="container">
+            </div>
+            <div class="foot fixed-bottom" id="foot">
+                <div class="container">
+                    <div class="foot_block clearfix">
                         <label class="pull-left select-all"><input class="check-all check" type="checkbox" id="all2"/><label for="all2"><span></span></label>全选</label>
                         <a class="pull-left delete" id="deleteAll" href="javascript:;">删除选中商品</a>
                         <div class="pull-left selected" id="selected">共<span id="chooseAll"></span>件商品，已选商品<span id="selectedTotal">0</span>件</div>
                         <input type="hidden" id="cartTotalPrice" />
-                        <div class="pull-right total">合计(不含运费)：<span class="priceIcon">￥</span><span id="priceTotal">0.00</span><a class="closing" href="#" onclick="account()">去结算</a></div>
+                        <div class="pull-right total">合计(不含运费)：<span class="priceIcon">￥</span><span id="priceTotal">0.00</span><a class="closing" href="javascript:void(0);" onclick="account()">去结算</a></div>
                     </div>
                 </div>
-                <div id="footBlank" style="height: 82px;"></div>
+            </div>
+            <div id="footBlank" style="height: 82px;"></div>
+        </div>
+        <div class="container">
+            <div th:case="false" class="withNoShopCart" style="display: block;">
+                <img th:src="@{/images/noshopCart.png}">
+                <div class="withNoShopCart_p">亲，您的购物车里还没有物品哦，赶紧去<a class="goProduct" th:href="@{/product/view}">逛逛</a>吧</div>
             </div>
         </div>
-
     </section>
 
     <!-- deleteModal -->
@@ -139,7 +161,7 @@
         </div>
     </div>
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer">
+    <footer id="footer" th:include="/public/_footer::footer">
     </footer>
 </div>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
@@ -161,11 +183,10 @@
             }
         }
         trolleyIds = trolleyIds.substr(0,trolleyIds.length-1);
-        $.ajax({url:"/order/addALLToOrder",method:'post',data:{trolleyIds:trolleyIds}
-            ,success:function(data){
-                console.log(data);
-                if(data.responseCode == 1)
-                    window.location.href=data.responseData + "";
+        $.ajax({url:"/user/orders/generate/one",method:'post',data:{trolleyIds:trolleyIds}
+            ,success:function(result){
+                if(result.code == 1)
+                    window.location.href=result.data + "";
             }
         })
     }

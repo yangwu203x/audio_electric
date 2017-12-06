@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class TrolleyServiceTest {
 
     @Autowired
@@ -44,5 +46,21 @@ public class TrolleyServiceTest {
         trolley.setUser(user);
         trolley.setProduct(product);
         trolleyRepository.save(trolley);
+    }
+
+    @Test
+    public void deleteTrolley(){
+        Long trolleyId = 32l;
+        User user = new User() ;
+        user.setId(1l);
+        int result =  trolleyRepository.deleteTrolleyByIdAndUser(trolleyId,user);
+        System.out.println(result);
+    }
+
+    @Test
+    public void getTrolleyNum(){
+        User user = new User() ;
+        user.setId(1l);
+        System.out.println(trolleyRepository.getTrolleyNum(user));
     }
 }

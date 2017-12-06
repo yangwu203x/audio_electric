@@ -32,6 +32,14 @@ public class CheckUserLogin {
         session.removeAttribute(Constant.CURRENT_LOGIN_USER);
     }
 
+    public static String getRefenceUrl(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String retUrl= request.getHeader("Referer");
+        if (retUrl == null || retUrl.contains("/login"))
+            retUrl = "/";
+        return retUrl;
+    }
+
     /**
      * 描述 登录成功处理
      * @param user
@@ -49,6 +57,16 @@ public class CheckUserLogin {
         HttpSession session = request.getSession();
         logger.info("login------------------------------------------------"+ session.getId());
         session.setAttribute(Constant.CURRENT_LOGIN_USER,user);
+        session.setAttribute(Constant.DEFAULTADDRESS,address);
+    }
+
+    /**
+     * 设置默认地址
+     * @param address
+     */
+    public static void setDefaultAddress(Address address){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
         session.setAttribute(Constant.DEFAULTADDRESS,address);
     }
 }

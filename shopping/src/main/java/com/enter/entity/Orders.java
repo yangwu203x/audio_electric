@@ -20,13 +20,26 @@ public class Orders {
     private User user;
 
     @Column(name = "address")
-    private String address;//地址
+    private String address;//完整地址，便于售后服务地址
+
+    @Column(name = "simple_address")
+    private String simpleAddress;
 
     @Column(name = "recipients")
     private String recipients;//收件人
 
     @Column(name = "tel")
     private String tel;//手机号码
+
+    @Column(name = "province_id")
+    private String provinceId;//省编号
+
+    @Column(name = "city_id")
+    private String cityId;//城市编号
+
+    @Column(name = "area_id")
+    private String areaId;//地区编号
+
 
     @Column(name = "delivery")
     private String delivery;//配送方式
@@ -40,12 +53,15 @@ public class Orders {
     @Column(name = "text")
     private String text;
 
-    @Column(name = "order_num")
+    @Column(name = "order_num",unique = true)
     private String orderNum;//订单编号
 
     @Column(name = "price")
     private Double price;//订单总价格
 
+    /**
+     * 1:待付款；2：待收货；3：已完成；4：已关闭
+     */
     @Column(name = "order_state")
     private String orderState;//订单状态
 
@@ -55,15 +71,42 @@ public class Orders {
     @Column(name = "order_pay")
     private String orderPay;//支付状态
 
-    @Column(name = "pay_date")
-    private Timestamp payDate;//支付时间
+
+
+    @OneToOne(mappedBy = "orders")
+    private SaleService saleService;
 
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
-    private Set<OrderDetail> orderDetails;
+    private Set<Trolley> trolleys;
+
+    @Column(name = "generate_time")
+    private String generateTime;//订单生成时间
+
+    @Column(name = "pay_date")
+    private Timestamp payDate;//支付时间
+
+    @Column(name = "success_time")
+    private String successTime;//成功交易时间
+
+    @Column(name = "close_time")
+    private String closeTime;//订单关闭时间
+
+    @Column(name = "left_time")
+    private Long leftTime;
 
 
+
+    private Integer countNum;
+
+    public Integer getCountNum() {
+        return countNum;
+    }
+
+    public void setCountNum(Integer countNum) {
+        this.countNum = countNum;
+    }
 
     public Long getId() {
         return id;
@@ -186,14 +229,85 @@ public class Orders {
         this.payDate = payDate;
     }
 
-    public Set<OrderDetail> getOrderDetails() {
-        return orderDetails;
+    public String getSimpleAddress() {
+        return simpleAddress;
     }
 
-    public void setOrderDetails(Set<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setSimpleAddress(String simpleAddress) {
+        this.simpleAddress = simpleAddress;
     }
 
+    public SaleService getSaleService() {
+        return saleService;
+    }
+
+    public void setSaleService(SaleService saleService) {
+        this.saleService = saleService;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getGenerateTime() {
+        return generateTime;
+    }
+
+    public void setGenerateTime(String generateTime) {
+        this.generateTime = generateTime;
+    }
+
+    public String getSuccessTime() {
+        return successTime;
+    }
+
+    public void setSuccessTime(String successTime) {
+        this.successTime = successTime;
+    }
+
+    public String getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(String closeTime) {
+        this.closeTime = closeTime;
+    }
+
+    public Set<Trolley> getTrolleys() {
+        return trolleys;
+    }
+
+    public void setTrolleys(Set<Trolley> trolleys) {
+        this.trolleys = trolleys;
+    }
+
+    public Long getLeftTime() {
+        return leftTime;
+    }
+
+    public void setLeftTime(Long leftTime) {
+        this.leftTime = leftTime;
+    }
 
     @Override
     public String toString() {
@@ -210,7 +324,6 @@ public class Orders {
                 ", orderDelivery='" + orderDelivery + '\'' +
                 ", orderPay='" + orderPay + '\'' +
                 ", payDate=" + payDate +
-                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

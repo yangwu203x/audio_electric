@@ -10,6 +10,8 @@
     <meta name="keywords" content="音特，音特电子，话筒"/>
     <meta name="description" content="音特电子，话筒"/>
     <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
@@ -21,18 +23,18 @@
 <body>
 <div class="wrapper">
     <!-- 通用头部-->
-    <header class="header" th:include="/public/_header"></header>
+    <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
     <!-- 内容区-->
     <section class="content">
         <div class="container">
             <!--位置导航-->
             <div class="navAdd">
                 <div class="navAdd-block">
-                    <a class="navAdd-a" href="index.html">首页</a>
+                    <a class="navAdd-a" th:href="@{/}">首页</a>
                     <span class="navAdd-dot"></span>
                     <a class="navAdd-a" href="#">购物车</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" href="#">确认订单</a>
+                    <a class="navAdd-a active" href="#">确认订单</a>
                 </div>
             </div>
             <!--标题-->
@@ -41,24 +43,24 @@
             </div>
             <!--确认订单内容区--收货地址-->
             <div class="orderAdd">
-                <p class="f-24">收货地址</p>
+                <p class="f-24 orderAdd_t">收货地址</p>
                 <div class="orderAddList clearfix">
                     <div class="row">
-                        <!--/*@thymesVar id="addressList" type="java.util.ArrayList"*/-->
-                        <!--/*@thymesVar id="address" type="com.enter.entity.Address"*/-->
-                        <div th:class="${session.selected_address !=null ? (session.selected_address.id == address.id ? 'col-md-3 defaultAdd':'col-md-3') : (address.selected == 1 ? 'col-md-3 defaultAdd':'col-md-3')}" th:each="address:${addressList}">
+                        <div th:class="${session.selected_address !=null ? (session.selected_address.id == address.id ? 'col-lg-3 col-md-4 defaultAdd':'col-lg-3 col-md-4') : (address.selected == 1 ? 'col-lg-3 col-md-4 defaultAdd':'col-lg-3 col-md-4')}" th:each="address:${addressList}">
+                            <!--/*@thymesVar id="addressList" type="java.util.ArrayList"*/-->
+                            <!--/*@thymesVar id="address" type="com.enter.entity.Address"*/-->
                             <div class="addMenu">
                                 <input type="hidden" th:value="${address.id}" />
                                 <p class="clearfix"><span class="addName" th:text="${address.name}"></span><span class="addNum pull-right" th:text="${address.tel}"></span></p>
-                                <p class="addMenu-add" th:text="${address.addressInfo.province + ' ' + address.addressInfo.city + ' ' + address.addressInfo.area + ' ' + address.addressInfo.detailPosition}"></p>
+                                <p class="addMenu-add" th:text="${address.absoluteAddress}"></p>
                                 <p class="defaultTip">
-                                    <span class="change_tip" th:text="${address.selected == 1} ? '默认地址' : '【设为默认地址】'"></span>
+                                    <span class="change_tip" th:text="${address.selected == '1'} ? '默认地址' : '【设为默认地址】'"></span>
                                     <span class="edit_tip js_editModal" th:onclick="'edit(' + ${address.id} + ')'">编辑</span>
-                                    <span class="delete_tip">删除</span></p>
+                                    <span class="delete_tip" >删除</span></p>
                                 <img class="addGou" th:src="@{/images/addgou.png}">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4 col-lg-3">
                             <div class="addMenu-new" onclick="add()">
                                 <div class="addMenu-div">
                                     <i class="iconfont icon-jiahao"></i>
@@ -74,7 +76,7 @@
                 <p class="f-24">支付方式</p>
                 <ul id="payWay" class="choose clearfix">
                     <li>
-                        <input name="way" type="radio" id="way1" value="在线支付">
+                        <input name="way" type="radio" id="way1" value="在线支付" checked>
                         <label for="way1">
                             在线支付
                         </label>
@@ -93,63 +95,75 @@
                 <p class="f-24">电子发票</p>
                 <ul id="invoice" class="choose clearfix">
                     <li>
-                        <input name="invoice" type="radio" id="invoice1" value="个人发票" checked>
+                        <input name="invoice" type="radio" id="invoice1" value="person" checked>
                         <label for="invoice1">
                             个人发票
                         </label>
                     </li>
                     <li>
-                        <input name="invoice" type="radio" id="invoice2" value="公司发票">
+                        <input name="invoice" type="radio" id="invoice2" value="company">
                         <label for="invoice2">
                             公司发票
                         </label>
                     </li>
                 </ul>
-                <div class="invoiceTip">
+                <div class="invoiceTip" id="companyTip">
                     <div class="invoiceForm">
-                        <label for="personal" class="invoiceLabel"><span class="redColor">*</span>发票抬头：</label>
+                        <label for="personalTitle" class="invoiceLabel"><span class="redColor">*</span>发票抬头：</label>
                         <div class="inputDiv">
-                            <input type="text" class="invoiceInput" id="personal">
+                            <input type="text" class="invoiceInput" id="personalTitle" placeholder="请输入发票抬头">
                         </div>
                     </div>
                     <div class="invoiceForm" id="companyInvoice">
                         <label for="company" class="invoiceLabel"><span class="redColor">*</span>纳税人识别号：</label>
                         <div class="inputDiv">
-                            <input type="text" class="invoiceInput" id="company">
+                            <input type="text" class="invoiceInput" id="company" placeholder="请填写购买纳税人识别号或统一社会信用代码">
+                        </div>
+                    </div>
+                </div>
+                <div class="invoiceTip" id="personTip">
+                    <div class="invoiceForm">
+                        <label for="personal" class="invoiceLabel"><span class="redColor">*</span>发票抬头：</label>
+                        <div class="inputDiv">
+                            <input type="text" class="invoiceInput" id="personal" value="吴迪">
                         </div>
                     </div>
                 </div>
             </div>
             <!--确认订单信息-->
             <div class="orderAdd">
-                <div class="sureOrder-t"><span class="f-24">确认订单信息</span><a class="pull-right" href="#"><span class="goBack">返回购物车修改</span> <i class="iconfont icon-right f-24"></i> </a></div>
+                <div class="sureOrder-t clearfix"><span class="f-24">确认订单信息</span><a class="goBuy pull-right" th:href="@{/user/trolley/view}"><span class="goBack">返回购物车修改</span> <i class="iconfont icon-right f-24"></i> </a></div>
                 <div class="table" id="sureOrderTable">
                     <div class="sureOrderTable_head">
                         <div class="row">
                             <div class="col-md-5">商品</div>
                             <div class="col-md-2">单价</div>
                             <div class="col-md-2">数量</div>
-                            <div class="col-md-3">小计</div>
+                            <div class="col-md-3 text-right">小计（元）</div>
                         </div>
                     </div>
                     <div class="sureOrderTable_body">
-                        <div class="sureOrderTable_item" th:each="orderDetail:${orderDetails}">
+                        <!--/*@thymesVar id="trolley" type="com.enter.entity.Trolley"*/-->
+                        <!--/*@thymesVar id="trolleyList" type="java.util.ArrayList"*/-->
+                        <div class="sureOrderTable_item" th:each="trolley:${trolleyList}">
                             <div class="row">
                                 <div class="col-md-5 sureOrder-goods clearfix">
-                                    <div class="goods-img"><img width="73px" th:src="${orderDetail.trolley.product.thumbnail}" alt=""/></div>
-                                    <div class="goods-info">
-                                        <p class="goods-name" th:text="${orderDetail.trolley.product.name}"></p>
-                                        <p class="goods-color" th:text="'颜色：'+${orderDetail.trolley.product.color}"></p>
-                                    </div>
+                                    <a th:href="'/product/view/id/'+${trolley.getProduct().getId()}">
+                                        <div class="goods-img"><img width="73px" th:src="${trolley.product.thumbnail3}" alt=""/></div>
+                                        <div class="goods-info">
+                                            <p class="goods-name" th:text="${trolley.product.categoryName+' '+trolley.product.name}"></p>
+                                            <p class="goods-color" th:text="'颜色：'+${trolley.product.color}"></p>
+                                        </div>
+                                    </a>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="perPrice" th:text="'￥'+${orderDetail.trolley.product.priceSale}"></div>
+                                    <div class="perPrice" th:text="'￥'+${trolley.product.priceSale}"></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="perNumber" th:text="${orderDetail.trolley.count}">1</div>
+                                    <div class="perNumber" th:text="${trolley.count}">1</div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="perTotalPrice" th:text="'￥'+${orderDetail.trolley.product.priceSale*orderDetail.trolley.count}"></div>
+                                <div class="col-md-3 text-right">
+                                    <div class="perTotalPrice" th:text="'￥'+${trolley.product.priceSale*trolley.count}"></div>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +174,23 @@
             <div class="orderAdd">
                 <p class="f-24">使用优惠券</p>
                 <div class="addSaleOff">+添加优惠券</div>
-                <div id="saleOff">您现在还没有可以使用的优惠券，请活动期间及时领取</div>
+                <!--没有优惠券-->
+                <div id="saleOff" style="display: none">您现在还没有可以使用的优惠券，请活动期间及时领取</div>
+                <!--有优惠券-->
+                <ul class="withDiscount clearfix" id="withDiscount">
+                    <li>
+                        <img class="addDiscount" th:src="@{/images/addDiscount2.jpg}">
+                        <img class="discountBg js_deleteDiscount" th:src="@{/images/addDiscountBg.png}">
+                    </li>
+                    <li>
+                        <img class="addDiscount" th:src="@{/images/addDiscount.jpg}">
+                        <img class="discountBg js_deleteDiscount" th:src="@{/images/addDiscountBg.png}">
+                    </li>
+                    <li>
+                        <img class="addDiscount" th:src="@{/images/addDiscount.jpg}">
+                        <img class="discountBg js_deleteDiscount" th:src="@{/images/addDiscountBg.png}">
+                    </li>
+                </ul>
             </div>
             <!--订单备注-->
             <div class="orderAdd">
@@ -168,6 +198,8 @@
                 <textarea rows="5" class="sureOrder-text" style="color:#898888" onfocus="if(this.value=='限200字（若有特殊需求，请联系商城在线客服）') {this.value='';}this.style.color='#030304';" onblur="if(this.value=='') {this.value='限200字（若有特殊需求，请联系商城在线客服）';this.style.color='#898888';}" maxlength="200">限200字（若有特殊需求，请联系商城在线客服）</textarea>
             </div>
             <!--提交订单-->
+            <!--/*@thymesVar id="priceTotal" type="java.lang.Double"*/-->
+            <!--/*@thymesVar id="trolleyIds" type="java.lang.String"*/-->
             <div class="orderAdd onlinePayWay">
                 <div class="offerOrder">
                     <input type="hidden" id="trolleyIds" th:value="${trolleyIds}"/><!--购物车id列表-->
@@ -176,11 +208,11 @@
                     <p>优惠卷抵扣：<span class="off-money">-¥0.00</span></p>
                     <p class="totalMoney">应付总额：<span class="allMoney" th:text="'￥'+${priceTotal}"></span></p>
                     <p>
-                        <input type="hidden" id="addressId" th:value="${session.selected_address !=null ? session.selected_address.id : ''}" /><!--地址id-->
+                        <input type="hidden"  th:value="${session.selected_address !=null ? session.selected_address.id : ''}" /><!--地址id-->
                         收件人：<span class="offerOrder-name" th:text="${session.selected_address !=null ? session.selected_address.name:''}" id="recipients"></span>
                         <span class="offerOrder-call" th:text="${session.selected_address !=null ? session.selected_address.tel:''}" id="tel"></span>
                     </p>
-                    <p>配送地址：<span class="offerOrder-add" th:text="${session.selected_address !=null ? session.selected_address.addressInfo.province+session.selected_address.addressInfo.city+session.selected_address.addressInfo.area+session.selected_address.addressInfo.detailPosition : ''}" id="detailPosition"></span></p>
+                    <p>配送地址：<span class="offerOrder-add" th:text="${session.selected_address !=null ? session.selected_address.absoluteAddress : ''}" id="detailPosition"></span></p>
                     <p><a class="goPay-a" href="javascript:void(0);" onclick="sumbitOrder()">提交订单</a></p>
                 </div>
             </div>
@@ -188,7 +220,7 @@
     </section>
 
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer">
+    <footer id="footer" th:include="/public/_footer::footer">
     </footer>
 </div>
 <!-- deleteModal -->
@@ -224,9 +256,9 @@
                 <h4 class="modal-title" id="addModalLabel">添加新地址</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="addAddress_form" action="/address/addAddress" method="post">
+                <form class="form-horizontal" id="addAddress_form" action="/address/add" method="post">
                     <div class="form-group">
-                        <input type="hidden" id="addressId" name="id"/>
+                        <input type="hidden" id="addressId" name="id" th:value="${session.selected_address != null ? session.selected_address.id :''}"/>
                         <label for="inputUser" class="col-sm-2 control-label"><span class="redColor">*</span>收货人：</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputUser" name="name">
@@ -242,32 +274,32 @@
                         <label class="col-sm-2 control-label"><span class="redColor">*</span>收货地址：</label>
                         <div class="col-sm-10">
                             <div class="address-box clearfix" id="select-area">
-                                <input type="hidden" id="provinceVal" name="addressInfo.province"/>
-                                <input type="hidden" id="cityVal" name="addressInfo.city"/>
-                                <input type="hidden" id="areaVal" name="addressInfo.area"/>
-                                <select class="form-control" id="province" name="addressInfo.provinceId"></select>
-                                <select class="form-control" id="city" name="addressInfo.cityId"></select>
-                                <select class="form-control" id="area" name="addressInfo.areaId"></select>
+                                <input type="hidden" id="provinceVal" name="province"/>
+                                <input type="hidden" id="cityVal" name="city"/>
+                                <input type="hidden" id="areaVal" name="area"/>
+                                <select class="form-control" id="province" name="provinceId"></select>
+                                <select class="form-control" id="city" name="cityId"></select>
+                                <select class="form-control" id="area" name="areaId"></select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddDetail" class="col-sm-2 control-label"><span class="redColor">*</span>详细地址：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputAddDetail" name="addressInfo.detailPosition">
+                            <input type="text" class="form-control" id="inputAddDetail" name="detailPosition">
                         </div>
                     </div>
                     <div class="form-group addModal_form">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
-                                <input class="check-one check" type="checkbox" id="choose1"/>
+                                <input class="check-one check" type="checkbox" id="choose1" name="selected" checked="checked" value="1"/>
                                 <label for="choose1"><span></span>设为默认地址</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button id="btn-submit" type="submit" class="btn-red" >完成</button>
+                            <button id="btn-submit" type="button" class="btn-red" onclick="addAddress()">完成</button>
                         </div>
                     </div>
                 </form>
@@ -280,192 +312,7 @@
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.form.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/orders/order_confirm.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
-<script type="text/javascript">
-    var addModals = $('#addModal');
-    $(function () {
-        // 收货地址点击删除效果
-        $('.delete_tip').click(function (e) {
-            e.stopPropagation();
-            var element = $(this).parents('.col-md-3');
-
-            Common.confirm({
-                operate: function (reselt) {
-                    if (reselt) {
-                        var addressId = element.find('input').val();
-                        $.ajax({
-                            url:'/address/delAddress',
-                            data:{addressId:addressId},
-                            success:function(data){
-                                if (data.responseCode == 1){
-                                    element.remove();
-                                }else if(data.responseCode == 2){
-                                    window.location.href='/login';
-                                }else{
-                                    alert(data.resultMessage);
-                                }
-                            }
-                        });
-                    }
-                }
-            })
-        });
-        // 收货地址点击'设为默认地址'效果
-        $('.change_tip').click(function () {
-            $('.change_tip').not(this).text("【设为默认地址】");
-            $(this).text("【默认地址】");
-        });
-        // 点击添加新地址弹窗
-
-        $("#select-area").selectAddress();//初始化省市区联动select
-
-        $('#select-area').on('change',function () {
-            provinceVal.val($("#province option:selected").text());
-            cityVal.val($("#city option:selected").text());
-            areaVal.val($("#area option:selected").text());
-        });
-
-    });
-    function add(){
-        addModals.modal();
-        $("#addAddress_form")[0].reset(); //表单弹出前初始化表单
-        $('#addAddress_form').attr("action",'/address/addAddress');
-        $('#addModalLabel').html("添加新地址");
-        $('#province').find("option[value=0]").attr("selected",true);
-        $('#city').find("option[value=0]").attr("selected",true);
-        $('#area').find("option[value=0]").attr("selected",true);
-        $('#addressId').val('');
-    }
-    function edit(addressId){
-        $('#addAddress_form').attr("action",'/address/editAddress');
-        $('#addModalLabel').html("编辑地址");
-        addModals.modal();
-        $.ajax({
-            url:'/address/findAddressById',
-            data:{addressId:addressId},
-            success:function(data){
-                if (data.responseCode == 1){
-                    var address = data.responseData;
-                    var addressInfo = address.addressInfo;
-                    var provinceCode = addressInfo.provinceId;
-                    var cityCode = addressInfo.cityId;
-                    var areaCode = addressInfo.areaId;
-                    $('#addressId').val(address.id);
-                    $('#inputUser').val(address.name);
-                    $('#inputPhone').val(address.tel);
-                    $('#inputAddDetail').val(addressInfo.detailPosition);
-                    writePlace(provinceCode,cityCode,areaCode);
-                }else if(data.responseCode == 2){
-                    window.location.href='/login';
-                }else{
-                    alert(data.resultMessage);
-                }
-            }
-        });
-    }
-
-
-
-    /**
-     * 渲染地址
-     * @param provinceCode
-     * @param cityCode
-     * @param areaCode
-     */
-    function writePlace(provinceCode,cityCode,areaCode){
-        var provinceOption = "province[postcode=" + provinceCode + "]";
-        var cityOption = provinceOption + " " + "city[postcode=" + cityCode + "]"
-        var city = $('#city');
-        var area = $('#area');
-        var province = $('#province');
-        province.find("option[value='" + provinceCode + "']").attr("selected",true);
-        $.ajax({
-            url:"/extands/areas/areas.xml",datatype:"xml",type:"GET",
-            success:function(xmlDoc){
-                var cityList = $(xmlDoc).find(provinceOption).children(city);
-                $(cityList).each(function(){
-                    city.append("<option value='"+$(this).attr("postcode")+"'>"+$(this).attr("name")+"</option>");
-                });
-                city.find("option[value='" + cityCode + "']").attr("selected",true);
-                var areaList = $(xmlDoc).find(cityOption).children(area);
-                $(areaList).each(function(){
-                    area.append("<option value='"+$(this).attr("postcode")+"'>"+$(this).attr("name")+"</option>");
-                });
-                area.find("option[value='" + areaCode + "']").attr("selected",true);
-                $('#provinceVal').val($("#province option:selected").text());
-                $('#cityVal').val($("#city option:selected").text());
-                $('#areaVal').val($("#area option:selected").text());
-            }
-        });
-    }
-
-    $('.addMenu').click(function () {
-        $(this).parent().addClass('defaultAdd').siblings().removeClass('defaultAdd');
-        var addressId = $(this).find('input').val()
-        $.ajax({url:'/order/modifyOrderAddress',data:{addressId:addressId},
-            success:function(data){
-                if (data.responseCode == 1){
-                    var address = data.responseData;
-                    var addressInfo = address.addressInfo;
-                    $('#addressId').val(address.id);
-                    $('#recipients').html(address.name);
-                    $('#detailPosition').html(addressInfo.province+addressInfo.city+addressInfo.area+addressInfo.detailPosition);
-                    $('#tel').html(address.tel);
-                }else if(data.responseCode == 2){
-                    window.location.href='/login';
-                }else{
-                    alert(data.resultMessage);
-                }
-            }
-        });
-
-    });
-    function sumbitOrder(){
-        var addressId = $('#addressId').val();
-        var trolleyIds = $('#trolleyIds').val();
-        $.ajax({url:'/order/generatedTotalOrder',data:{addressId:addressId,trolleyIds:trolleyIds},
-            success:function(data){
-                if (data.responseCode == 1){
-                    var orders = data.responseData;
-                    window.location.href = '/order/onlinePay?orderNum='+orders.orderNum;
-                }else if(data.responseCode == 2){
-                    window.location.href='/login';
-                }else{
-                    alert(data.resultMessage);
-                }
-            }
-        });
-    }
-    $(function () {
-        // 收货地址点击'设为默认地址'效果
-        $('.change_tip').click(function (e) {
-            $('.change_tip').not(this).text("【设为默认地址】");
-            $(this).text("【默认地址】");
-        });
-        // 点击添加新地址弹窗
-        $('#addModal').on('show.bs.modal', function() {
-            $("#select-area").selectAddress();
-        })
-    });
-    //  自定义提示框
-    var Common = {
-        confirm:function(params){
-            var model = $("#deleteModal");
-            $("#common_confirm_btn").click();
-            //每次都将监听先关闭，防止多次监听发生，确保只有一次监听
-            model.find(".cancel").die("click");
-            model.find(".ok").die("click");
-            model.find(".ok").live("click",function(){
-                params.operate(true)
-            });
-
-            model.find(".cancel").live("click",function(){
-                params.operate(false)
-            })
-        }
-    }
-
-
-</script>
 </body>
 </html>

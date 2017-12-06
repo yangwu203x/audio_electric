@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html lang="zh-cn" class="ie6 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7 ]>
+<html lang="zh-cn" class="ie7 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8 ]>
+<html lang="zh-cn" class="ie8 ie ltie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 9 ]>
+<html lang="zh-cn" class="ie9 ie" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="zh-cn" class="normal" xmlns:th="http://www.thymeleaf.org"> <!--<![endif]-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="title" content="音特"/>
+    <meta name="keywords" content="音特，音特电子，话筒"/>
+    <meta name="description" content="音特电子，话筒"/>
+    <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" >
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="wrapper">
+    <!-- 通用头部-->
+    <header class="header navbar-fixed-top" th:include="/public/_header::header">
+    </header>
+    <!-- 内容区-->
+    <div class="content">
+        <section class="medias">
+        <div id="content">
+            <div class="block block_songs">
+                <img class="blockBg" th:src="@{/images/media_bg.jpg}">
+                <div class="songs_server">
+                    <div class="container">
+                        <div class="media_tech_text">
+                            <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">流媒体技术</p>
+                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子采用流媒体技术，流媒体技术也称流式媒体技术.就是把</p>
+                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">连续的影像和声音信息经过压缩处理后放上网站服务器,由视频服务器向用户计算机顺序或实时地传送各个压缩包</p>
+                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.6s" data-occur="1">让用户一边下载一边观看、收听，而不要等整个压缩文件下载</p>
+                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.8s" data-occur="1">到自己的计算机上才可以观看的网络传输技术。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block block_songs">
+                <div class="container">
+                    <div class="medias_block">
+                        
+                        <div class="medias_adv">
+                            <img class="blockBg" th:src="@{/images/medias_adv_bg.jpg}">
+                            <div class="medias_adv_text">
+                                <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">用户体验更加好</p>
+                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子采用了流媒体技术，实现用户实时K歌，而不用</p>
+                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">等待歌曲下载完成，用户体验更加好</p>
+                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.6s" data-occur="1">真正意义上的想唱就唱!</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="medias_adv_block">
+                                    <img class="media_icon" th:src="@{/images/media_icon1.png}">
+                                    <p class="media_adv_title">节约时间</p>
+                                    <p class="ps server_p">传统媒体K歌需要时间下载完成后才可以K歌，浪费时间</p>
+                                    <p class="ps server_p">音特电子采用流媒体技术，完美解决这个问题，不仅使启动延时</p>
+                                    <p class="ps server_p">大大缩短，减少了用户在线等待的时间。</p>
+                                    <img class="mediaImg" th:src="@{/images/mediaImg1.jpg}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="medias_adv_block">
+                                    <img class="media_icon" th:src="@{/images/media_icon2.png}">
+                                    <p class="media_adv_title">节省空间</p>
+                                    <p class="ps server_p">传统媒体K歌需要把歌曲下载完成后才可以K歌，浪费</p>
+                                    <p class="ps server_p">储存空间，音特电子采用流媒体技术，不需要太大的缓存容量</p>
+                                    <p class="ps server_p">节省硬盘的空间。</p>
+                                    <img class="mediaImg" th:src="@{/images/mediaImg2.jpg}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block block_songs">
+                <div class="container">
+                    <div class="medias_pro">
+                        <img class="blockBg" th:src="@{/images/media_bg2.jpg}">
+                        <div class="medias_pro_text">
+                            <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">做用户想要的产品</p>
+                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子长期一来一直坚持把用户体验放在首位，做用户想要的产品，</p>
+                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">采用流媒体技术更加体现这一点。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    <!-- footer-->
+    <footer id="footer" th:include="/public/_footer::footer">
+    </footer>
+</div>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.easing.1.3.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/modernizr-custom.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/sdw_hw.js}"></script>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script type="text/javascript" th:src="@{/js/app.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+
+</script>
+</body>
+</html>

@@ -101,6 +101,7 @@ function fontResize() {
     var title = 60;
     var title3 = 39;
     var title30 = 30;
+    var ctxP = 24;
     var ctx = 20;
     var ps = 18;
     if (fs < 0.4 && sdw_width > 768) {
@@ -113,18 +114,23 @@ function fontResize() {
         title3 = 35;
         title30 = 30;
         ctx = 20;
+        ctxP = 24;
         ps = 14;
         ctx = ctx * fs;
+        ctxP = ctxP * fs;
         title =title * fs;
         title3 =title3 * fs;
         title30 =title30 * fs;
     } else {
         ctx = ((ctx * fs) < 14 ? 14 : (ctx * fs));
+        ctxP = ((ctxP * fs) < 16 ? 16 : (ctxP * fs));
         title = ((title * fs) <25 ? 25 : (title * fs));
         title3 = ((title3 * fs) <25 ? 25 : (title3 * fs));
         title30 = ((title30 * fs) <18 ? 18 : (title30 * fs));
     }
-
+    if (sdw_width > 768 && sdw_width < 1200) {
+        fs = 0.8;
+    }
     $(".block").css({"font-size": 30 * (sdw_width < 769 ? (sdw_width / 750) : w) + "px"});
     $(".title").css({"font-size": title + "px", "margin-bottom": 35 * w,"line-height": title * 1.3  + "px"});
     $(".title2").css({"font-size": title + "px", "margin-bottom": 30 * w,"line-height": title * 1.3  + "px"});
@@ -136,6 +142,7 @@ function fontResize() {
     $(".sup").css({"font-size": 14 * fs + "px"});
     $(".sup2").css({"font-size": 16 * fs + "px"});
     $(".ctx").css({"font-size": ctx + "px",  "line-height": ctx * 1.4 + "px"});
+    $(".ctxP").css({"font-size": ctxP + "px",  "line-height": ctxP * 1.5 + "px"});
     $(".ctx3").css({"font-size": ctx + "px", "margin-bottom": 140 * w, "line-height": ctx * 1.4 + "px"});
     $(".ctx2").css({"font-size": ctx + "px","line-height": ctx * 1.4 + "px"});
     $(".ctx4").css({"font-size": ctx + "px", "margin-bottom": 50 * w, "line-height": ctx * 1.4 + "px"});

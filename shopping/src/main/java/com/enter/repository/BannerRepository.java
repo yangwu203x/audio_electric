@@ -12,4 +12,6 @@ import java.util.List;
 public interface BannerRepository extends JpaRepository<Banner,Long> {
 
     List<Banner> findAll();
+
+    List<Banner> findBannerByCategory(String category);
 }

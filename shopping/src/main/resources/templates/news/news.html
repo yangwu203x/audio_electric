@@ -19,10 +19,10 @@
     <meta name="keywords" content="音特，音特电子，话筒"/>
     <meta name="description" content="音特电子，话筒"/>
     <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.min.css}">
     <link rel="stylesheet" th:href="@{/css/iconfont.css}">
-    <link rel="stylesheet" th:href="@{/css/slippry.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -32,208 +32,98 @@
 <body>
 <div class="wrapper">
     <!-- 通用头部-->
-   <header class="header" th:include="/public/_header"></header>
-    <!--banner-->
-    <section class="banner">
-        <img th:src="@{/images/newsBg.jpg}">
-    </section>
+   <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
     <!-- 内容区-->
     <div class="content">
         <section id="news">
+            <!--/*@thymesVar id="newsList" type="java.util.ArrayList"*/-->
             <div class="container">
+                <div class="navAdd">
+                    <div class="navAdd-block">
+                        <a class="navAdd-a" th:href="@{/}">首页</a>
+                        <span class="navAdd-dot"></span>
+                        <a class="navAdd-a active" href="#">新闻资讯</a>
+                    </div>
+                </div>
+                <!--/*@thymesVar id="news" type="com.enter.entity.News"*/-->
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" th:each="news:${newsList}">
                         <div class="newsDiv">
                             <div class="newsDate">
                                 <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
+                                <span class="newsTime" th:text="${news.createDate}">2017.10.17</span>
                             </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
+                            <a href="javascript:void(0);" class="popup-link" th:onclick="'view(' + ${news.id} + ')'" >
                                 <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
                             </a>
                             <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
+                                <a href="javascript:void(0);" class="popup-link" th:onclick="'view(' + ${news.id} + ')'">
+                                    <span class="newsTitle" th:text="${news.title}">K歌宝“MP30”正式上市</span>
                                 </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="newsDiv">
-                            <div class="newsDate">
-                                <i class="iconfont icon-rili"></i>
-                                <span class="newsTime">2017.10.17</span>
-                            </div>
-                            <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                <img class="img-responsive" th:src="@{/images/newsImg.jpg}" alt="MP30">
-                            </a>
-                            <div class="newsBlock">
-                                <a href="javascript:void(0);" class="popup-link" data-toggle="modal" data-target="#newsModal">
-                                    <span class="newsTitle">K歌宝“MP30”正式上市</span>
-                                </a>
-                                <p class="newsDetail">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
+                                <p class="newsDetail" th:text="${news.content}">音特电子新产品K歌宝“MP30”的新品发布会今天在宝安体育馆场地进行......</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="addMore text-center" id="addMore">
                     <button class="load_more" id="load_more_button"><img th:src="@{/images/addMore.png}" class="addMoreImg" alt="加载更多"></button>
-                    <div class="animation_image" style="display:none;"><img th:src="@{/images/sy-loader.gif}"></div>
+                    <div class="animation_image" style="display:none;">
+                        <div class="spinner">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer">
+    <footer id="footer" th:include="/public/_footer::footer">
     </footer>
 </div>
 <!-- Modal -->
 <div class="modal newsModal" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsModalLabel">
+    <div class="modal_close">
+        <a class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="iconfont icon-close"></span></a>
+    </div>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <div class="newsContent">
                 <h3 class="newsContent_title">K歌宝“MP30”正式上市</h3>
                 <p class="newsContent_time">2017-10-17  15：20</p>
                 <div class="newsSlider">
-                    <ul id="slippry-news">
-                        <li>
-                            <a href="#slide1">
-                                <img th:src="@{/images/newsSlider1.jpg}">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#slide2">
-                                <img th:src="@{/images/newsSlider1.jpg}">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#slide3">
-                                <img th:src="@{/images/newsSlider1.jpg}">
-                            </a>
-                        </li>
-                    </ul>
+                    <div id="carousel-news" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-news" data-slide-to="0" class="active"><a class="dot" href="javascript:void(0)"></a></li>
+                            <li data-target="#carousel-news" data-slide-to="1"><a class="dot" href="javascript:void(0)"></a></li>
+                            <li data-target="#carousel-news" data-slide-to="2"><a class="dot" href="javascript:void(0)"></a></li>
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img th:src="@{/images/newsSlider1.jpg}" alt="news">
+                            </div>
+                            <div class="item">
+                                <img th:src="@{/images/newsSlider1.jpg}" alt="news">
+                            </div>
+                            <div class="item">
+                                <img th:src="@{/images/newsSlider1.jpg}" alt="news">
+                            </div>
+                        </div>
+                    </div>
+                    <a class="arrows arrow-left" href="#carousel-news" role="button" data-slide="prev">
+                        <span class="iconfont icon-zuofanhui" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="arrows arrow-right" href="#carousel-news" role="button" data-slide="next">
+                        <span class="iconfont icon-right-arrow" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <div class="newsContent_div">
+                <div class="newsContent_div" id>
                     <p>手机K歌宝分为有线K歌宝和无线K歌宝。</p>
                     <p>手机K歌宝分为有线K歌宝和无线K歌宝。</p>
                     <p>手机K歌宝分为有线K歌宝和无线K歌宝。</p>
@@ -253,26 +143,24 @@
                         手机K歌宝因为将麦克风、音响结合为一体，距离非常近，且是合为一体的，所以从音响出来的人声很快又回到麦克风拾音咪头里去，再一次经过功放的放大，又一次
                         从音响回到麦克风里去，如此极为迅速地循环，便产生了严重的啸叫。手机K歌宝在电路上，必需克服这个难题，所以在人声优化电路里，需要增加一个能非常好地抵制声
                         反馈机制的电路，而又不能损失原有人声。这一点，深圳唐恩科技有限公司的途讯手机K歌宝完美解决了这一问题
-                    </p>
                 </div>
             </div>
         </div>
     </div>
-    <a class="closeImg" data-dismiss="modal" aria-label="Close"><img class="close-img" th:src="@{/images/closeImg.png}"></a>
+    <!--<a class="closeImg" data-dismiss="modal" aria-label="Close"><img class="close-img" th:src="@{/images/closeImg.png}"></a>-->
 </div>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.easing.1.3.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/slippry.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
-
 <script type="text/javascript">
+    function view(id){
+        var newsModal = $('#newsModal');
+        newsModal.modal();
+    }
     $(document).ready(function () {
         //  初始化新闻详情里的轮播插件
-        $('#slippry-news').slippry({
-            transition:'horizontal'
-        });
         //  点击加载更多
         var track_click = 0; //跟踪点击事件，定义一个点击次数
 
@@ -287,11 +175,11 @@
             if(track_click <= total_pages) //确保用户点击数始终小于数据的总页数
             {
                 //后台获取页码数和返回的加载数据到页面news里
-                $.post('fetch_pages.php',{'page': track_click}, function(data) {
+                $.post('fetch_pages.php',{'page': track_click}, function(result) {
 
                     $(".load_more").show(); //展示点击加载更多按钮
 
-                    $("#news .row").append(data); //将服务器获取到的数据展示在页面#news .row 下面
+                    $("#news .row").append(result); //将服务器获取到的数据展示在页面#news .row 下面
 
                     //滚动页面到加载按钮处
                     $("html, body").animate({scrollTop: $("#load_more_button").offset().top}, 500);

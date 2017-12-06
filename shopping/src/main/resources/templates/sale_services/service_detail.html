@@ -10,6 +10,8 @@
     <meta name="keywords" content="音特，音特电子，话筒"/>
     <meta name="description" content="音特电子，话筒"/>
     <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/theme/default/laydate.css}">
@@ -22,45 +24,31 @@
 <body>
 <div class="wrapper">
     <!-- 通用头部-->
-    <header class="header" th:include="/public/_header"></header>
+    <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
     <!-- 内容区-->
     <section class="content">
         <div class="container">
             <!--位置导航-->
             <div class="navAdd">
                 <div class="navAdd-block">
-                    <a class="navAdd-a" href="index.html">首页</a>
+                    <a class="navAdd-a" th:href="@{/}">首页</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" href="personCenter.html">会员中心</a>
+                    <a class="navAdd-a" th:href="@{/user/orders/view}">会员中心</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" th:href="@{/order/afterService}">售后服务</a>
+                    <a class="navAdd-a active" th:href="@{/service/listMySaleService}">售后服务</a>
                 </div>
             </div>
             <!--个人中心-->
+            <!--/*@thymesVar id="saleService" type="com.enter.entity.SaleService"*/-->
             <div class="person">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="personBlock">
-                            <div class="userInfo">
-                                <img class="male" th:href="@{images/male.jpg}">
-                                <p class="userName" th:text="${session.login_user.name}"></p>
-                            </div>
-                            <ul class="personNav">
-                                <li><a class="personNav_a" th:href="@{/order/listMyOrder}">我的订单</a></li>
-                                <li><a class="personNav_a active" th:href="@{/order/afterService}">售后服务</a></li>
-                                <li><a class="personNav_a" th:href="@{/discount}">优惠券</a></li>
-                                <li><a class="personNav_a" href="address.html">收货地址</a></li>
-                                <li><a class="personNav_a" href="myInfo.html">账户资料</a></li>
-                            </ul>
-                            <div class="personBg"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-10">
+                <div class="row" th:with="activeState=2">
+                    <div class="col-lg-3 col-md-2" th:include="/public/person_data::person_data"></div>
+                    <div class="col-lg-9 col-md-10">
                         <div class="myOrder">
                             <div class="orderTitle">
                                 <span class="f-24">进度详情</span>
                             </div>
-                            <div class="orderDetailBlock failOrder">
+                            <div  th:class="${saleService.state == '1'}? 'serviceDetailBlock failOrder':(${saleService.state == '2'}? 'serviceDetailBlock alreadyOrder':(${saleService.state == '3'}? 'serviceDetailBlock pickOrder':(${saleService.state == '4'}? 'serviceDetailBlock dealOrder':( ${saleService.state == '5'}? 'serviceDetailBlock doneOrder':( 'serviceDetailBlock failOrder')))))">
                                 <div class="orderDetailProcess" id="orderStation">
                                     <div class="line">
                                         <div class="redLine51"></div>
@@ -74,41 +62,56 @@
                                             <div class="detailOfferOrder">
                                                 <div class="detailCircle"></div>
                                                 <p>提交审核</p>
-                                                <p class="offerTime">2017-09-14  13：36：45</p>
+                                                <p class="offerTime" th:text="${saleService.submitTime}"></p>
                                             </div>
                                         </div>
                                         <div class="col-20">
                                             <div class="detailFendOrder">
                                                 <div class="detailCircle"></div>
                                                 <p>审核完成</p>
+                                                <p class="offerTime" th:text="${saleService.checkedTime}"></p>
                                             </div>
                                         </div>
                                         <div class="col-20">
                                             <div class="detailDeliverOrder">
                                                 <div class="detailCircle"></div>
                                                 <p>音特收货</p>
+                                                <p class="offerTime" th:text="${saleService.receiveTime}"></p>
                                             </div>
                                         </div>
                                         <div class="col-20">
                                             <div class="detailDoOrder">
                                                 <div class="detailCircle"></div>
                                                 <p>正在处理</p>
+                                                <p class="offerTime" th:text="${saleService.handleTime}"></p>
                                             </div>
                                         </div>
                                         <div class="col-20">
                                             <div class="detailFinishOrder">
                                                 <div class="detailCircle"></div>
                                                 <p>完成</p>
+                                                <p class="offerTime" th:text="${saleService.successTime}"></p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="orderDetailDo clearfix">
-                                        <div class="detail_state pull-left">
-                                            <p>订单状态：<span class="serviceDetail_state">待审核</span> 服务类型：<span class="serviceDetail_type">退货</span></p>
-                                            <p class="order_bc service_bc">订单正在审核中，审核完成后结果会以短信形式告知您。您也可以在售后服务中进行查询</p>
+                                    <div class="orderDetailDo clearfix" >
+                                        <div class="detail_state pull-left" th:switch="${saleService.state}">
+                                            <p>售后状态：<span class="serviceDetail_state" th:text="${saleService.state == '1'}? '待审核':(${saleService.state == '2'}? '已审核':(${saleService.state == '3'}? '正在处理':(${saleService.state == '4'}? '正在处理':(${saleService.state == '5'}? '已完成':'已关闭'))))">待审核</span> 服务类型：<span class="serviceDetail_type" th:text="${saleService.serviceType}">退货</span></p>
+                                            <p th:case="1" class="order_bc service_bc">售后服务正在审核中！</p>
+                                            <p th:case="2" class="order_bc service_bc">售后服务审核已经通过，请填写相关的快递信息！</p>
+                                            <p th:case="3" class="order_bc service_bc">售后服务正在处理中，请留意售后服务进度！</p>
+                                            <p th:case="4" class="order_bc service_bc">售后服务正在处理中，请留意售后服务进度！</p>
+                                            <p th:case="5" class="order_bc service_bc">售后服务已完成</p>
+                                            <p th:case="6" class="order_bc service_bc">售后服务已取消！</p>
                                         </div>
-                                        <div class="orderDetailDo_btns pull-right">
-                                            <a class="gotoBuy" href="#" id="js_delete_service">取消服务</a>
+                                        <div class="orderDetailDo_btns pull-right" th:switch="${saleService.state}">
+                                            <div th:case="1">
+                                                <a  class="gotoBuy" href="javascript:void(0)" th:onclick="'cancerSaleService('+${saleService.id}+')'" id="js_delete_service">取消服务</a>
+                                            </div>
+                                            <div th:case="2">
+                                                <a class="gotoBuy" href="javascript:void(0)" th:onclick="'cancerSaleService('+${saleService.id}+')'" id="js_delete_service">取消服务</a>
+                                                <a class="gotoBuy pull-left" href="delivery_info.html">查看物流</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -124,25 +127,24 @@
                                             <div>赠品</div>
                                         </div>
                                         <div class="col-md-2">
-                                            <div>购买数量</div>
+                                            <div>提交数量</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="myOrderNum">
-                                    <span class="orderNumber">订单编号：<span class="order_number">17091449589655112758</span></span>
-                                    <span >成交时间：<span class="order_time">2017-09-14  13：46：29</span></span>
-                                </div>
+
                                 <div class="tableContent">
                                     <div class="myOrderList">
-                                        <div class="row">
+                                        <div class="row" th:each="trolley:${saleService.orders.trolleys}" th:with="product=${trolley.getProduct()}">
                                             <div class="col-md-4">
-                                                <div class="product orderGoods clearfix">
-                                                    <div class="product-img"><img th:href="@{images/product1.png}" alt=""/></div>
-                                                    <p class="product-name">卡拉OK E5</p>
-                                                    <p class="product-color">颜色：黑色</p>
+                                                <div class="goods orderGoods clearfix">
+                                                    <a th:href="'/product/view/id/'+${product.getId()}">
+                                                        <div class="goods-img"><img width="90px" th:src="${product.thumbnail3}" alt=""/></div>
+                                                        <p class="goods-name" th:text="${product.categoryName+ ' '+product.name}"></p>
+                                                        <p class="goods-color" th:text="'颜色：'+${product.color}+' '+${trolley.series}"></p>
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 myOrderAccess_border">
                                                 <div class="myOrderAccess">
                                                     麦克风×1、底座×1、遥控器×1、电源适配器×1、
                                                     音频线×1、U盘×1、使用手册×1、电池×6
@@ -152,49 +154,50 @@
                                                 <div class="myOrderGift"><span class="no_gift"></span></div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="myOrderQuality">1</div>
+                                                <div class="myOrderQuality" th:text="${trolley.count}"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="orderDetail_content">
-                                    <p class="orderDetail_content_t">问题描述 <a class="edit" href="javascript:;" data-toggle="modal" data-target="#orderWordsModal">更新描述</a></p>
-                                    <p class="problemType">7天无理由包退</p>
+                                <div class="myOrderNum">
+                                    <span class="orderNumber">退货编号：<span class="order_number" th:text="${saleService.id}"></span></span>
+                                    <span >申请时间：<span class="order_time" th:text="${saleService.submitTime}"></span></span>
+                                </div>
+                                <div class="orderDetail_content" th:switch="${saleService.state}">
+                                    <p class="orderDetail_content_t">问题描述
+                                        <a th:case="1" class="edit" href="javascript:;" data-toggle="modal" data-target="#orderWordsModal">更新描述</a></p>
+                                    <p class="problemType" th:text="${saleService.description}">7天无理由包退</p>
                                     <div class="problemImgs">
                                         <img th:href="@{images/problem-img.jpg}">
                                     </div>
                                 </div>
-                                <div class="orderDetail_content" id="delivery_door">
-                                    <p class="orderDetail_content_t"><span class="delivery_method">上门取件</span><a class="edit" href="javascript:;" id="changeWay1">更换退回方式</a></p>
-                                    <p id="other_delivery">取件时间：<input type="text" id="date" class="calendarInput"><label for="date" id="calender"><i class="iconfont icon-rili"></i></label></p>
+                                <div class="orderDetail_content" id="delivery_door" th:switch="${saleService.state == }" th:text="${saleService.state == '1'}">
+                                    <div th:case="true">
+                                        <p class="orderDetail_content_t"><span class="delivery_method">上门取件</span>
+                                            <a class="edit" href="javascript:;" id="changeWay1">更换退回方式</a></p>
+                                        <p id="other_delivery">取件时间：<input type="text" id="date" class="calendarInput" th:value="${saleService.submitTime}"><label  for="date" id="calender"><i class="iconfont icon-rili"></i></label></p>
+                                    </div>
+                                    <div th:case="false">
+                                        <p class="orderDetail_content_t"><span class="delivery_method">上门取件</span>
+                                        <p >取件时间：<input type="text"  class="calendarInput" th:value="${saleService.submitTime}"></p>
+                                    </div>
                                 </div>
                                 <div class="orderDetail_content" id="delivery_self">
                                     <p class="orderDetail_content_t"><span class="delivery_method">自找快递</span><a class="edit" href="javascript:;" id="changeWay2">更换退回方式</a></p>
-                                    <div class="form-inline">
-                                        <div class="form-group">
-                                            <label for="delivery_select">物流公司：</label>
-                                            <select class="form-control delivery_select" id="delivery_select">
-                                                <option value="1">顺丰快递</option>
-                                                <option value="2">圆通快递</option>
-                                                <option value="3">中通快递</option>
-                                                <option value="4">韵达快递</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="delivery_select">物流公司：</label>
-                                            <input id="delivery_num" class="form-control delivery_num" type="text" placeholder="请填写快递单号">
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="orderDetail_content">
-                                    <p class="orderDetail_content_t"><span class="address_t">取件地址</span> <a class="edit" href="#" id="js_edit" data-toggle="modal" data-target="#addModal">编辑</a></p>
-                                    <p>收货人：<span class="clientName">吴滴用</span></p>
-                                    <p>手机号： <span class="clientNum">18022823329</span></p>
-                                    <p>收货地址：<span class="clientAdd">广东省深圳市宝安区西乡街道永丰社区9区</span></p>
+                                <div class="orderDetail_content" th:switch="${saleService.state}">
+                                    <p class="orderDetail_content_t"><span class="address_t">取件地址</span>
+                                        <a th:case="1" class="edit" href="#" id="js_edit" data-toggle="modal" data-target="#addModal">编辑</a></p>
+                                    <input hidden="hidden" id="provinceId1" th:value="${saleService.provinceId1}"/>
+                                    <input hidden="hidden" id="cityId1" th:value="${saleService.cityId1}"/>
+                                    <input hidden="hidden" id="areaId1" th:value="${saleService.areaId1}"/>
+                                    <p>收货人：<span class="clientName" id="receiver1"  th:text="${saleService.receiver1}"></span></p>
+                                    <p>手机号： <span class="clientNum" id="tel1" th:text="${saleService.tel1}"></span></p>
+                                    <p>收货地址：<span class="clientAdd" id="detailAddress1" th:text="${saleService.detailAddress1}"></span></p>
                                 </div>
                                 <div class="orderDetail_content">
                                     <p class="orderDetail_content_t">审核留言</p>
-                                    <p class="checkWord">尊敬的客户，很抱歉给您添麻烦了，谢谢！</p>
+                                    <p class="checkWord" th:text="${saleService.info}"></p>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +210,7 @@
     </section>
 
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer">
+    <footer id="footer" th:include="/public/_footer::footer">
     </footer>
 </div>
 <!-- addModal -->
@@ -223,13 +226,13 @@
                     <div class="form-group">
                         <label for="inputUser" class="col-sm-2 control-label"><span class="redColor">*</span>收货人：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputUser">
+                            <input type="text" class="form-control" id="inputUser" th:value="${saleService.receiver1}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPhone" class="col-sm-2 control-label"><span class="redColor">*</span>手机号码：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputPhone">
+                            <input type="text" class="form-control" id="inputPhone" th:value="${saleService.tel1}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -238,14 +241,14 @@
                             <div class="address-box clearfix" id="select-area">
                                 <select class="form-control" id="province"></select>
                                 <select class="form-control" id="city"></select>
-                                <select class="form-control" id="country"></select>
+                                <select class="form-control" id="area"></select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputAddDetail" class="col-sm-2 control-label"><span class="redColor">*</span>详细地址：</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputAddDetail">
+                            <input type="text" class="form-control" id="inputAddDetail" th:value="${saleService.simpleAddress1}">
                         </div>
                     </div>
                     <div class="form-group addModal_form">
@@ -258,7 +261,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="button" class="btn-red" data-dismiss="modal">完成</button>
+                            <button type="button" class="btn-red" data-dismiss="modal" onclick="complete()">完成</button>
                         </div>
                     </div>
                 </form>
@@ -306,122 +309,10 @@
 <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <script type="text/javascript" th:src="@{/js/laydate.js}"></script>
+<script type="text/javascript" th:src="@{/js/sale_services/service_detail.js}"></script>
+<script type="text/javascript" th:src="@{/js/public/fillAddress.js}"></script>
 <script type="text/javascript">
-    $(function() {
-        var objUrl;
-        var img_html;
-        $("#myFile").change(function() {
-            var img_div = $(".img_div");
-            var filepath = $("input[name='myFile']").val();
-            for(var i = 0; i < this.files.length; i++) {
-                objUrl = getObjectURL(this.files[i]);
-                var extStart = filepath.lastIndexOf(".");
-                var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-                /*鉴定每个图片上传尾椎限制 */
-                if(ext != ".BMP" && ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG") {
-                    $(".shade").fadeIn(500);
-                    $(".text_span").text("图片限于bmp,png,gif,jpeg,jpg格式");
-                    this.value = "";
-                    $(".img_div").html("");
-                    return false;
-                } else{
-                    /*
-                     若规则全部通过则在此提交url到后台数据库
-                     * */
-                    img_html = "<div class='isImg'><img src='" + objUrl + "' style='height: 100%; width: 100%;' /><button class='removeBtn' onclick='javascript:removeImg(this)'>x</button></div>";
-                    img_div.append(img_html);
-                }
 
-            }
-            /*鉴定每个图片大小总和*/
-            var file_size = 0;
-            var all_size = 0;
-            for(var j = 0; j < this.files.length; j++) {
-                file_size = this.files[j].size;
-                all_size = all_size + this.files[j].size;
-                var size = all_size / 1024;
-                if(size > 500) {
-                    $(".shade").fadeIn(500);
-                    $(".text_span").text("上传的图片大小不能超过100k！");
-                    this.value = "";
-                    $(".img_div").html("");
-                    return false;
-                }
-            }
-            return true;
-        });
-        /*鉴定每个浏览器上传图片url 目前没有合并到Ie*/
-        function getObjectURL(file) {
-            var url = null;
-            if(window.createObjectURL != undefined) { // basic
-                url = window.createObjectURL(file);
-            } else if(window.URL != undefined) { // mozilla(firefox)
-                url = window.URL.createObjectURL(file);
-            } else if(window.webkitURL != undefined) { // webkit or chrome
-                url = window.webkitURL.createObjectURL(file);
-            }
-            //console.log(url);
-            return url;
-        }
-
-        // 点击添加新地址弹窗
-        $('#addModal').on('show.bs.modal', function() {
-            $("#select-area").selectAddress();
-        });
-
-        //  点击更换退回方式---上门取件
-        $('#changeWay1').click(function () {
-            $('#delivery_self').css('display','block');
-            $('#delivery_door').css('display','none');
-            $('.address_t').html('退货地址');
-            $('#js_edit').css('display','none');
-        });
-        //  点击更换退回方式---自找快递
-        $('#changeWay2').click(function () {
-            $('#delivery_self').css('display','none');
-            $('#delivery_door').css('display','block');
-            $('.address_t').html('取件地址');
-            $('#js_edit').css('display','inline');
-        });
-        //  2，审核完成状态
-        $('.alreadyOrder').find('.serviceDetail_state').html('已审核');
-        $('.alreadyOrder').find('.service_bc').html('').append('<span class="order_tips">审核已经通过，请填写相关的快递信息！</span>');
-        $('.alreadyOrder').find('.orderDetailDo_btns').append('<a class="gotoBuy pull-left" href="deliveryInfo.html">'+'查看物流'+'</a>');
-        //  3，音特收货状态
-        $('.pickOrder').find('.serviceDetail_state').html('正在处理');
-        $('.pickOrder').find('.service_bc').html('').append('<span class="order_tips">该订单正在处理中，请留意售后服务进度！</span>');
-        $('.pickOrder').find('.orderDetailDo_btns').remove();
-        $('.pickOrder').find('.edit').remove();
-        $('.pickOrder').find('#calender').remove();
-        //  4，正在处理状态
-        $('.dealOrder').find('.serviceDetail_state').html('正在处理');
-        $('.dealOrder').find('.service_bc').html('').append('<span class="order_tips">该订单正在处理中，请留意售后服务进度！</span>');
-        $('.dealOrder').find('.orderDetailDo_btns').remove();
-        $('.dealOrder').find('.edit').remove();
-        $('.dealOrder').find('#calender').remove();
-        //  5，已完成状态
-        $('.doneOrder').find('.serviceDetail_state').html('已完成');
-        $('.doneOrder').find('.service_bc').html('').append('<span class="order_tips">该订单已完成，请留意查看物流信息！</span>');
-        $('.doneOrder').find('.orderDetailDo_btns').remove();
-        $('.doneOrder').find('.edit').remove();
-        $('.doneOrder').find('#calender').remove();
-        //  6，已关闭状态
-        $('.failOrder').find('.serviceDetail_state').html('已关闭');
-        $('.failOrder').find('.service_bc').html('').append('<span class="order_tips">订单已关闭，如有问题，欢迎您点击</span>'+'<a class="yellowColor" href="#">'+'客服'+'</a>'+'<span class="order_tips">与我们沟通，非常感谢您的支持！</span>');
-        $('.failOrder').find('.orderDetailDo_btns').remove();
-        $('.failOrder').append('<div class="orderDetail_content">'+' <a class="gotoBuy offerReview" href="#">重新提交</a>'+'<span>请再次确认信息后提交服务订单，之后售后专员会与您电话沟通，请保持手机畅通</span>'+' </div>');
-    });
-    /*上传图片附带删除 再次地方可以加上一个ajax进行提交到后台进行删除 */
-    function removeImg(r){
-        $(r).parent().remove();
-    }
-
-    laydate.render({
-        elem: '#date', //指定元素
-        theme:'#ff5400',
-        value: new Date(),
-        showWeeks: true
-    });
 </script>
 </body>
 </html>

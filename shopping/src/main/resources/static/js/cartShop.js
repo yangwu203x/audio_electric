@@ -68,6 +68,25 @@ window.onload = function () {
         }else{
             span.innerHTML = '-';
         }
+
+    }
+
+    function ajaxCount(tr,count){
+        var productId = $(tr).find("[name=productId]").val();
+        $.ajax({
+            type:"post",
+            url:"/user/trolley/add",
+            data:{productId:productId,count:count},
+            success:function(result){
+                if(result.code ==1){
+                }
+                else if(result.code == 2){
+                    window.location.href=result.url;
+                }else {
+                    alert(result.msg);
+                }
+            }
+        });
     }
 
     // 点击选择框
@@ -117,11 +136,13 @@ window.onload = function () {
                 case 'add': //点击了加号
                     countInout.value = value + 1;
                     getSubtotal(this);
+                    ajaxCount(this,1);
                     break;
                 case 'reduce': //点击了减号
                     if (value > 1) {
                         countInout.value = value - 1;
                         getSubtotal(this);
+                        ajaxCount(this,-1);
                     }
                     break;
                 case 'delete iconfont icon-close': //点击了删除
@@ -161,14 +182,31 @@ window.onload = function () {
             btnId: params2.btnId,
             operate: function (reselt) {
                 if (reselt) {
+                    var trolleyIds = "";
                     for (var i = 0; i < tr.length; i++) {
                         // 如果被选中，就删除相应的行
                         if (tr[i].getElementsByTagName('input')[0].checked) {
-                            tr[i].parentNode.removeChild(tr[i]); // 删除相应节点
-                            i--; //回退下标位置
+                            trolleyIds += tr[i].getElementsByTagName('input')[0].value + ",";
                         }
                     }
-                    getTotal();
+                    trolleyIds = trolleyIds.substring(0,trolleyIds.length-1);
+                    $.ajax({url:"/user/trolley/delete/bacth/ids/"+trolleyIds,type:"delete",success:function(result){
+                        if(result.code == 1){
+                            for (var i = 0; i < tr.length; i++) {
+                                // 如果被选中，就删除相应的行
+                                if (tr[i].getElementsByTagName('input')[0].checked) {
+                                    tr[i].parentNode.removeChild(tr[i]); // 删除相应节点
+                                    i--; //回退下标位置
+                                }
+                            }
+                            getTotal();
+                        }else if(result.repsonseCode == 2){
+                            window.location.href=result.url;
+                        }else{
+                            alert(result.msg);
+                        }
+                    }});
+
                 } else {
 
                 }
@@ -190,3 +228,26 @@ window.onload = function () {
 
 };
 
+function delete_ok(element,params2,getTotal){
+    var id = $(element).find(".delete").attr("title");
+    Common.confirm({
+        nameId: params2.nameId,
+        btnId: params2.btnId,
+        operate: function (reselt) {
+            if (reselt) {
+                $.ajax({url:"/user/trolley/delete/id/"+id,type:"delete",success:function(result){
+                    if(result.code == 1){
+                        element.remove();
+                        getTotal();
+                    }else if(result.repsonseCode == 2){
+                        window.location.href=result.url;
+                    }else{
+                        alert(result.msg);
+                    }
+                }});
+            } else {
+            }
+        }
+    });
+
+}

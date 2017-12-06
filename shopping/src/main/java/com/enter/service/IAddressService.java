@@ -13,6 +13,7 @@ public interface IAddressService {
 
     Address addAddress(Address address);
 
+
     Address findAddressById(Long addressId);
 
     List<Address> listMyAddress();
@@ -20,7 +21,10 @@ public interface IAddressService {
     void editAddress(Address address);
 
 
-    Address findAddressByUserAndSelected(User user, Integer selected);
+    Address findAddressByUserAndSelected(User user, String selected);
 
     void delAddress(Long addressId);
+
+    Address setDefaultAddress(Long addressId);
+
 }

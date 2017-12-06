@@ -1,5 +1,6 @@
 package com.enter.service.impl;
 
+import com.enter.annotations.LoginVerifyJson;
 import com.enter.entity.Address;
 import com.enter.entity.User;
 import com.enter.exception.ShoppingException;
@@ -21,6 +22,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Author leo_Yang【音特】
@@ -37,18 +39,18 @@ public class AccountServiceImpl implements IAccountService {
     @Autowired
     private IAddressService addressService;
 
-    public Body checkValidCode(String email,String validCode){
+    public void checkValidCode(String email,String validCode,String type){
         checkEmail(email);
         //判断验证码
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        String tempCode = (String) request.getSession().getAttribute(email);
+        String tempCode = (String) request.getSession().getAttribute(email + type);
         if (tempCode ==null || !tempCode.equalsIgnoreCase(validCode))
             throw new ShoppingException(RetCode.UTIL_AUTHCODE);
-        request.getSession().setAttribute(Constant.REGISTERFLAG+email,Constant.MODIFYPWD);
-        return BodyUtil.success();
+        request.getSession().setAttribute(email+type,Constant.MODIFYPWD);
+
     }
 
-    public Body doReg(User user){
+    public void doReg(User user){
         String email = user.getEmail();//邮箱
         checkEmail(email);
         String password = user.getPassword();//密码
@@ -56,7 +58,7 @@ public class AccountServiceImpl implements IAccountService {
             throw new ShoppingException(RetCode.REG_EMPTY_PASSWORD);
         //判断验证码
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        String flagStr = (String) request.getSession().getAttribute(Constant.REGISTERFLAG+email);
+        String flagStr = (String) request.getSession().getAttribute(email+Constant.REGISTER);
         if (!Constant.MODIFYPWD.equals(flagStr))
             throw new ShoppingException(RetCode.PLEASE_SEND_VALID);
         //密码加密
@@ -64,29 +66,30 @@ public class AccountServiceImpl implements IAccountService {
         user.setPassword(password);
         User loginUser = userRepository.save(user);
         CheckUserLogin.doLogin(loginUser);
-        return BodyUtil.success();
     }
 
     @Override
-    public Body sendValidCode(User user) {
-        int result = RetCode.FAILED.getCode();
-        String email = user.getEmail();//邮箱
+    public void sendValidCode(String email,String type) {
         checkEmail(email);
         User persistent = userRepository.getUserByEmail(email);
-        //判断邮箱是否注册
-        if(persistent != null){
-            throw new ShoppingException(RetCode.REG_EXIST_EMAIL);
-        }else{
-            //生成验证码
-            String validCode = RandomUtils.generateString(6);
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            request.getSession().setAttribute(email,validCode);
-            logger.info("validCode=" + validCode);
-            //发送注册邮件
-            emailService.sendSimpleMail(email,validCode);
+        if(Constant.REGISTER.equals(type)){
+            //type == register 注册验证码
+            if(persistent != null){
+                throw new ShoppingException(RetCode.REG_EXIST_EMAIL);
+            }
+        }else if(Constant.FORGETPWD.equals(type)){
+            //type == forgetPwd 忘记密码验证码
+            if(persistent == null){
+                throw new ShoppingException(RetCode.REG_EMAIL_IS_NOT_REGISTER);
+            }
         }
-
-        return BodyUtil.success();
+            //生成验证码
+        String validCode = RandomUtils.generateString(6);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        request.getSession().setAttribute(email + type,validCode);
+        logger.info("validCode=" + validCode);
+        //发送注册邮件
+        emailService.sendRegisterEmail(email,validCode);
     }
 
 
@@ -106,7 +109,7 @@ public class AccountServiceImpl implements IAccountService {
     }
 
     @Override
-    public Body login(String email,String password) {
+    public User login(String email,String password) {
         checkEmail(email);
         if (StringUtils.isNull(password))
             throw new ShoppingException(RetCode.REG_EMPTY_PASSWORD);
@@ -115,10 +118,10 @@ public class AccountServiceImpl implements IAccountService {
         User user = userRepository.getUserByEmailAndPassword(email,password);
         if(user == null)
             throw new ShoppingException(RetCode.LOG_USERNAME_OR_PASSWOLD_ERROR);
-        Address address = addressService.findAddressByUserAndSelected(user,1);
+        Address address = addressService.findAddressByUserAndSelected(user,"1");
         CheckUserLogin.doLogin(user,address);
 
-        return BodyUtil.sucess(user, DataType.Object);
+        return user;
     }
 
     @Override
@@ -135,6 +138,56 @@ public class AccountServiceImpl implements IAccountService {
     public void logout() {
         User user = CheckUserLogin.getloginuser();
         CheckUserLogin.doLogout();
+    }
+
+//    @Override
+//    @LoginVerifyJson
+//    public void modifyTel(String tel, String msgCode) {
+//        if (!RegExpValidatorUtils.IsHandset(tel))
+//            throw new ShoppingException(RetCode.REG_FORMAT_ERROR_PHONENUM);
+//        if (msgCode == null)
+//            throw new ShoppingException(RetCode.DXCODEISNULL);
+//        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+//        HttpSession session = request.getSession();
+//        String origalCode = (String) session.getAttribute(Constant.DXCODE);
+//        if (!msgCode.equals(origalCode))
+//            throw new ShoppingException(RetCode.DXCODEMISTAKE);
+//        User userSession = CheckUserLogin.getloginuser();
+//        User user = userRepository.findOne(userSession.getId());
+//        user.setTel(tel);
+//        userRepository.save(user);
+//    }
+
+    @Override
+    public void sendDxCode(String tel) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        //TODO 发送短信验证码
+        session.setAttribute(Constant.DXCODE,"1235");
+    }
+
+    @Override
+    public User changePwd(User user) {
+        String email = user.getEmail();//邮箱
+        checkEmail(email);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String flagStr = (String) request.getSession().getAttribute(email+Constant.FORGETPWD);
+        //判断验证码
+        if (!Constant.MODIFYPWD.equals(flagStr))
+            throw new ShoppingException(RetCode.PLEASE_SEND_VALID);
+        User perUser = userRepository.getUserByEmail(email);
+        if(perUser == null){
+            throw new ShoppingException(RetCode.REG_EMAIL_IS_NOT_REGISTER);
+        }
+        String password = user.getPassword();//密码
+        if (StringUtils.isNull(password))
+            throw new ShoppingException(RetCode.REG_EMPTY_PASSWORD);
+
+        //密码加密
+        password = Function.EncoderByMd5UTF8(password);
+        perUser.setPassword(password);
+        user = userRepository.save(perUser);
+        return user;
     }
 
     private void checkEmail(String email) {

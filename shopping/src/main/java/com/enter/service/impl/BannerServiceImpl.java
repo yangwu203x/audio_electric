@@ -1,6 +1,7 @@
 package com.enter.service.impl;
 
 import com.enter.entity.Banner;
+import com.enter.entity.Category;
 import com.enter.repository.BannerRepository;
 import com.enter.service.IBannerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,11 @@ public class BannerServiceImpl implements IBannerService {
     @Override
     public List<Banner> findAll() {
         return bannerRepository.findAll();
+    }
+
+    @Override
+    public List<Banner> findBannerByCategory(String category) {
+        return bannerRepository.findBannerByCategory(category);
     }
 
     @Override

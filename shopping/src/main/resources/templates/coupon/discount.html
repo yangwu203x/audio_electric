@@ -10,6 +10,8 @@
     <meta name="keywords" content="音特，音特电子，话筒"/>
     <meta name="description" content="音特电子，话筒"/>
     <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
@@ -21,86 +23,80 @@
 <body>
 <div class="wrapper">
     <!-- 通用头部-->
-    <header class="header" th:include="/public/_header"></header>
+    <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
     <!-- 内容区-->
     <section class="content">
         <div class="container">
             <!--位置导航-->
             <div class="navAdd">
                 <div class="navAdd-block">
-                    <a class="navAdd-a" href="index.html">首页</a>
+                    <a class="navAdd-a" th:href="@{/}">首页</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" href="personCenter.html">会员中心</a>
+                    <a class="navAdd-a" th:href="@{/user/orders/view}">会员中心</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" th:href="@{/discount}">优惠券</a>
+                    <a class="navAdd-a active" th:href="@{/discount}">优惠券</a>
                 </div>
             </div>
             <!--个人中心-->
             <div class="person">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="personBlock">
-                            <div class="userInfo">
-                                <img class="male" th:src="@{/images/male.jpg}">
-                                <p class="userName" th:text="${session.login_user.name}"></p>
-                            </div>
-                            <ul class="personNav">
-                                <li><a class="personNav_a" th:href="@{/order/listMyOrder}">我的订单</a></li>
-                                <li><a class="personNav_a" th:href="@{/order/afterService}" >售后服务</a></li>
-                                <li><a class="personNav_a active" th:href="@{/discount}">优惠券</a></li>
-                                <li><a class="personNav_a" th:href="@{/address/listMyAddress}" >收货地址</a></li>
-                                <li><a class="personNav_a" th:href="@{/user/accountInfo}">账户资料</a></li>
-                            </ul>
-                            <div class="personBg"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-10">
+                <div class="row" th:with="activeState=3">
+                    <div class="col-lg-3 col-md-2" th:include="/public/person_data::person_data"></div>
+                    <div class="col-lg-9 col-md-10">
                         <div class="myOrder">
-                            <div class="orderTitle discountTitle clearfix">
+                            <div class="orderTitle clearfix">
                                 <span class="f-24">优惠券</span>
-                                <a class="goBuy pull-right" href="index.html">领取优惠券 <i class="iconfont icon-right f-24"></i></a>
+                                <a class="discount_a pull-right" th:href="@{/product/view}">领取优惠券 <i class="iconfont icon-right f-24"></i></a>
                             </div>
                             <div class="discountImgs">
+                                <!--有优惠券-->
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg1.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg1.jpg}">
                                         </a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg3.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg3.jpg}">
                                         </a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg2.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg2.jpg}">
                                         </a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg2.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg2.jpg}">
                                         </a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg2.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg2.jpg}">
                                         </a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg2.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg2.jpg}">
                                         </a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg2.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg2.jpg}">
                                         </a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="discountImg" href="page.html">
-                                            <img class="img-responsive" th:src="@{/images/discountImg2.jpg}">
+                                        <a class="discountImg" th:href="@{/product/view}">
+                                            <img th:src="@{/images/discountImg2.jpg}">
                                         </a>
+                                    </div>
+                                </div>
+                                <!--没有优惠券-->
+                                <div id="withNoDiscount" style="display: none">
+                                    <div class="noDiscount">
+                                        <img th:src="@{/images/noDiscount.png}">
+                                        <p class="noDiscount_p">您还没有任何优惠卷，快去领取吧！</p>
+                                        <a class="noDiscount_a" th:href="@{/product/view}">去领取</a>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +110,7 @@
     </section>
 
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer">
+    <footer id="footer" th:include="/public/_footer::footer">
     </footer>
 </div>
 <script th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>

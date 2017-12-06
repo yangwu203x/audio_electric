@@ -2,8 +2,8 @@ spring:
   database:
     driverClassName: com.mysql.jdbc.Driver
   datasource:
-    url: jdbc:mysql://192.168.1.120:3306/appserver?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;allowMultiQueries=true&useSSL=true
-    password: 123456
+    url: jdbc:mysql://localhost:3306/appserver?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;allowMultiQueries=true&useSSL=true
+    password: enteradmin
     username: root
   jpa:
     hibernate:
@@ -17,12 +17,14 @@ spring:
     cache-period: 0
     content-type: text/html
     mode: LEGACYHTML5
+    prefix: classpath:/templates
   template:
               cache: false
   mail:
-    host: smtp.sina.com
-    username: 153615406404yw@sina.com
-    password: yangwu123456
+    host: smtp.qq.com
+    username: entermedia1024@qq.com
+    password: ihdubvihqpmwcgjd
+    port: 587
   http:
     encoding:
       charset: utf-8

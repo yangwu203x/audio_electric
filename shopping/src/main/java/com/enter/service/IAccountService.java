@@ -13,14 +13,14 @@ public interface IAccountService {
 
     /**
      * 发送验证码
-     * @param user
+     * @param email
      * @return
      */
-    Body sendValidCode(User user);
+    void sendValidCode(String email,String type);
 
-    Body checkValidCode(String email,String validCode);
+    void checkValidCode(String email,String validCode,String type);
 
-    Body doReg(User user);
+    void doReg(User user);
 
     /**
      * 修改密码
@@ -44,11 +44,17 @@ public interface IAccountService {
      * @param password
      * @return
      */
-    Body login(String email,String password);
+    User login(String email,String password);
 
     Object loginOut();
 
     Object findPwd(User user);
 
     void logout();
+
+//    void modifyTel(String tel, String msgCode);
+
+    void sendDxCode(String tel);
+
+    User changePwd(User user);
 }

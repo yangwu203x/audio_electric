@@ -5,17 +5,19 @@ package com.enter.util;
  */
 public class Constant {
 
+    public static final String DXCODE                           =   "DXCODE";//短信验证码
     public static final Short DEFAULTADDRESSVALUE                           =   1;//选择的地址
     public static final String DEFAULTADDRESS                           =   "selected_address";//选择的地址
-    public static final Integer TROLLEYONE                           =   0;//没有生成订单的购物车
-    public static final Integer TROLLEYTWO                          =   1;//生成订单的购物车
-    public static final Integer TROLLEYTHREE                          =   3;//购物车生成订单
+    public static final String REGISTER                           =   "registerCode";//注册
+    public static final String FORGETPWD                           =   "forgetPwdCode";//忘记密码
     public static final Integer PAGESIZE                            =   20;//分页每页条数
     public static final String REGISTERFLAG                          =   "register";//是否通过注册第一步
     public static final String MODIFYPWD                        =   "modifyPwd";//在线
     public static final String LOGIN                            =   "1";//在线
     public static final String LOGOUT                           =   "0";//下线
     public static final String CURRENT_LOGIN_USER               =   "login_user";	//成功
+    public static final String EMAIL_VALIDCODE                  =   "email_validCode";//邮件验证码
+    public static final String MESSAGE_VALIDCODE                  =   "message_validCode";//短信验证码
     public static final String UNACTIVESTATUS                   =   "0";//未激活
     public static final String ACTIVEDSTATUS                    =   "1";//已激活
     public static final String REGISTERBYMAIL                   =   "1";//注册方式

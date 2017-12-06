@@ -14,10 +14,15 @@ import java.util.Set;
  */
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-    List<Product> findProductByCategoryId(Long categoryId);
+    List<Product> findProductByCategoryId(Integer categoryId);
+
+    List<Product> findProductByCategoryIdOrderByPositionAsc(Integer categoryId);
 
     Product getProductById(Long productId);
 
     Page<Product> findAll(Pageable pageable);
 
+    List<Product> findProductByPositionAndAndCategoryId(Integer position,Long categoryId);
+
+    List<Product> findProductByPosition(int position);
 }

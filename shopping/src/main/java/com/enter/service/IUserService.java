@@ -1,6 +1,5 @@
 package com.enter.service;
 
-import com.enter.annotations.LoginVerify;
 import com.enter.entity.User;
 
 /**
@@ -13,4 +12,12 @@ public interface IUserService {
      * @return
      */
     User accountInfo();
+
+    User editUserName(String name);
+
+    User modifyPwd(String oldPassword,String password);
+
+    User modifyEmail(String email,String validCode);
+
+    void modifyTel(String tel,String validCode);
 }

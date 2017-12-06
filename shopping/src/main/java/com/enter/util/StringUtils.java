@@ -5,10 +5,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +16,17 @@ import java.util.regex.Pattern;
  */
 public class StringUtils {
 
-
+	public static String getRandom(int length){
+			String sources = "0123456789"; // 加上一些字母，就可以生成pc站的验证码了
+			Random rand = new Random();
+			StringBuffer flag = new StringBuffer();
+			for (int j = 0; j < length; j++)
+			{
+				flag.append(sources.charAt(rand.nextInt(9)) + "");
+			}
+			System.out.println(flag.toString());
+			return flag.toString();
+	}
 
 	/**
 	 * 判断是否是数值

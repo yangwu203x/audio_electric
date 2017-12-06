@@ -1,20 +1,15 @@
 package com.enter.controller;
 
-import com.enter.entity.Address;
-import com.enter.entity.OrderDetail;
-import com.enter.entity.Orders;
+import com.enter.entity.*;
 import com.enter.service.IAddressService;
 import com.enter.service.IOrdersService;
-import com.enter.util.Constant;
 import com.enter.util.enums.DataType;
 import com.enter.util.protocol.BodyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,74 +17,95 @@ import java.util.List;
  * @Date 2017/10/24 0024 17:14
  */
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/user/orders")
 public class OrderController {
     @Autowired
     private IOrdersService ordersService;
     @Autowired
     private IAddressService addressService;
 
-    @RequestMapping("/listMyOrder")
+    @GetMapping("/view/orderNo/{orderNum}")
+    public String findOrderById(@PathVariable("orderNum") Long orderId, Model model){
+        Orders orders = ordersService.findOrderById(orderId);
+        model.addAttribute("orders",orders);
+        return "/orders/order_detail";
+    }
+
+    /**
+     * 查询所有订单
+     * @param model
+     * @return
+     */
+    @GetMapping("/view")
     public String listMyOrder(Model model){
-        List<Orders> ordersList = ordersService.listMyOrder();
+
+        List<StateCount> orderStates = ordersService.getOrdersStateCount();
+        List<Orders> ordersList = ordersService.listMyOrder("0");
         model.addAttribute("ordersList",ordersList);
+        for (StateCount orderState1:orderStates)
+        model.addAttribute("orderState"+orderState1.getState(),orderState1.getNum());
+        model.addAttribute("orderStateActive","0");
         return "/account/my_orders";
     }
 
     /**
-     * 购物车生成
-     * @param trolleyId
+     * 根据订单状态来查询订单
+     * @param model
+     * @param orderState
      * @return
      */
-    @RequestMapping("/addToOrder")
-    public String addToOrder(Long trolleyId){
-        //根据购物车id生成子订单
-        ordersService.addToOrderDetail(trolleyId);
-        return "";
-    }
-
-    @ResponseBody
-    @RequestMapping("/generatedTotalOrder")
-    public Object generatedTotalOrder(String trolleyIds,Long addressId){
-        //根据购物车id生成子订单
-        Orders order = ordersService.generatedTotalOrder(trolleyIds,addressId);
-        return BodyUtil.sucess(order,DataType.Object);
-    }
-
-    @RequestMapping("/onlinePay")
-    public String onlinePay(String orderNum,Model model){
-        Orders orders = ordersService.findOrdersByOrderNum(orderNum);
-        model.addAttribute("orders",orders);
-        return "/orders/online_pay";
+    @GetMapping("/status/{orderState}")
+    public String listMyOrderByStatus(Model model,@PathVariable("orderState") String orderState){
+        List<StateCount> orderStates = ordersService.getOrdersStateCount();
+        List<Orders> ordersList = ordersService.listMyOrder(orderState);
+        model.addAttribute("ordersList",ordersList);
+        for (StateCount orderState1:orderStates)
+            model.addAttribute("orderState"+orderState1.getState(),orderState1.getNum());
+        model.addAttribute("orderStateActive",orderState);
+        return "/account/my_orders";
     }
 
     /**
-     * 批量添加子订单
+     * 立即购买
      * @return
      */
-    @RequestMapping("/addALLToOrder")
+    @PostMapping("/nowBuy")
+    @ResponseBody
+    public Object nowBuy(Long productId,Integer count,String colorNo,String series){
+        //添加到购物车
+        Trolley trolley = ordersService.nowBuy(productId,count,colorNo,series);
+        return BodyUtil.success(null,DataType.Object,"/user/orders/generate/two/trolleyIds/"+trolley.getId());
+    }
+
+    /**
+     * 批量生成子订单
+     * @return
+     */
+    @PostMapping("/generate/one")
     @ResponseBody
     public Object addALLToOrder(String trolleyIds){
-        List<OrderDetail> orderDetailList = ordersService.addAllToOrderDetail(trolleyIds);
+        List<Trolley> trolleyList = ordersService.addAllToOrderDetail(trolleyIds);
         //拼接地址
-        return BodyUtil.sucess("/order/generatedOrder?trolleyIds="+trolleyIds, DataType.Object);
+        return BodyUtil.success("/user/orders/generate/two/trolleyIds/"+trolleyIds, DataType.Object);
     }
 
+
     /**
+     * 提交订单页面预览
      * @param trolleyIds
      * @return
      */
-    @RequestMapping("/generatedOrder")
-    public String generatedOrder(String trolleyIds, Model model){
+    @GetMapping("/generate/two/trolleyIds/{trolleyIds}")
+    public String generatedOrder(@PathVariable("trolleyIds") String trolleyIds, Model model){
         //地址
         List<Address> addressList = addressService.listMyAddress();
         //订单详情列表
-        List<OrderDetail> orderDetails = ordersService.listMyOrderDetailByTrolleyId(trolleyIds);
+        List<Trolley> trolleyList = ordersService.listMyTrolleyTrolleyId(trolleyIds);
         Double priceTotal = 0d;
-        for (OrderDetail orderDetail:orderDetails){
-            priceTotal += orderDetail.getTrolley().getSubTotal();
+        for (Trolley trolley:trolleyList){
+            priceTotal += trolley.getSubTotal();
         }
-        model.addAttribute("orderDetails",orderDetails);
+        model.addAttribute("trolleyList",trolleyList);
         model.addAttribute("addressList",addressList);
         model.addAttribute("priceTotal",priceTotal);
         model.addAttribute("trolleyIds",trolleyIds);
@@ -97,17 +113,45 @@ public class OrderController {
         return "/orders/order_confirm";
     }
 
-    @RequestMapping("/modifyOrderAddress")
+
+    /**
+     * 生成订单
+     * @param trolleyIds
+     * @param addressId
+     * @return
+     */
     @ResponseBody
-    public Object modifyOrderAddress(Long addressId,HttpServletRequest request){
-        Address address = addressService.findAddressById(addressId);
-        request.getSession().setAttribute(Constant.DEFAULTADDRESS,address);
-        return BodyUtil.sucess(address,DataType.Object);
+    @PostMapping("/generate/three")
+    public Object generatedTotalOrder(String trolleyIds, Long addressId){
+        Orders order = ordersService.generatedTotalOrder(trolleyIds,addressId);
+        return BodyUtil.success(order,DataType.Object);
     }
 
-    @RequestMapping("/afterService")
-    public String afterService(){
-        return "/sale_services/service_after";
+
+    /**
+     * 在线支付页面
+     * @param orderNum
+     * @param model
+     * @return
+     */
+    @GetMapping("/onlinePay/view/{orderNum}")
+    public String onlinePay(@PathVariable("orderNum") String orderNum,Model model){
+        Orders orders = ordersService.findOrdersByOrderNum(orderNum);
+        model.addAttribute("orders",orders);
+        return "/orders/online_pay";
     }
+
+    /**
+     * 取消订单
+     * @param orderNum
+     * @return
+     */
+    @PutMapping("/cancer/{orderNum}")
+    @ResponseBody
+    public Object cancerOrders(@PathVariable("orderNum")String orderNum){
+        ordersService.cancerOrders(orderNum);
+        return BodyUtil.success();
+    }
+
 
 }

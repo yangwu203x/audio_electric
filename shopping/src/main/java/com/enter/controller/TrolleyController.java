@@ -7,8 +7,7 @@ import com.enter.util.protocol.BodyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
  * @Date 2017/10/23 0023 9:31
  */
 @Controller
-@RequestMapping("/trolley")
+@RequestMapping("/user/trolley")
 public class TrolleyController {
 
     @Autowired
@@ -25,39 +24,50 @@ public class TrolleyController {
 
 
     @ResponseBody
-    @RequestMapping("/productCountFromTrolley")
+    @GetMapping("/totalCount")
     public Object productCountFromTrolley(){
-        int num = trolleyService.productCountFromTrolley();
-        return BodyUtil.sucess(num, DataType.Object);
+        String num = trolleyService.getTrolleyNum();
+        if (num == null)
+            num = "0";
+        return BodyUtil.success(num, DataType.Object);
     }
 
 
     @ResponseBody
-    @RequestMapping("/ajaxToMyTrolley")
+    @GetMapping("/ajax/view")
     public Object ajaxToMyTrolley(){
         List<Trolley> trolleyList = trolleyService.listMyTrolley();
-        return BodyUtil.sucess(trolleyList, DataType.Array);
+        return BodyUtil.success(trolleyList, DataType.Array);
     }
 
-    @RequestMapping("/listMyTrolley")
+    @GetMapping("/view")
     public String listMyTrolley(Model model){
         List<Trolley> trolleyList = trolleyService.listMyTrolley();
         model.addAttribute("trolleyList",trolleyList);
         return "/trolley/shop_cart";
     }
 
-    @RequestMapping("/addToTrolley")
+    @PostMapping("/add")
     @ResponseBody
-    public Object addToTrolley(Long productId,Integer count){
+    public Object addToTrolley(Long productId,Integer count,String colorNo,String series){
         //加一件就要加数量上
-        trolleyService.addToTrolley(productId,count);
+        trolleyService.addToTrolley(productId,count,colorNo,series);
         return BodyUtil.result(1);
     }
 
-    @RequestMapping("/deleteFromTrolley")
-    public Object deleteFromTrolley(Long productId,Integer count){
-        //删除一件和全部删除
-         trolleyService.deleteFromTrolley(productId,count);
-         return null;
+    @DeleteMapping("/delete/id/{trolleyId}")
+    @ResponseBody
+    public Object deleteFromTrolley(@PathVariable("trolleyId") Long trolleyId){
+         trolleyService.deleteFromTrolley(trolleyId);
+         return BodyUtil.success();
     }
+
+    @DeleteMapping("/delete/bacth/ids/{trolleyIds}")
+    @ResponseBody
+    public Object bacthDeleteFromTrolley(@PathVariable("trolleyIds") String trolleyIds){
+        trolleyService.bacthDeleteFromTrolley(trolleyIds);
+        return BodyUtil.success();
+    }
+
+
 }

@@ -64,6 +64,10 @@ function changeFocus(dir) {
         $("#focusIndex"+currentFocusI+" .focusR").animate({left: -($(window).width()/2+1000)},500,'easeInExpo',function(){
             $("#focusIndex"+nextI+" .focusL").animate({left: -250},1000,'easeInOutCirc');
             $("#focusIndex"+nextI+" .focusR").animate({left: -600},1200,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusL2").animate({left: 0},1000,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusR2").animate({left: -800},1200,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusL3").animate({left: -100},1000,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusR3").animate({left: -700},1200,'easeInOutCirc');
 
             $("#focusIndex"+currentFocusI).animate({left: -$(window).width()},1000,'easeOutExpo');
             $("#focusIndex"+nextI).animate({left: 0},1000,'easeOutExpo',function(){
@@ -83,6 +87,10 @@ function changeFocus(dir) {
         $("#focusIndex"+currentFocusI+" .focusL").animate({left: $(window).width()/2},500,'easeInExpo',function(){
             $("#focusIndex"+nextI+" .focusL").animate({left: -250},1200,'easeInOutCirc');
             $("#focusIndex"+nextI+" .focusR").animate({left: -600},1000,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusL2").animate({left: 0},1200,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusR2").animate({left: -800},1000,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusL3").animate({left: -100},1200,'easeInOutCirc');
+            $("#focusIndex"+nextI+" .focusR3").animate({left: -700},1000,'easeInOutCirc');
 
             $("#focusIndex"+currentFocusI).animate({left: $(window).width()},1000,'easeOutExpo');
             $("#focusIndex"+nextI).animate({left: 0},1000,'easeOutExpo',function(){

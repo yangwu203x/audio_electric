@@ -52,6 +52,9 @@ public final class RegExpValidatorUtils {
         String regex = "^(\\d{3,4}-)?\\d{6,8}$";
         return match(regex, str);
     }
+    public static void main(String[] args){
+        System.out.println(IsHandset("15361540644"));
+    }
 
     /**
      * 验证输入密码条件(字符与数据同时出现)

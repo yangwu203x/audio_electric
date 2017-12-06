@@ -22,11 +22,23 @@ public class Address {
     @Column(name = "tel")
     private String tel;
     @Column(name = "selected")
-    private Integer selected;
+    private String selected = "0";
+    @Column(name = "country_id")
+    private String countryId;//国家编号
+    @Column(name = "province_id")
+    private String provinceId;//省编号
+    @Column(name = "city_id")
+    private String cityId;//城市编号
+    @Column(name = "area_id")
+    private String areaId;//区编号
+    @Column(name = "detail_position")
+    private String  detailPosition;//详细地址
+    @Column(name = "absolute_address")
+    private String absoluteAddress;//完整地址
+    private String province;
+    private String city;
+    private String area;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id")
-    private AddressInfo addressInfo;
 
     public Long getId() {
         return id;
@@ -68,20 +80,84 @@ public class Address {
         this.tel = tel;
     }
 
-    public Integer getSelected() {
+    public String getSelected() {
         return selected;
     }
 
-    public void setSelected(Integer selected) {
+    public void setSelected(String selected) {
         this.selected = selected;
     }
 
-    public AddressInfo getAddressInfo() {
-        return addressInfo;
+    public String getCountryId() {
+        return countryId;
     }
 
-    public void setAddressInfo(AddressInfo addressInfo) {
-        this.addressInfo = addressInfo;
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
+    }
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(String areaId) {
+        this.areaId = areaId;
+    }
+
+    public String getDetailPosition() {
+        return detailPosition;
+    }
+
+    public void setDetailPosition(String detailPosition) {
+        this.detailPosition = detailPosition;
+    }
+
+    public String getAbsoluteAddress() {
+        return absoluteAddress;
+    }
+
+    public void setAbsoluteAddress(String absoluteAddress) {
+        this.absoluteAddress = absoluteAddress;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
     @Override

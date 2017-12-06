@@ -2,18 +2,33 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" >
 </head>
 <body>
-<header class="header" th:include="/public/_header">
-<p class="url">访问url</p>
-<div class="form-group">
-    <p th:text="${url}"></p>
-</div>
-<p class="exception">异常原因</p>
-<div class="form-group">
-    <p th:text="${exception}"></p>
+<header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
+<div class="content">
+    <div class="error-page">
+        <img th:src="@{/images/errorImg.png}">
+        <div class="form-group">
+            <p class="url">访问url</p>
+            <!--/*@thymesVar id="url" type="java.lang.String"*/-->
+            <p th:text="${url}">url</p>
+        </div>
+        <div class="form-group">
+            <p class="exception">异常原因</p>
+            <!--/*@thymesVar id="exception" type="java.lang.String"*/-->
+            <p th:text="${exception}">错误</p>
+        </div>
+    </div>
+
 </div>
 
+    <footer id="footer" th:include="/public/_footer::footer"></footer>
 </body>
 </html>

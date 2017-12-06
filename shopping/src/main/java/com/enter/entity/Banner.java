@@ -24,6 +24,10 @@ public class Banner {
     private String picUrl2;
     @Column(name = "info")
     private String info;
+    @Column(name = "category")
+    private String category;
+    @Column(name = "class_name")
+    private String className;
 
     public void setId(Long id) {
         this.id = id;
@@ -59,6 +63,23 @@ public class Banner {
 
     public void setPicUrl2(String picUrl2) {
         this.picUrl2 = picUrl2;
+    }
+
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     @Override

@@ -1,0 +1,117 @@
+09:21:06.337 [restartedMain] INFO  com.enter.ShoppingApplication - Starting ShoppingApplication on PC-20170313TDVT with PID 11580 (F:\idea\shopping\target\classes started by Administrator in F:\idea\shopping) 
+09:21:06.354 [restartedMain] INFO  com.enter.ShoppingApplication - No active profile set, falling back to default profiles: default 
+09:21:06.579 [restartedMain] INFO  o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1e9c147b: startup date [Fri Nov 24 09:21:06 CST 2017]; root of context hierarchy 
+09:21:08.864 [restartedMain] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http) 
+09:21:08.909 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat] 
+09:21:08.910 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet Engine: Apache Tomcat/8.5.20 
+09:21:09.069 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext 
+09:21:09.069 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2490 ms 
+09:21:09.579 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean - Mapping servlet: 'dispatcherServlet' to [/] 
+09:21:09.584 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*] 
+09:21:09.584 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'hiddenHttpMethodFilter' to: [/*] 
+09:21:09.584 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'httpPutFormContentFilter' to: [/*] 
+09:21:09.585 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*] 
+09:21:10.472 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default' 
+09:21:10.481 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...] 
+09:21:10.601 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate Core {5.0.12.Final} 
+09:21:10.604 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found 
+09:21:10.606 [restartedMain] INFO  org.hibernate.cfg.Environment - HHH000021: Bytecode provider name : javassist 
+09:21:10.661 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.1.Final} 
+09:21:10.816 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect 
+09:21:11.293 [restartedMain] INFO  o.h.tool.hbm2ddl.SchemaUpdate - HHH000228: Running hbm2ddl schema update 
+09:21:11.723 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default' 
+09:21:12.370 [restartedMain] INFO  o.h.h.i.QueryTranslatorFactoryInitiator - HHH000397: Using ASTQueryTranslatorFactory 
+09:21:14.498 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1e9c147b: startup date [Fri Nov 24 09:21:06 CST 2017]; root of context hierarchy 
+09:21:14.710 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/account/register]}" onto public java.lang.String com.enter.controller.AccountController.register(com.enter.entity.User) 
+09:21:14.712 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/account/tel/modify/],methods=[PUT]}" onto public java.lang.Object com.enter.controller.AccountController.modifyTel(java.lang.String,java.lang.String) 
+09:21:14.713 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/account/validCode/message/{tel}],methods=[GET]}" onto public java.lang.Object com.enter.controller.AccountController.sendDxCode(java.lang.String) 
+09:21:14.713 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/account/logout]}" onto public java.lang.String com.enter.controller.AccountController.logout() 
+09:21:14.714 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/account/checkValidCode]}" onto public java.lang.String com.enter.controller.AccountController.checkValidCode(java.lang.String,java.lang.String) 
+09:21:14.715 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/account/login]}" onto public java.lang.String com.enter.controller.AccountController.login(java.lang.String,java.lang.String) 
+09:21:14.715 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/account/sendValidCode]}" onto public java.lang.String com.enter.controller.AccountController.sendValidCode(com.enter.entity.User) 
+09:21:14.718 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/address/view/id/{addressId}],methods=[GET]}" onto public java.lang.Object com.enter.controller.AddressController.findAddressById(java.lang.Long) 
+09:21:14.719 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/address/view],methods=[GET]}" onto public java.lang.Object com.enter.controller.AddressController.listMyAddress(org.springframework.ui.Model) 
+09:21:14.720 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/address/delete/id/{addressId}],methods=[DELETE]}" onto public java.lang.Object com.enter.controller.AddressController.delAddress(java.lang.Long) 
+09:21:14.720 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/address/modify],methods=[PUT]}" onto public java.lang.Object com.enter.controller.AddressController.editAddress(com.enter.entity.Address,javax.servlet.http.HttpServletRequest) 
+09:21:14.720 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/address/add],methods=[POST]}" onto public java.lang.Object com.enter.controller.AddressController.addAddress(com.enter.entity.Address) 
+09:21:14.720 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/address/temporaryAddress/set/id/{addressId}],methods=[GET]}" onto public java.lang.Object com.enter.controller.AddressController.setTemporaryAddress(java.lang.Long) 
+09:21:14.720 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/address/defaultAddress/modify/id/{addressId}],methods=[PUT]}" onto public java.lang.Object com.enter.controller.AddressController.setDefaultAddress(java.lang.Long,javax.servlet.http.HttpServletRequest) 
+09:21:14.721 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/news/listNews]}" onto public java.lang.String com.enter.controller.NewsController.listNews(org.springframework.ui.Model) 
+09:21:14.722 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/onlinePay/view/{orderNum}],methods=[GET]}" onto public java.lang.String com.enter.controller.OrderController.onlinePay(java.lang.String,org.springframework.ui.Model) 
+09:21:14.723 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/cancer/{orderNum}],methods=[PUT]}" onto public java.lang.Object com.enter.controller.OrderController.cancerOrders(java.lang.String) 
+09:21:14.723 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/orderDetail/view/{trolleyIds}],methods=[GET]}" onto public java.lang.String com.enter.controller.OrderController.generatedOrder(java.lang.String,org.springframework.ui.Model) 
+09:21:14.724 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/orderDetail/generate],methods=[POST]}" onto public java.lang.Object com.enter.controller.OrderController.addALLToOrder(java.lang.String) 
+09:21:14.724 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/view],methods=[GET]}" onto public java.lang.String com.enter.controller.OrderController.listMyOrder(org.springframework.ui.Model) 
+09:21:14.724 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/view/orderNo/{orderNum}],methods=[GET]}" onto public java.lang.String com.enter.controller.OrderController.findOrderById(java.lang.Long,org.springframework.ui.Model) 
+09:21:14.724 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/status/{orderState}],methods=[GET]}" onto public java.lang.String com.enter.controller.OrderController.listMyOrderByStatus(org.springframework.ui.Model,java.lang.String) 
+09:21:14.725 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/orders/generate],methods=[POST]}" onto public java.lang.Object com.enter.controller.OrderController.generatedTotalOrder(java.lang.String,java.lang.Long) 
+09:21:14.725 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/product/findProductById]}" onto public java.lang.String com.enter.controller.ProductController.findProductById(org.springframework.ui.Model,java.lang.Long) 
+09:21:14.726 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/product/listMall]}" onto public java.lang.String com.enter.controller.ProductController.listMall(org.springframework.ui.Model) 
+09:21:14.727 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/add],methods=[POST]}" onto public java.lang.Object com.enter.controller.SaleServiceController.addSaleService(com.enter.entity.SaleService) 
+09:21:14.728 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/tip/success],methods=[GET]}" onto public java.lang.String com.enter.controller.SaleServiceController.applySuccess() 
+09:21:14.728 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/view],methods=[GET]}" onto public java.lang.String com.enter.controller.SaleServiceController.findSaleServiceByUser(org.springframework.ui.Model) 
+09:21:14.728 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/view/status/{state1}/{state2}],methods=[GET]}" onto public java.lang.String com.enter.controller.SaleServiceController.findSaleServiceByUserAndState(org.springframework.ui.Model,java.lang.String,java.lang.String) 
+09:21:14.728 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/view/id/{id}],methods=[GET]}" onto public java.lang.String com.enter.controller.SaleServiceController.getSaleServiceById(java.lang.Long,org.springframework.ui.Model) 
+09:21:14.728 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/apply/{orderNum}],methods=[GET]}" onto public java.lang.String com.enter.controller.SaleServiceController.applyForSaleService(java.lang.String,org.springframework.ui.Model) 
+09:21:14.728 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/view/orderId/{orderId}],methods=[GET]}" onto public java.lang.String com.enter.controller.SaleServiceController.findSaleServiceByOrderId(java.lang.Long,org.springframework.ui.Model) 
+09:21:14.729 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/service/cancer],methods=[PUT]}" onto public java.lang.Object com.enter.controller.SaleServiceController.cancerSaleService(java.lang.Long) 
+09:21:14.730 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/]}" onto public java.lang.String com.enter.controller.StaticController.index(org.springframework.ui.Model) 
+09:21:14.731 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/media]}" onto public java.lang.String com.enter.controller.StaticController.media() 
+09:21:14.731 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/login]}" onto public java.lang.String com.enter.controller.StaticController.login() 
+09:21:14.731 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/contact]}" onto public java.lang.String com.enter.controller.StaticController.contact() 
+09:21:14.731 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/music]}" onto public java.lang.String com.enter.controller.StaticController.music() 
+09:21:14.732 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/about]}" onto public java.lang.String com.enter.controller.StaticController.about() 
+09:21:14.732 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/news]}" onto public java.lang.String com.enter.controller.StaticController.news() 
+09:21:14.733 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/activity]}" onto public java.lang.String com.enter.controller.StaticController.activity() 
+09:21:14.733 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/discount]}" onto public java.lang.String com.enter.controller.StaticController.discount() 
+09:21:14.733 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/songs]}" onto public java.lang.String com.enter.controller.StaticController.songs() 
+09:21:14.737 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/trolley/add],methods=[POST]}" onto public java.lang.Object com.enter.controller.TrolleyController.addToTrolley(java.lang.Long,java.lang.Integer) 
+09:21:14.737 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/trolley/view],methods=[GET]}" onto public java.lang.String com.enter.controller.TrolleyController.listMyTrolley(org.springframework.ui.Model) 
+09:21:14.737 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/trolley/ajax/view],methods=[GET]}" onto public java.lang.Object com.enter.controller.TrolleyController.ajaxToMyTrolley() 
+09:21:14.738 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/trolley/totalCount],methods=[GET]}" onto public java.lang.Object com.enter.controller.TrolleyController.productCountFromTrolley() 
+09:21:14.738 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/trolley/delete/id/{trolleyId}],methods=[DELETE]}" onto public java.lang.Object com.enter.controller.TrolleyController.deleteFromTrolley(java.lang.Long) 
+09:21:14.739 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/modifyTel]}" onto public java.lang.Object com.enter.controller.UserController.modifyTel(java.lang.String,java.lang.String) 
+09:21:14.739 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/modifyEmail]}" onto public java.lang.Object com.enter.controller.UserController.modifyEmail(java.lang.String,java.lang.String) 
+09:21:14.739 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/getUserById/{Id}]}" onto public java.lang.String com.enter.controller.UserController.getUserById(java.lang.Long) 
+09:21:14.739 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/editUserName]}" onto public java.lang.Object com.enter.controller.UserController.editUserName(java.lang.String) 
+09:21:14.740 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/{path}/{name}]}" onto public java.lang.String com.enter.controller.UserController.toPage(java.lang.String,java.lang.String) 
+09:21:14.740 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/index]}" onto public java.lang.String com.enter.controller.UserController.toPage(org.springframework.ui.Model) 
+09:21:14.740 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/overView]}" onto public java.lang.String com.enter.controller.UserController.accountInfo(org.springframework.ui.Model) 
+09:21:14.740 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/reqXML]}" onto public java.lang.String com.enter.controller.UserController.reqXML(org.springframework.ui.Model) 
+09:21:14.742 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/user/modifyPwd]}" onto public java.lang.Object com.enter.controller.UserController.modifyPwd(java.lang.String,java.lang.String) 
+09:21:14.743 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest) 
+09:21:14.744 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) 
+09:21:14.919 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler] 
+09:21:14.919 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler] 
+09:21:14.962 [restartedMain] INFO  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Detected @ExceptionHandler methods in globalExceptionHandler 
+09:21:15.037 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler] 
+09:21:16.641 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729 
+09:21:16.764 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter - Registering beans for JMX exposure on startup 
+09:21:16.850 [restartedMain] INFO  o.s.b.c.e.t.TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http) 
+09:21:16.857 [restartedMain] INFO  com.enter.ShoppingApplication - Started ShoppingApplication in 10.987 seconds (JVM running for 13.539) 
+09:43:07.385 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring FrameworkServlet 'dispatcherServlet' 
+09:43:07.387 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization started 
+09:43:07.462 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - FrameworkServlet 'dispatcherServlet': initialization completed in 75 ms 
+09:43:10.352 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.ShoppingException: 未登陆 
+09:48:20.968 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.PageException: 未登陆 
+09:48:22.335 [http-nio-8080-exec-5] INFO  com.enter.util.CheckUserLogin - login------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+09:50:36.080 [http-nio-8080-exec-4] INFO  com.enter.util.CheckUserLogin - logout------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+09:50:40.308 [http-nio-8080-exec-2] INFO  com.enter.util.CheckUserLogin - login------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+09:51:05.907 [http-nio-8080-exec-8] INFO  com.enter.util.CheckUserLogin - logout------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:20:11.710 [http-nio-8080-exec-6] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.ShoppingException: 未登陆 
+10:20:22.432 [http-nio-8080-exec-7] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.ShoppingException: 未登陆 
+10:20:23.968 [http-nio-8080-exec-2] INFO  com.enter.util.CheckUserLogin - login------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:20:34.285 [http-nio-8080-exec-5] INFO  com.enter.util.CheckUserLogin - login------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:20:37.097 [http-nio-8080-exec-2] INFO  com.enter.util.CheckUserLogin - logout------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:21:53.402 [http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.ShoppingException: 未登陆 
+10:21:56.301 [http-nio-8080-exec-3] INFO  com.enter.util.CheckUserLogin - login------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:22:37.865 [http-nio-8080-exec-9] INFO  com.enter.util.CheckUserLogin - logout------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:23:49.986 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.PageException: 未登陆 
+10:23:51.685 [http-nio-8080-exec-9] INFO  com.enter.util.CheckUserLogin - login------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:26:35.245 [http-nio-8080-exec-9] INFO  com.enter.util.CheckUserLogin - logout------------------------------------------------CD8A181CAAAA9B92D24C9AE5031A2A0B 
+10:26:37.442 [http-nio-8080-exec-1] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.ShoppingException: 未登陆 
+11:34:27.430 [http-nio-8080-exec-5] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.ShoppingException: 未登陆 
+11:35:25.398 [http-nio-8080-exec-7] INFO  com.enter.util.CheckUserLogin - login------------------------------------------------5913CC920327282A67DC16F3CD946C42 
+17:19:01.007 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved exception caused by Handler execution: com.enter.exception.ShoppingException: 未登陆 

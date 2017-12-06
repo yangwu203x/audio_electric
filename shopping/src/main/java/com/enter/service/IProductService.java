@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -12,11 +13,14 @@ import java.util.Set;
  * @Date 2017/10/18 0018 17:34
  */
 public interface IProductService {
-    List<Product> findProductByCategoryId(Long categoryId);
+    List<Product> findProductByCategoryId(Integer categoryId);
 
     Product findOne(Long productId);
 
     Page<Product> findAll(Pageable pageable);
 
 
+    Map<String,Object> listMall();
+
+    List<Product> findProductByPosition(int position);
 }

@@ -87,8 +87,8 @@
             minlength: '最少需要6位数字'
         },
         feedback: {
-            success: 'icon-check',
-            error: 'icon-yuanjiaojuxing11'
+            // success: 'icon-check',
+            // error: 'icon-yuanjiaojuxing11'
         }
     };
 

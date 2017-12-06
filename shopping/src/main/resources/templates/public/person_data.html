@@ -1,0 +1,16 @@
+<div th:fragment="person_data" xmlns:th="http://www.thymeleaf.org">
+    <div class="personBlock">
+        <div class="userInfo">
+            <img class="male" th:src="@{/images/male.jpg}">
+            <p class="userName" th:text="${session.login_user.name}"></p>
+        </div>
+        <ul class="personNav">
+            <li th:class="${activeState == 1}?'personNavLi active':'personNavLi'"><a class="personNav_a" th:href="@{/user/orders/view}"><span class="personNav_name">我的订单</span></a></li>
+            <li th:class="${activeState == 2}?'personNavLi active':'personNavLi'"><a class="personNav_a" th:href="@{/user/service/view}" ><span class="personNav_name">售后服务</span></a></li>
+            <li th:class="${activeState == 3}?'personNavLi active':'personNavLi'"><a class="personNav_a" th:href="@{/discount}"><span class="personNav_name">优惠券</span></a></li>
+            <li th:class="${activeState == 4}?'personNavLi active':'personNavLi'"><a class="personNav_a" th:href="@{/user/address/view}"><span class="personNav_name">收货地址</span></a></li>
+            <li th:class="${activeState == 5}?'personNavLi active':'personNavLi'"><a class="personNav_a" th:href="@{/user/overView}"><span class="personNav_name">账户资料</span></a></li>
+        </ul>
+        <div class="personBg"></div>
+    </div>
+</div>

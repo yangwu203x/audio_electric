@@ -10,6 +10,8 @@
     <meta name="keywords" content="音特，音特电子，话筒"/>
     <meta name="description" content="音特电子，话筒"/>
     <title>音特电子</title>
+    <LINK rel="Bookmark" href="/favicon.ico" >
+    <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
@@ -21,112 +23,156 @@
 <body>
 <div class="wrapper">
     <!-- 通用头部-->
-    <header class="header" th:include="/public/_header"></header>
+    <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
     <!-- 内容区-->
     <section class="content">
         <div class="container">
             <!--位置导航-->
             <div class="navAdd">
                 <div class="navAdd-block">
-                    <a class="navAdd-a" href="index.html">首页</a>
+                    <a class="navAdd-a" th:href="@{/}">首页</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" href="my_orders.html">会员中心</a>
+                    <a class="navAdd-a" >会员中心</a>
                     <span class="navAdd-dot"></span>
-                    <a class="navAdd-a" href="my_orders.html">我的订单</a>
+                    <a class="navAdd-a active" href="#">我的订单</a>
                 </div>
             </div>
             <!--个人中心-->
             <div class="person">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="personBlock">
-                            <div class="userInfo">
-                                <img class="male" th:src="@{/images/male.jpg}">
-                                <p class="userName" th:text="${session.login_user.name}"></p>
-                            </div>
-                            <ul class="personNav">
-                                <li><a class="personNav_a active" th:href="@{/user/account/person_center}">我的订单</a></li>
-                                <li><a class="personNav_a" th:href="@{/user/sale_services/service_after}" >售后服务</a></li>
-                                <li><a class="personNav_a" th:href="@{/user/coupon/discount}">优惠券</a></li>
-                                <li><a class="personNav_a" th:href="@{/address/listMyAddress}" >收货地址</a></li>
-                                <li><a class="personNav_a" th:href="@{/user/accountInfo}">账户资料</a></li>
-                            </ul>
-                            <div class="personBg"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-10">
+                <div class="row" th:with="activeState=1">
+                    <div class="col-lg-3 col-md-2" th:include="/public/person_data::person_data"></div>
+                    <div class="col-lg-9 col-md-10">
                         <div class="myOrder">
                             <div class="orderTitle">
                                 <span class="f-24">我的订单</span>
                             </div>
                             <div class="myOrderBlock">
                                 <!-- Nav tabs -->
+                                <!--/*@thymesVar id="orderStateActive" type="java.lang.String"*/-->
+                                <!--/*@thymesVar id="orderState1" type="java.lang.Integer"*/-->
+                                <!--/*@thymesVar id="orderState2" type="java.lang.Integer"*/-->
+                                <!--/*@thymesVar id="orderState3" type="java.lang.Integer"*/-->
+                                <!--/*@thymesVar id="orderState4" type="java.lang.Integer"*/-->
                                 <ul class="myOrder-tabs" role="tablist" id="someTab">
-                                    <li role="presentation" class="active"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">全部</a></li>
-                                    <li role="presentation"><a href="#pend" aria-controls="pend" role="tab" data-toggle="tab">待付款<span class="badge">1</span></a></li>
-                                    <li role="presentation"><a href="#receive" aria-controls="receive" role="tab" data-toggle="tab">待收货</a></li>
-                                    <li role="presentation"><a href="#finish" aria-controls="finish" role="tab" data-toggle="tab">已完成</a></li>
-                                    <li role="presentation"><a href="#closed" aria-controls="closed" role="tab" data-toggle="tab">已关闭</a></li>
+                                    <li role="presentation" th:class="${orderStateActive == '0'} ? 'active':''"><a href="/user/orders/status/0" aria-controls="all" >全部<span class="badge" ></span></a></li>
+                                    <li role="presentation" th:class="${orderStateActive == '1'} ? 'active':''"><a href="/user/orders/status/1" aria-controls="pend"  >待付款<span class="badge" th:text="${orderState1}"></span></a></li>
+                                    <li role="presentation" th:class="${orderStateActive == '2'} ? 'active':(${orderStateActive == '3'} ? 'active':(${orderStateActive == '4'} ? 'active':''))"><a href="/user/orders/status/2" aria-controls="receive"  >待收货<!--<span class="badge" th:text="${orderState2}"></span>--></a></li>
+                                    <li role="presentation" th:class="${orderStateActive == '5'} ? 'active':''"><a href="/user/orders/status/5" aria-controls="finish"  >已完成<!--<span class="badge" th:text="${orderState3}"></span>--></a></li>
+                                    <li role="presentation" th:class="${orderStateActive == '6'} ? 'active':''"><a href="/user/orders/status/6" aria-controls="closed"  >已关闭<!--<span class="badge" th:text="${orderState4}"></span>--></a></li>
                                 </ul>
-
+                                <!--/*@thymesVar id="ordersList" type="java.util.ArrayList"*/-->
                                 <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="all">
-                                        <div class="tableHead">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div>商品</div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div>单价（元）</div>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <div>数量</div>
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <div>状态</div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div>操作</div>
-                                                </div>
-                                            </div>
+                                <div class="tab-content" >
+                                    <div role="tabpanel" class="tab-pane active" id="all" th:name="${ordersList.size() >0}" th:switch="${ordersList.size() >0}">
+                                        <div class="noThisOrder" th:case="false">
+                                            <img class="noOrder" th:src="@{/images/noOrder.png}"><p class="noOrder_tips">您还没有相关的订单</p><p class="goSee">可以去看看有哪些想买的</p>
                                         </div>
+                                        <div class="tableHead" th:case="true" >
+                                            <table class="order-table">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="40%">
+                                                        商品
+                                                    </th>
+                                                    <th width="16.66666667%">
+                                                        单价（元）
+                                                    </th>
+                                                    <th width="8.33333333%">
+                                                        数量
+                                                    </th>
+                                                    <th width="10%">
+                                                        商品操作
+                                                    </th>
+                                                    <th width="8.33333333%">
+                                                        状态
+                                                    </th>
+                                                    <th width="16.66666667%">
+                                                        交易操作
+                                                    </th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!--/*@thymesVar id="orders" type="com.enter.entity.Orders"*/-->
+                                        <!--/*@thymesVar id="orderDetail" type="com.enter.entity.OrderDetail"*/-->
                                         <ul>
                                             <li th:each="orders:${ordersList}">
-                                                <div class="myOrderNum">
-                                                    <span class="orderNumber">订单编号：<span class="order_number" th:text="${orders.orderNum}"></span></span>
-                                                    <span >成交时间：<span class="order_time" th:text="${orders.payDate}">2017-09-14  13：46：29</span></span>
-                                                </div>
                                                 <div class="tableContent">
-                                                    <div class="myOrderList">
-                                                        <div class="row" th:each="orderDetail:${orders.orderDetails}">
-                                                            <div class="col-md-6">
-                                                                <div class="product orderGoods clearfix">
-                                                                    <div class="product-img"><img width="150px" th:src="${orderDetail.trolley.product.thumbnail}" alt=""/></div>
-                                                                    <p class="product-name" th:text="${orderDetail.trolley.product.name}"></p>
-                                                                    <p class="product-color" th:text="${orderDetail.trolley.product.color}"></p>
+                                                    <table class="order-table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td colspan="6" class="order-title">
+                                                                <div class="myOrderNum">
+                                                                    <span class="orderNumber">订单编号：<span class="order_number" th:text="${orders.orderNum}"></span></span>
+                                                                    <span >提交时间：<span class="order_time" th:text="${orders.generateTime}"></span></span>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="myOrderMoney" th:text="'￥'+${orderDetail.trolley.product.priceSale}"></div>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <div class="myOrderNumber" th:text="${orderDetail.trolley.count}"></div>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <div class="myOrderState" th:text="${orders.orderPay}"></div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="doOrder">
-                                                                    <p><a href="orderDetail.html">查看订单</a></p>
-                                                                    <p><a href="#">取消订单</a></p>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                        <tr th:each="trolley,orderStat:${orders.trolleys}" th:with="product=${trolley.getProduct()}">
+                                                            <td class="order-table-list" width="40%" >
+                                                                <div class="goods orderGoods clearfix" >
+                                                                    <a th:href="'/product/view/id/'+${product.id}">
+                                                                        <div class="goods-img"><img  th:src="${product.thumbnail3}" alt=""/></div>
+                                                                        <p class="goods-name" th:text="${product.categoryName+ ' '+product.name}"></p>
+                                                                        <p class="goods-color" th:text="'颜色：'+${product.color}+' '+${trolley.series}"></p>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="myOrderTotal clearfix">
-                                                        <p class="myOrderTotal_p pull-right">应付总额（运费：<span class="deliveryMoney">¥5.00</span>，优惠：<span class="saleOffMoney">¥100.00</span>）：<span class="finalMoney" th:text="'￥'+${orders.price}"></span><a class="gotoBuy" href="#">去结算</a></p>
-                                                    </div>
+                                                            </td>
+                                                            <td class="order-table-Money" width="16.66666667%" th:text="'￥'+${product.priceSale}">
+                                                            </td>
+                                                            <td class="order-table-number" width="8.33333333%" th:text="${trolley.count}">
+                                                            </td>
+                                                            <td class="order-table-operate" width="10%" th:switch="${orders.orderState}" >
+                                                                <p th:case="1">&#175; &#175;</p><p th:case="2">&#175; &#175;</p><p th:case="3">&#175; &#175;</p><p th:case="1">&#175; &#175;</p>
+                                                                <p th:case="5"><a class="order-table-a" th:href="'/user/service/apply/'+${orders.orderNum}" >申请售后</a></p>
+                                                                <p th:case="6"><a class="order-table-a" th:href="'/user/service/apply/'+${orders.orderNum}" >申请售后</a></p>
+                                                            </td>
+                                                            <td th:hidden="${orderStat.index==0}?'false':'hidden'" th:rowspan="${orders.trolleys.size()}" class="order-table-state" width="8.33333333%" th:switch="${orders.orderState}">
+                                                                <font th:case="1">待付款</font>
+                                                                <font th:case="2">待收货</font>
+                                                                <font th:case="3">待收货</font>
+                                                                <font th:case="4">待收货</font>
+                                                                <font th:case="5">已完成</font>
+                                                                <font th:case="6">已关闭</font>
+                                                            </td>
+                                                            <td th:hidden="${orderStat.index==0}?'false':'hidden'" th:rowspan="${orders.trolleys.size()}" class="order-table-action" width="16.66666667%" th:switch="${orders.orderState}" >
+                                                                <div class="order-table-doOrder" th:case="1">
+                                                                    <p><a class="order-table-a" th:href="'/user/orders/view/orderNo/'+${orders.id}">查看订单</a></p>
+                                                                    <p><a class="order-table-a" th:title="${orders.orderNum}" href="javascript:void(0)" data-toggle="modal" data-target="#deleteModal">取消订单</a></p>
+                                                                </div>
+                                                                <div class="order-table-doOrder" th:case="2">
+                                                                    <p><a class="order-table-a" th:href="'/user/orders/view/orderNo/'+${orders.id}">查看订单</a></p>
+                                                                    <p><a class="order-table-a" th:title="${orders.orderNum}" href="javascript:void(0)" data-toggle="modal" data-target="#deleteModal">取消订单</a></p>
+                                                                </div>
+                                                                <div class="order-table-doOrder" th:case="3">
+                                                                    <p><a class="order-table-a" th:href="'/user/orders/view/orderNo/'+${orders.id}">查看订单</a></p>
+                                                                    <p><a class="order-table-a" th:title="${orders.orderNum}" href="javascript:void(0)" data-toggle="modal" data-target="#deleteModal">取消订单</a></p>
+                                                                </div>
+                                                                <div class="order-table-doOrder" th:case="4">
+                                                                    <p><a class="order-table-a" th:href="'/user/orders/view/orderNo/'+${orders.id}">查看订单</a></p>
+                                                                    <p><a class="order-table-a" th:href="'/user/address/deliveryId/1'"  >查看物流</a></p>
+                                                                </div>
+                                                                <div class="order-table-doOrder" th:case="5">
+                                                                    <p><a class="order-table-a" th:href="'/user/orders/view/orderNo/'+${orders.id}">查看订单</a></p>
+                                                                </div>
+                                                                <div class="order-table-doOrder" th:case="6">
+                                                                    <p><a class="order-table-a" th:href="'/user/orders/view/orderNo/'+${orders.id}">查看订单</a></p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td colspan="6" class="order-title">
+                                                                <div class="myOrderTotal clearfix">
+                                                                    <p class="myOrderTotal_p pull-right">应付总额（运费：<span class="deliveryMoney">免运费</span>，优惠：<span class="saleOffMoney" >¥0</span>）：<span class="finalMoney" th:text="'¥'+${orders.price}"></span><a th:href="'/user/orders/onlinePay/view/'+${orders.orderNum}" th:class="${orders.orderState =='1'}?'gotoBuy':''" th:text="${orders.orderState =='1'}?'去结算':''"></a></p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </li>
                                         </ul>
@@ -143,21 +189,91 @@
     </section>
 
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer">
+    <footer id="footer" th:include="/public/_footer::footer">
     </footer>
 </div>
+<!--delete model-->
+<input type="hidden" id="common_confirm_btn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#deleteModal">
+<div class="modal myInfoModal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="close iconfont icon-close" data-dismiss="modal" aria-label="Close" aria-hidden="true"></i>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title deleteModal_t" id="deleteModalLabel">确定取消服务吗?</h4>
+                <div class="modal-btns">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn-qx ok" data-dismiss="modal">确定</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn-red cancel" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
+<script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
 <script th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/app.js}"></script>
 <script type="text/javascript">
-    $(function () {
-        $('#someTab a:first').tab('show');
-        // 没有相关订单的状态
-        $('.noOrder').find('.tab-content').html('').append('<img class="noOrder" th:src="@{/images/noOrder.png}">'+'<p class="noOrder_tips">'+'您还没有这一类别的订单，快去下单吧！'+'</p>'+'<a class="goOrder" href="index.html">'+'去下单'+'</a>');
-        $('.noOrder').find('.badge').remove();
-        // 没有某一类订单的状态
-        $('.noThisOrder').html('').append('<img class="noOrder" th:src="@{/images/noOrder.png}">'+'<p class="noOrder_tips">'+'您还没有相关的订单'+'</p>'+'<p class="goSee">'+'可以去看看有哪些想买的'+'</p>');
-    })
+
+    $('.order-table-a').click(function (e) {
+        e.stopPropagation();
+        var orderNum = $(this).attr("title");
+        Common.confirm({
+            operate: function (reselt) {
+                if (reselt) {
+                    $.ajax({url:'/user/orders/cancer/'+orderNum,type:'put',success:function(result){
+                        if (result.code == 1){
+                            alert("取消成功");
+                            window.location.reload();
+                        }else if(result.code == 2){
+                            window.location.href=result.url;
+                        }else{
+                            alert(result.msg);
+                        }
+                    }});
+                } else {
+                }
+            }
+        })
+    });
+
+    var Common = {
+        confirm:function(params){
+            var model = $("#deleteModal");
+            $("#common_confirm_btn").click();
+            //每次都将监听先关闭，防止多次监听发生，确保只有一次监听
+            model.find(".cancel").die("click");
+            model.find(".ok").die("click");
+            model.find(".ok").live("click",function(){
+                params.operate(true)
+            });
+
+            model.find(".cancel").live("click",function(){
+                params.operate(false)
+            })
+        }
+    }
+//    function cancerOrders(obj){
+//        var orderNum = $(obj).attr("title");
+//        $.ajax({url:'/user/orders/cancer/'+orderNum,type:'put',success:function(result){
+//            if (result.code == 1){
+//                alert("取消成功");
+//                window.location.reload();
+//            }else if(result.code == 2){
+//                window.location.href=result.url;
+//            }else{
+//                alert(result.msg);
+//            }
+//        }});
+//    }
+
 </script>
 </body>
 </html>

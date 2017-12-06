@@ -4,10 +4,10 @@
     <logger name="org.springframework.web" level="info"/>
     <!-- show sql --> <logger name="com.audio.electric.mapper" level="info"/>
     <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>D:/logs/shopping.log</File>
+        <File>logs/shopping.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover 保存历史记录到这个文件夹一日起为后缀 -->
-            <FileNamePattern>D:\\logs\\temp\\shopping-log.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>logs/shopping-log.%d{yyyy-MM-dd}.log</FileNamePattern>
             <!-- keep 30 days' worth of history -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>

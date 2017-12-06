@@ -22,7 +22,8 @@ public class User {
     private String name;
     @Column(name = "email")
     private String email;
-
+    @Column(name = "tel")
+    private String tel;
 
     public long getId() {
         return id;
@@ -64,7 +65,13 @@ public class User {
         this.email = email;
     }
 
+    public String getTel() {
+        return tel;
+    }
 
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
 
     @Override
     public String toString() {

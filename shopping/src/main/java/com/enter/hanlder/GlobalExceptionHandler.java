@@ -35,12 +35,10 @@ public class GlobalExceptionHandler {
         if (e.getCode() == RetCode.UNLOGINED.getCode()){
             mav.setViewName("/reg/login");
         }else{
-            mav.addObject("exception", e);
+            mav.addObject("exception", e.getMessage());
             mav.addObject("url", req.getRequestURL());
             mav.setViewName("/public/error");
         }
-
-
         return mav;
     }
 
@@ -50,8 +48,10 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Object defaultErrorHandlerBody(HttpServletRequest req, Exception e) throws Exception {
         if(e instanceof ShoppingException){
-            ShoppingException appException = (ShoppingException) e;
-            return BodyUtil.exception(appException.getCode(),appException.getMessage());
+            ShoppingException shoppingExcetpion = (ShoppingException) e;
+            if (shoppingExcetpion.getCode() == RetCode.UNLOGINED.getCode())
+                return BodyUtil.unLoginException();
+            return BodyUtil.exception(shoppingExcetpion.getCode(),shoppingExcetpion.getMessage());
         }else{
             logger.info(e.getMessage());
             return BodyUtil.exception(RetCode.UNKNOWN_ERROR.getCode(),RetCode.UNKNOWN_ERROR.getMsg());

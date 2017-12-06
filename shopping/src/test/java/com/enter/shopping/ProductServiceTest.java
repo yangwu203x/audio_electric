@@ -62,13 +62,13 @@ public class ProductServiceTest {
         product.setPartsSet(partsSet);
         product.setName("magic sing");
         product.setThumbnail("/images/ktv2.jpg");
-        product.setCategoryId(2l);
+        product.setCategoryId(2);
         productRepository.save(product);
     }
 
     @Test
     public void contextLoads() {
-        List<Product> product = productService.findProductByCategoryId(1l);
+        List<Product> product = productService.findProductByCategoryId(1);
         Iterator<Product> it =  product.iterator();
         while(it.hasNext())
             System.out.println(it.next());

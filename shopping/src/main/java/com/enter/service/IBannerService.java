@@ -12,5 +12,7 @@ public interface IBannerService {
 
     List<Banner> findAll();
 
+    List<Banner> findBannerByCategory(String category);
+
     Banner addBanner(Banner banner);
 }
