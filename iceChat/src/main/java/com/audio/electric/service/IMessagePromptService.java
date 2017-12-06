@@ -7,5 +7,5 @@ package com.audio.electric.service;
 public interface IMessagePromptService {
 
     //向客户发送消息评论提示
-    public void commentPrompt();
+     void commentPrompt();
 }

@@ -19,11 +19,11 @@ public interface MessageService {
      * @param msg
      * @return
      */
-    public int saveMessage(Message msg);
+     int saveMessage(Message msg);
 
-    public int saveMessage(Message[] msgs1);
+     int saveMessage(Message[] msgs1);
 
-    public int removeMessage(String userId);
+     int removeMessage(String userId);
 
-    public Message[] getMessage(String userId);
+     Message[] getMessage(String userId);
 }
