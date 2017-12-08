@@ -95,6 +95,12 @@ public class Orders {
 
     @Column(name = "left_time")
     private Long leftTime;
+    @Column(name = "invoice")
+    private String invoice;
+    @Column(name = "invoice_header")
+    private String invoiceHeader;
+    @Column(name = "tax_indent")
+    private String TaxIdent;
 
 
 
@@ -307,6 +313,30 @@ public class Orders {
 
     public void setLeftTime(Long leftTime) {
         this.leftTime = leftTime;
+    }
+
+    public String getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(String invoice) {
+        this.invoice = invoice;
+    }
+
+    public String getInvoiceHeader() {
+        return invoiceHeader;
+    }
+
+    public void setInvoiceHeader(String invoiceHeader) {
+        this.invoiceHeader = invoiceHeader;
+    }
+
+    public String getTaxIdent() {
+        return TaxIdent;
+    }
+
+    public void setTaxIdent(String taxIdent) {
+        TaxIdent = taxIdent;
     }
 
     @Override

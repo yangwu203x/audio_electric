@@ -125,7 +125,10 @@
                                                             <td class="order-table-number" width="8.33333333%" th:text="${trolley.count}">
                                                             </td>
                                                             <td class="order-table-operate" width="10%" th:switch="${orders.orderState}" >
-                                                                <p th:case="1">&#175; &#175;</p><p th:case="2">&#175; &#175;</p><p th:case="3">&#175; &#175;</p><p th:case="1">&#175; &#175;</p>
+                                                                <p th:case="1">&#175; &#175;</p>
+                                                                <p th:case="2">&#175; &#175;</p>
+                                                                <p th:case="3">&#175; &#175;</p>
+                                                                <p th:case="4">&#175; &#175;</p>
                                                                 <p th:case="5"><a class="order-table-a" th:href="'/user/service/apply/'+${orders.orderNum}" >申请售后</a></p>
                                                                 <p th:case="6"><a class="order-table-a" th:href="'/user/service/apply/'+${orders.orderNum}" >申请售后</a></p>
                                                             </td>

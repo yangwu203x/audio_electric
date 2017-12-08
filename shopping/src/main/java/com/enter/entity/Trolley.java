@@ -125,6 +125,8 @@ public class Trolley {
         this.series = series;
     }
 
+
+
     @Override
     public String toString() {
         return "Trolley{" +

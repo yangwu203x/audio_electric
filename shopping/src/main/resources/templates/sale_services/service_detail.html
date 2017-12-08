@@ -171,7 +171,7 @@
                                         <img th:href="@{images/problem-img.jpg}">
                                     </div>
                                 </div>
-                                <div class="orderDetail_content" id="delivery_door" th:switch="${saleService.state == }" th:text="${saleService.state == '1'}">
+                                <div class="orderDetail_content" id="delivery_door" th:switch="${saleService.state == 1}" >
                                     <div th:case="true">
                                         <p class="orderDetail_content_t"><span class="delivery_method">上门取件</span>
                                             <a class="edit" href="javascript:;" id="changeWay1">更换退回方式</a></p>

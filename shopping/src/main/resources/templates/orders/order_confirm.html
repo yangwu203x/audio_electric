@@ -109,9 +109,9 @@
                 </ul>
                 <div class="invoiceTip" id="companyTip">
                     <div class="invoiceForm">
-                        <label for="personalTitle" class="invoiceLabel"><span class="redColor">*</span>发票抬头：</label>
+                        <label for="companyTitle" class="invoiceLabel"><span class="redColor">*</span>发票抬头：</label>
                         <div class="inputDiv">
-                            <input type="text" class="invoiceInput" id="personalTitle" placeholder="请输入发票抬头">
+                            <input type="text" class="invoiceInput" id="companyTitle" placeholder="请输入发票抬头">
                         </div>
                     </div>
                     <div class="invoiceForm" id="companyInvoice">
@@ -143,27 +143,28 @@
                         </div>
                     </div>
                     <div class="sureOrderTable_body">
+                        <!--/*@thymesVar id="product" type="com.enter.entity.Product"*/-->
                         <!--/*@thymesVar id="trolley" type="com.enter.entity.Trolley"*/-->
                         <!--/*@thymesVar id="trolleyList" type="java.util.ArrayList"*/-->
-                        <div class="sureOrderTable_item" th:each="trolley:${trolleyList}">
+                        <div class="sureOrderTable_item" th:each="trolley:${trolleyList}" th:with="product = ${trolley.getProduct()}">
                             <div class="row">
                                 <div class="col-md-5 sureOrder-goods clearfix">
-                                    <a th:href="'/product/view/id/'+${trolley.getProduct().getId()}">
-                                        <div class="goods-img"><img width="73px" th:src="${trolley.product.thumbnail3}" alt=""/></div>
+                                    <a th:href="'/product/view/id/'+${product.id}">
+                                        <div class="goods-img"><img width="73px" th:src="${product.thumbnail3}" alt=""/></div>
                                         <div class="goods-info">
-                                            <p class="goods-name" th:text="${trolley.product.categoryName+' '+trolley.product.name}"></p>
-                                            <p class="goods-color" th:text="'颜色：'+${trolley.product.color}"></p>
+                                            <p class="goods-name" th:text="${product.categoryName+' '+product.name}"></p>
+                                            <p class="goods-color" th:text="'颜色：'+${product.color}"></p>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="perPrice" th:text="'￥'+${trolley.product.priceSale}"></div>
+                                    <div class="perPrice" th:text="'￥'+${product.priceSale}"></div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="perNumber" th:text="${trolley.count}">1</div>
                                 </div>
                                 <div class="col-md-3 text-right">
-                                    <div class="perTotalPrice" th:text="'￥'+${trolley.product.priceSale*trolley.count}"></div>
+                                    <div class="perTotalPrice" th:text="'￥'+${product.priceSale*trolley.count}"></div>
                                 </div>
                             </div>
                         </div>
@@ -175,9 +176,9 @@
                 <p class="f-24">使用优惠券</p>
                 <div class="addSaleOff">+添加优惠券</div>
                 <!--没有优惠券-->
-                <div id="saleOff" style="display: none">您现在还没有可以使用的优惠券，请活动期间及时领取</div>
+                <div id="saleOff" style="">您现在还没有可以使用的优惠券，请活动期间及时领取</div>
                 <!--有优惠券-->
-                <ul class="withDiscount clearfix" id="withDiscount">
+                <!--<ul class="withDiscount clearfix" id="withDiscount">
                     <li>
                         <img class="addDiscount" th:src="@{/images/addDiscount2.jpg}">
                         <img class="discountBg js_deleteDiscount" th:src="@{/images/addDiscountBg.png}">
@@ -190,7 +191,7 @@
                         <img class="addDiscount" th:src="@{/images/addDiscount.jpg}">
                         <img class="discountBg js_deleteDiscount" th:src="@{/images/addDiscountBg.png}">
                     </li>
-                </ul>
+                </ul>-->
             </div>
             <!--订单备注-->
             <div class="orderAdd">

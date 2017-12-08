@@ -141,7 +141,7 @@ $(function(){
                     clearCount("sendCodeEmail");
                     alert(result.msg);
                 }
-            })
+            });
         }
 
     });

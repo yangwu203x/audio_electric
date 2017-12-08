@@ -197,12 +197,16 @@ function sumbitOrder(){
     //纳税人识别号
     var TaxIdent;
     var invoice = $("input[name=invoice]:checked").val();
-    if(invoice == 'person'){
 
-    }else{
-        invoice
+    if(invoice == 'person'){
+        //个人发票
+        invoiceHeader = $('#personal').val();
+    }else if(invoice == 'company'){
+        //公司发票
+        invoiceHeader = $('#companyTitle').val();
+        TaxIdent = $('#company').val();
     }
-    $.ajax({type:'post',url:'/user/orders/generate/three',data:{addressId:addressId,trolleyIds:trolleyIds},
+    $.ajax({type:'post',url:'/user/orders/generate/three',data:{addressId:addressId,trolleyIds:trolleyIds,invoice:invoice,invoiceHeader:invoiceHeader,TaxIdent:TaxIdent},
         success:function(result){
             if (result.code == 1){
                 var orders = result.data;
