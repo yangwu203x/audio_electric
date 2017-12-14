@@ -11,7 +11,7 @@ import java.util.Set;
  * @Date 2017/12/1 0007 14:53
  */
 public interface PropertyRepository extends Repository<Property,Long>{
-     Set<Property> findPropertyByProductId(Long productId);
+     Set<Property> findPropertyByProductIdOrderByNumDesc(Long productId);
 
      Property findPropertyByProductIdAndColorNo(Long productId,String colorNo);
 

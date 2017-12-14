@@ -103,7 +103,7 @@ function fontResize() {
     var title30 = 30;
     var ctxP = 24;
     var ctx = 20;
-    var ps = 18;
+    var ps = 17;
     if (fs < 0.4 && sdw_width > 768) {
         fs = 0.4;
     }
@@ -115,7 +115,7 @@ function fontResize() {
         title30 = 30;
         ctx = 20;
         ctxP = 24;
-        ps = 14;
+        ps = 13;
         ctx = ctx * fs;
         ctxP = ctxP * fs;
         title =title * fs;
@@ -138,7 +138,7 @@ function fontResize() {
     $(".title4").css({"font-size": title3 + "px", "margin-bottom": 130 * w, "line-height": title3 * 1.3  + "px"});
     $(".title5").css({"font-size": title3 + "px", "margin-bottom": 80 * w, "line-height": title3 * 1.3  + "px"});
     $(".title30").css({"font-size": title30 + "px"});
-    $(".ps").css({"font-size": ps * fs + "px","line-height": ps * 1.3  + "px"});
+    $(".ps").css({"font-size": ps + "px","line-height": ps * 1.5  + "px"});
     $(".sup").css({"font-size": 14 * fs + "px"});
     $(".sup2").css({"font-size": 16 * fs + "px"});
     $(".ctx").css({"font-size": ctx + "px",  "line-height": ctx * 1.4 + "px"});

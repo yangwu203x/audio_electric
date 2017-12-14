@@ -1,3 +1,4 @@
+<!--统一pc端-->
 <div th:fragment="header" xmlns:th="http://www.thymeleaf.org">
     <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
     <script type="text/javascript" th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
@@ -109,4 +110,93 @@
             </div>
         </div>
     </aside>
+</div>
+<!--手机端-->
+    <!--1.购物车-->
+<div th:fragment="tel_product" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="header-xs-block">
+            <div class="navIcons-xs icon-out pull-left">
+                <span class="line_icons"></span>
+                <span class="line_icons"></span>
+                <span class="line_icons"></span>
+            </div>
+            <a class="header-logo" th:href="@{/}"><img class="logo-xs" th:src="@{/images-xs/logo-xs.png}"></a>
+            <div class="header-xs-r pull-right">
+                <a class="header-xs-a" th:href="@{/user/trolley/view}"><img class="shopCart-xs" th:src="@{/images-xs/shopCart-xs.png}"></a>
+                <a class="header-xs-a header-xs-person" th:href="@{/user/orders/view}"><img class="person-xs" th:src="@{/images-xs/person-xs.png}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-inner-nav">
+        <div class="container">
+            <ul>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/news/listNews}">新闻资讯</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/activity}">活动中心</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/product/view}">音特商城</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/about}">关于我们</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/contact}">联系我们</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <!--2.商城-->
+<div th:fragment="tel_index" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="header-xs-block">
+            <div class="navIcons-xs icon-out pull-left">
+                <span class="line_icons"></span>
+                <span class="line_icons"></span>
+                <span class="line_icons"></span>
+            </div>
+            <a class="header-logo" th:href="@{/}"><img class="logo-xs" th:src="@{/images-xs/logo-xs.png}"></a>
+            <div class="header-xs-r pull-right">
+                <a class="header-xs-a" th:href="@{/product/view}"><img class="shopCart-xs" th:src="@{/images-xs/shop-xs.png}"></a>
+                <a class="header-xs-a header-xs-person" th:href="@{/user/orders/view}"><img class="person-xs" th:src="@{/images-xs/person-xs.png}"></a>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-inner-nav">
+        <div class="container">
+            <ul>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/news/listNews}">新闻资讯</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/activity}">活动中心</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/product/view}">音特商城</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/about}">关于我们</a>
+                </li>
+                <li class="nav-xs-li">
+                    <a class="nav-xs-a" th:href="@{/contact}">联系我们</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+    <!--3.子页面-->
+<div th:fragment="tel_page"  xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="header-xs-block clearfix">
+            <a class="header-goBack pull-left" href="javascript:void (0)" onclick="window.history.go(-1);"><i class="iconfont icon-you-copy"></i></a>
+            <span class="header-title">商品详情</span>
+            <div class="header-xs-r pull-right">
+                <a class="header-xs-a" th:href="@{/user/trolley/view}"><img class="shopCart-xs" th:src="@{/images-xs/shopCart-xs.png}"></a>
+            </div>
+        </div>
+    </div>
 </div>

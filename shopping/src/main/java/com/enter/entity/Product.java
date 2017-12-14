@@ -62,6 +62,9 @@ public class Product {
     @Column(name = "position")
     private Integer position;//商城摆放位置
 
+    @Column(name = "mobile_url")
+    private String mobileUrl;//手机图片
+
     @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Set<Thumbnail> thumbnailSet;
@@ -289,6 +292,14 @@ public class Product {
 
     public void setThumbnail4(String thumbnail4) {
         this.thumbnail4 = thumbnail4;
+    }
+
+    public String getMobileUrl() {
+        return mobileUrl;
+    }
+
+    public void setMobileUrl(String mobileUrl) {
+        this.mobileUrl = mobileUrl;
     }
 
     @Override

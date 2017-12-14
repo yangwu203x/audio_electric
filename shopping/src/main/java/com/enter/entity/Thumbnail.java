@@ -26,6 +26,8 @@ public class Thumbnail {
     private Integer selected;
     @Column(name = "position")
     private Integer position;
+    @Column(name = "mobile_url")
+    private String mobileUrl;
 
     public Long getId() {
         return id;
@@ -94,6 +96,14 @@ public class Thumbnail {
 
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    public String getMobileUrl() {
+        return mobileUrl;
+    }
+
+    public void setMobileUrl(String mobileUrl) {
+        this.mobileUrl = mobileUrl;
     }
 
     @Override

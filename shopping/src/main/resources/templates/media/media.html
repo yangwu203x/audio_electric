@@ -23,8 +23,8 @@
     <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/iconfont.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" >
+    <link rel="stylesheet" th:href="@{/css/public/common.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -34,82 +34,117 @@
 <body>
 <div class="wrapper">
     <!-- 通用头部-->
-    <header class="header navbar-fixed-top" th:include="/public/_header::header">
+    <header>
+        <div class="header navbar-fixed-top hidden-sm hidden-xs" th:include="/public/_header::header"></div>
+        <div class="header-xs visible-xs visible-sm" th:include="/public/_header::tel_index"></div>
     </header>
     <!-- 内容区-->
     <div class="content">
         <section class="medias">
-        <div id="content">
-            <div class="block block_songs">
-                <img class="blockBg" th:src="@{/images/media_bg.jpg}">
-                <div class="songs_server">
+            <div id="content">
+                <div class="block block_songs">
+                    <img class="blockBg hidden-xs hidden-sm" th:src="@{/images/media_bg.jpg}">
+                    <img class="blockBg visible-sm visible-xs" th:src="@{/images-xs/media_bg_xs.png}">
+                    <div class="songs_server">
+                        <div class="container">
+                            <div class="media_tech_text">
+                                <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">流媒体技术</p>
+                                <div class="hidden-xs">
+                                    <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特采用流媒体技术，也叫流式媒体技术。</p>
+                                    <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">就是把连续的影像和声音信息经过压缩处理后放上网站服务器,由视频服务器向用户计算机顺序或实时地传送各个压缩包</p>
+                                    <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.6s" data-occur="1">让用户一边下载一边观看、收听，而不要等整个压缩文件下载</p>
+                                    <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.8s" data-occur="1">到自己的计算机上才可以观看的网络传输技术。</p>
+                                </div>
+                                <div class="songs-xs visible-xs">
+                                    <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特采用流媒体技术，也叫流式媒体技术。</p>
+                                    <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">就是把连续的影像和声音信息经过压缩处理</p>
+                                    <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.6s" data-occur="1">后放上网站服务器,由视频服务器向用户计算机顺序或实时地传送各个压缩包,让用户一边下载一边观看、收听，而不要等整个压缩文件下载到自己的计算机上才可以观看的网络传输技术。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block block_songs">
                     <div class="container">
-                        <div class="media_tech_text">
-                            <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">流媒体技术</p>
-                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子采用流媒体技术，流媒体技术也称流式媒体技术.就是把</p>
-                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">连续的影像和声音信息经过压缩处理后放上网站服务器,由视频服务器向用户计算机顺序或实时地传送各个压缩包</p>
-                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.6s" data-occur="1">让用户一边下载一边观看、收听，而不要等整个压缩文件下载</p>
-                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.8s" data-occur="1">到自己的计算机上才可以观看的网络传输技术。</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="block block_songs">
-                <div class="container">
-                    <div class="medias_block">
-                        
-                        <div class="medias_adv">
-                            <img class="blockBg" th:src="@{/images/medias_adv_bg.jpg}">
-                            <div class="medias_adv_text">
-                                <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">用户体验更加好</p>
-                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子采用了流媒体技术，实现用户实时K歌，而不用</p>
-                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">等待歌曲下载完成，用户体验更加好</p>
-                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.6s" data-occur="1">真正意义上的想唱就唱!</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="medias_adv_block">
-                                    <img class="media_icon" th:src="@{/images/media_icon1.png}">
-                                    <p class="media_adv_title">节约时间</p>
-                                    <p class="ps server_p">传统媒体K歌需要时间下载完成后才可以K歌，浪费时间</p>
-                                    <p class="ps server_p">音特电子采用流媒体技术，完美解决这个问题，不仅使启动延时</p>
-                                    <p class="ps server_p">大大缩短，减少了用户在线等待的时间。</p>
-                                    <img class="mediaImg" th:src="@{/images/mediaImg1.jpg}">
+                        <div class="medias_block">
+                            <div class="medias_adv">
+                                <img class="blockBg hidden-sm hidden-xs" th:src="@{/images/medias_adv_bg.jpg}">
+                                <img class="blockBg visible-sm visible-xs" th:src="@{/images-xs/media_img_xs1.png}">
+                                <div class="medias_adv_text">
+                                    <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">用户体验更加好</p>
+                                    <div class="hidden-xs">
+                                        <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子采用了流媒体技术，实现用户实时K歌，而不用</p>
+                                        <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">等待歌曲下载完成，用户体验更加好</p>
+                                        <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.6s" data-occur="1">真正意义上的想唱就唱!</p>
+                                    </div>
+                                    <div class="songs-xs visible-xs">
+                                        <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子采用了流媒体技术，</p>
+                                        <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">实现用户实时K歌，而不用等待歌曲下载完成，用户体验更加好真正意义上的想唱就唱!</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="medias_adv_block">
-                                    <img class="media_icon" th:src="@{/images/media_icon2.png}">
-                                    <p class="media_adv_title">节省空间</p>
-                                    <p class="ps server_p">传统媒体K歌需要把歌曲下载完成后才可以K歌，浪费</p>
-                                    <p class="ps server_p">储存空间，音特电子采用流媒体技术，不需要太大的缓存容量</p>
-                                    <p class="ps server_p">节省硬盘的空间。</p>
-                                    <img class="mediaImg" th:src="@{/images/mediaImg2.jpg}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="medias_adv_block">
+                                        <img class="media_icon hidden-xs hidden-sm" th:src="@{/images/media_icon1.png}">
+                                        <img class="mediaImg visible-sm visible-xs" th:src="@{/images-xs/mediaImg1_xs.png}">
+                                        <p class="title30 sdw-animate box media_adv_title">节约时间</p>
+                                        <div class="hidden-xs">
+                                            <p class="ps server_p">传统媒体K歌需要时间下载完成后才可以K歌，浪费时间</p>
+                                            <p class="ps server_p">音特电子采用流媒体技术，完美解决这个问题，不仅使启动</p>
+                                            <p class="ps server_p">延时大大缩短，减少了用户在线等待的时间。</p>
+                                        </div>
+                                        <div class="songs-xs visible-xs">
+                                            <p class="ps server_p">传统媒体K歌需要时间下载完成后才可以K歌，</p>
+                                            <p class="ps server_p">浪费时间音特电子采用流媒体技术，完美解决这个问题，不仅使启动延时大大缩短，减少了用户在线等待的时间。</p>
+                                        </div>
+                                        <img class="mediaImg hidden-xs hidden-sm" th:src="@{/images/mediaImg1.jpg}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="medias_adv_block">
+                                        <img class="media_icon hidden-xs hidden-sm" th:src="@{/images/media_icon2.png}">
+                                        <img class="mediaImg visible-sm visible-xs" th:src="@{/images-xs/mediaImg2_xs.png}">
+                                        <p class="title30 sdw-animate box media_adv_title">节省空间</p>
+                                        <div class="hidden-xs">
+                                            <p class="ps server_p">传统媒体K歌需要把歌曲下载完成后才可以K歌，浪费</p>
+                                            <p class="ps server_p">储存空间，音特电子采用流媒体技术，不需要太大的缓存容量</p>
+                                            <p class="ps server_p">节省硬盘的空间。</p>
+                                        </div>
+                                        <div class="visible-xs songs-xs">
+                                            <p class="ps server_p">传统媒体K歌需要把歌曲下载完成后才可以</p>
+                                            <p class="ps server_p">K歌，浪费储存空间，音特电子采用流媒体技术，不需要太大的缓存容量节省硬盘的空间。</p>
+                                        </div>
+                                        <img class="mediaImg hidden-xs hidden-sm" th:src="@{/images/mediaImg2.jpg}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="block block_songs">
-                <div class="container">
-                    <div class="medias_pro">
-                        <img class="blockBg" th:src="@{/images/media_bg2.jpg}">
-                        <div class="medias_pro_text">
-                            <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">做用户想要的产品</p>
-                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子长期一来一直坚持把用户体验放在首位，做用户想要的产品，</p>
-                            <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">采用流媒体技术更加体现这一点。</p>
+                <div class="block block_songs">
+                    <div class="container">
+                        <div class="medias_pro">
+                            <img class="blockBg hidden-sm hidden-xs" th:src="@{/images/media_bg2.jpg}">
+                            <img class="blockBg visible-sm visible-xs" th:src="@{/images-xs/media_bg2_xs.png}">
+                            <div class="medias_pro_text">
+                                <p class="title30 sdw-animate server_title" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0s" data-occur="1">做用户想要的产品</p>
+                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.2s" data-occur="1">音特电子长期一来一直坚持把用户体验放在</p>
+                                <p class="ps sdw-animate server_p" data-start="{&quot;transform&quot;:&quot;translate3d(0,30px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500"  data-delay="0.4s" data-occur="1">首位，做用户想要的产品，采用流媒体技术更加体现这一点。</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     </div>
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer::footer">
+    <footer id="footer">
+        <div class="hidden-sm hidden-xs" th:include="/public/_footer::footer"></div>
+        <div class="footer-xs visible-xs visible-sm" th:include="/public/_footer::tel_index"></div>
     </footer>
+    <!--语言-->
+    <div class="modal newsModal langModal" id="langModal" tabindex="-1" role="dialog" aria-labelledby="langModalLabel" th:include="/public/lang::lang"></div>
 </div>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.easing.1.3.js}"></script>

@@ -64,31 +64,60 @@
     <div class="footerBar">
             © dameigong.cn 2017 皖ICP备17012709号
     </div>
-    <div class="modal newsModal langModal" id="langModal" tabindex="-1" role="dialog" aria-labelledby="langModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-lang-header">
-                    <a class="close" data-dismiss="modal" aria-label="Close"><i class="iconfont icon-close f-32"></i></a>
-                    <h4 class="modal-lang-title">Please select your country or region</h4>
+</div>
+
+<!--移动端--footer-->
+<div th:fragment="tel_index"  xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="footer-service-xs">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="footer-top-xs">
+                        <i class="iconfont icon-tianwuliyoubaotui"></i>
+                        <span class="footerService">7天无理由退货</span>
+                    </div>
                 </div>
-                <ul class="lang_list clearfix">
-                    <li>
-                        <a href="javascript:void(0);" data-countryhref="#" data-dismiss="modal"><i class="lang-logo lang-logo-cn"></i><span>简体中文</span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-countryhref="#" data-dismiss="modal"><i class="lang-logo lang-logo-hk"></i><span>繁體中文</span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-countryhref="#" data-dismiss="modal"><i class="lang-logo lang-logo-en"></i><span>English</span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-countryhref="#" data-dismiss="modal"><i class="lang-logo lang-logo-ru"></i><span>日语</span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-countryhref="#" data-dismiss="modal"><i class="lang-logo lang-logo-il"></i><span>韩语</span></a>
-                    </li>
-                </ul>
+                <div class="col-xs-6">
+                    <div class="footer-top-xs">
+                        <i class="iconfont icon-tianbaohuan"></i>
+                        <span class="footerService">30天包换</span>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="footer-top-xs">
+                        <i class="iconfont icon-quanguobaoyou"></i>
+                        <span class="footerService">全国包邮</span>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="footer-top-xs">
+                        <i class="iconfont icon-quanguobaoxiu"></i>
+                        <span class="footerService">全国联保</span>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="footerLinks">
+            <ul class="footerList clearfix">
+                <li class="footerListLi-xs"><a class="footer_a clearfix" th:href="@{/news/listNews}">新闻资讯<i class="iconfont icon-right pull-right"></i></a></li>
+                <li class="footerListLi-xs"><a class="footer_a clearfix" th:href="@{/activity}">活动中心<i class="iconfont icon-right pull-right"></i></a></li>
+                <li class="footerListLi-xs"><a class="footer_a clearfix" th:href="@{/product/view}">音特商城<i class="iconfont icon-right pull-right"></i></a></li>
+                <li class="footerListLi-xs"><a class="footer_a clearfix" th:href="@{/about}">关于我们<i class="iconfont icon-right pull-right"></i></a></li>
+                <li class="footerListLi-xs"><a class="footer_a clearfix" th:href="@{/contact}">联系我们<i class="iconfont icon-right pull-right"></i></a></li>
+                <li class="footerListLi-xs"><a class="footer_a clearfix" data-toggle="modal" data-target="#langModal">简体中文<i class="iconfont icon-right pull-right"></i></a></li>
+            </ul>
+        </div>
+        <div class="footerContact-xs clearfix">
+            <div class="footer_xs_l">
+                <strong class="footer-call">400-119-5555</strong>
+                <p class="footer-text">( 24小时全国服务热线 )</p>
+            </div>
+            <div class="footerCodes-xs">
+                <i class="iconfont icon-weibo"></i>
+                <i class="iconfont icon-weixin2"></i>
+                <i class="iconfont icon-qq1"></i>
+            </div>
+        </div>
+        <div class="footerBar-xs">© dameigong.cn 2017 皖ICP备17012709号</div>
     </div>
 </div>

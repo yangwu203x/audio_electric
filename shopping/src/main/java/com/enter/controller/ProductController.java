@@ -29,15 +29,15 @@ public class ProductController {
         model.addAttribute("product", product);
         if(product.getName().contains("E5")){
             model.addAttribute("proDetail","/product/e5/proDetail");
-            model.addAttribute("spec","/images/parameter-e5.jpg");
+            model.addAttribute("spec","/product/e5/spec");
             model.addAttribute("askQ","/product/e5/askQ");
         }else if(product.getName().contains("MP30")){
             model.addAttribute("proDetail","/product/MP30/proDetail");
-            model.addAttribute("spec","/images/parameter-mp30.jpg");
+            model.addAttribute("spec","/product/MP30/spec");
             model.addAttribute("askQ","/product/MP30/askQ");
         }else{
             model.addAttribute("proDetail","/product/no/proDetail");
-            model.addAttribute("spec","/images/noImg.jpg");
+            model.addAttribute("spec","/product/no/spec");
             model.addAttribute("askQ","/product/no/askQ");
         }
         return "/product/page";

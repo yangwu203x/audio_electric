@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
     $('#demo1').banqh({
         box: "#demo1",//总框架
@@ -29,7 +27,7 @@ $(document).ready(function () {
         $(this).prev('.elva').slideToggle(1500);
         $(this).next('.block2-div').toggleClass('display');
     });
-    var color = $("input[name='color']:checked").attr("title");
+    var color = $("#chooseColor .on").attr('title');
     $("#productColor").html(color);
 });
 // 如果轮播图个数大于四，就显示左右切换键，否则将其隐藏
@@ -43,99 +41,139 @@ if(banLiIndex > 4){
 function addCart() {
     var productId  = $('#productId').val();
     var count = $('#inputNum').val();
-    var colorNo = $("input[name='color']:checked").val();
-    var series = $("input[name='series']:checked").val();
-    if(!colorNo){
-        alert("请选择颜色");
-        return
+    var colorNo = $("#chooseColor .on").attr('alt');
+    var series = $("#chooseSeries .on").attr('alt');
+    if(!tip(colorNo,"请选择颜色") || !tip(series,"请选择套餐")){
+        return;
     }
-    if(!series){
-        alert("请选择套餐");
-        return
-    }
-    $.ajax({
-        type:'post',
-        url:'/user/trolley/add',
-        data:{productId:productId,count:count,colorNo:colorNo,series:series},
-        success:function(result){
-            if(result.code == 1)
-                $('#addCartModal').modal();
-            else if(result.code == 2){
-                window.location.href = result.url;
-            }else {
-                alert(result.msg);
-            }
-        },error:function(){}
-    })
+    postForm('/user/trolley/add',
+        {productId:productId,count:count,colorNo:colorNo,series:series},
+        function(result){
+        if(result.code == 1)
+            $('#addCartModal').modal();
+        else if(result.code == 2){
+            window.location.href = result.url;
+        }else {
+            alert(result.msg);
+        }
+    });
 }
 
 // 点击直接购买
 function nowBuy() {
     var productId  = $('#productId').val();
     var count = $('#inputNum').val();
-    var colorNo = $("input[name='color']:checked").val();
-    var series = $("input[name='series']:checked").val();
-    if(!colorNo){
-        alert("请选择颜色");
-        return
+    var colorNo = $("#chooseColor .on").attr('alt');
+    var series = $("#chooseSeries .on").attr('alt');
+    tip(colorNo,"请选择颜色",true);
+    tip(series,"请选择套餐",true);
+    postForm('/user/orders/nowBuy',
+        {productId:productId,count:count,colorNo:colorNo,series:series},
+    function(result){
+        if(result.code == 1)
+            window.location.href=result.url;
+        else if(result.code == 2){
+            window.location.href = result.url;
+        }else {
+            alert(result.msg);
+        }
+    });
+}
+
+
+//  点击哪个选项给他一个‘on’类名，其余同类清除‘on’类名
+$('.chooseColors li').click(function(){
+    var id = $(this).parent().attr('id');
+    var colorName = $(this).attr('title');
+    //改变本标签样式
+    if(!$(this).hasClass('disabledChoose')){
+        $(this).addClass('on').siblings().removeClass('on');
     }
-    if(!series){
-        alert("请选择套餐");
-        return
+    //同步样式
+    if(id.indexOf('-xs')>0){
+        id = id.substring(0,id.length-3);
+    }else{
+        id += '-xs';
     }
-    $.ajax({
-        type:'post',
-        url:'/user/orders/nowBuy',
-        data:{productId:productId,count:count,colorNo:colorNo,series:series},
-        success:function(result){
-            if(result.code == 1)
-                window.location.href=result.url;
-            else if(result.code == 2){
-                window.location.href = result.url;
-            }else {
-                alert(result.msg);
+    var lis = $('#'+id).find("li");
+    for(var i =0;i<lis.length;i++){
+        var li = lis[i];
+        if(colorName == $(li).attr('title')){
+            if(!$(li).hasClass('disabledChoose')){
+                $(li).addClass('on').siblings().removeClass('on');
+                break;
             }
-        },error:function(){}
-    })
+        }
+    }
+    $('#productColor').html(colorName);
+});
+//输入数量改变pc
+$('#inputNum').bind('input propertychange',function(){
+    var inputNum = $('#inputNum').val();
+    if(inputNum.trim() == '' || inputNum < 0){
+        inputNum = 1;
+        $('#inputNum').val(inputNum);
+    }
+    $('#inputNum-xs').val(inputNum);
+    $("#productCount").html(inputNum+"件");
+});
+//输入数量改变mobile
+$('#inputNum-xs').bind('input propertychange',function(){
+    var inputNumxs = $('#inputNum-xs').val();
+    if(inputNumxs.trim() == '' || inputNumxs < 0){
+        inputNumxs = 1;
+        $('#inputNum-xs').val(inputNumxs);
+    }
+    $('#inputNum').val(inputNumxs);
+    $("#productCount").html(inputNumxs+"件");
+});
+
+//  点击，数字加减
+function m_count(t) {
+    var num = $('#inputNum').val();
+    if($(t).find('i').hasClass('icon-jianhao')){
+        num--;
+    }else if($(t).find('i').hasClass('icon-jiahao1')){
+        num++;
+    }
+    if(num < 1){
+        num = 1;
+    }
+    $('#inputNum').val(num);
+    $('#inputNum-xs').val(num);
+    $("#productCount").html(num+"件");
 }
 
-
-
-
-
-
-//  点击减号，数字减一
-function m_subtract(t) {
-    var obj = t.parentNode.getElementsByTagName('input')[0];
-    if (obj.value > 1)
-        obj.value--;
-    $("#productCount").html(obj.value+"件");
-}
-//  点击加号，数字加一
-function m_add(t) {
-    var obj = t.parentNode.getElementsByTagName('input')[0];
-    obj.value++;
-    $("#productCount").html(obj.value+"件");
-}
-
-function changeColor(t){
-    $("#productColor").html($(t).attr("title"));
-}
 
 //当屏幕向下滚时，导航栏固定在顶部
 $(window).scroll(function () {
+    var bodyWidth =document.body.clientWidth;//网页可见区域宽
+    var headerXsHeight = $('.header-page-xs').height();
     var scrollHeight = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
     var scrollNavTop = $('#content')[0].offsetTop;
-    if(scrollHeight >=  scrollNavTop-82){
-        $('.header').removeClass('fixed-top');
-        $('.pageNav').addClass('scrollNavFixed');
-        $('.scrollBuyTo').css('visibility','visible');
-    }else if (scrollHeight >  82 ) {
-        $('.header').addClass('fixed-top');
-        $('.pageNav').removeClass('scrollNavFixed');
-        $('.scrollBuyTo').css('visibility','hidden');
+    if(bodyWidth <= 991){
+        if(scrollHeight >=  scrollNavTop-headerXsHeight){
+            $('.header-page-xs').removeClass('header-page-fixed');
+            $('.pageNav').addClass('scrollNavFixed');
+        }else if (scrollHeight >  0) {
+            $('.header-page-xs').addClass('header-page-fixed');
+            $('.pageNav').removeClass('scrollNavFixed');
+        }else{
+            $('.header-page-xs').removeClass('header-page-fixed');
+            $('.pageNav').removeClass('scrollNavFixed');
+        }
     }else{
-        $('.header').removeClass('fixed-top');
-        $('.pageNav').removeClass('scrollNavFixed');
+        if(scrollHeight >=  scrollNavTop-82){
+            $('.header').removeClass('fixed-top');
+            $('.pageNav').addClass('scrollNavFixed');
+            $('.scrollBuyTo').css('visibility','visible');
+        }else if (scrollHeight >  82 ) {
+            $('.header').addClass('fixed-top');
+            $('.pageNav').removeClass('scrollNavFixed');
+            $('.scrollBuyTo').css('visibility','hidden');
+        }else{
+            $('.header').removeClass('fixed-top');
+            $('.pageNav').removeClass('scrollNavFixed');
+        }
     }
 });

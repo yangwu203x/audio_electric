@@ -14,8 +14,9 @@
     <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/iconfont.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" >
+    <link rel="stylesheet" th:href="@{/css/public/common.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" >-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -26,10 +27,13 @@
 <!--/*@thymesVar id="thumbnail" type="com.enter.entity.Thumbnail"*/-->
 <div class="wrapper">
     <!-- 通用头部-->
-    <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
+    <header>
+        <div class="header navbar-fixed-top hidden-sm hidden-xs" th:include="/public/_header::header"></div>
+        <div class="header-page-xs navbar-fixed-top visible-xs visible-sm" th:include="/public/_header::tel_page"></div>
+    </header>
     <!-- 内容区-->
     <section class="page">
-        <div class="page_navAdd">
+        <div class="page_navAdd hidden-sm hidden-xs">
             <div class="container">
                 <!--位置导航-->
                 <div class="navAdd">
@@ -45,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="page-product">
+        <div class="page-product hidden-sm hidden-xs">
             <div class="row">
                 <div class="col-lg-5">
                     <div class="ban" id="demo1">
@@ -82,37 +86,32 @@
                         <p class="productName" th:text="${product.categoryName+' '+product.name}"></p>
                         <input type="hidden" id="productId" th:value="${product.id}" />
                         <p class="productWords" th:text="${product.content}"></p>
-                        <p class="productMoney_div" ><span class="colorsWords">价格：</span><span class="productMoney" th:text="'¥'+${product.priceSale}"></span></p>
-
+                        <p class="productMoney_div" ><span class="colorsWords">价格：</span>
+                            <span class="productMoney" th:text="'¥'+${product.priceSale}"></span>
+                        </p>
                         <div class="colors">
                             <span class="colorsWords">颜色：</span>
                             <ul class="chooseColors choose clearfix" id="chooseColor">
-                                <li th:each="property,propertyStat:${product.getPropertySet()}">
-                                    <input name="color" onchange="changeColor(this)" type="radio" th:id="'color'+${propertyStat.index+1}" th:value="${property.getColorNo()}" th:title="${property.getColorName()}" th:checked="${property.getNum()>0}" th:disabled="${property.getNum()<1}">
-                                    <label  th:for="'color'+${propertyStat.index+1}">
+                                <li th:class="${property.getNum()<1}?'disabledChoose':(${property.getNum()>1 and stat.index == 0}?'on':'')" th:each="property,stat:${product.getPropertySet()}" th:alt="${property.getColorNo()}" th:title="${property.getColorName()}">
                                         <span th:class="'colorCircle '+${property.getColorNo()}"></span>
-                                        <font th:text="${property.getColorName()}"></font>
-                                    </label>
+                                        <span th:text="${property.getColorName()}"></span>
                                 </li>
                             </ul>
                         </div>
                         <div class="colors">
                             <span class="colorsWords">套餐：</span>
                             <ul class="chooseColors choose clearfix" id="chooseSeries">
-                                <li>
-                                    <input name="series" type=radio" id="series1" value="官方标配" checked>
-                                    <label for="series1">
-                                        官方标配
-                                    </label>
+                                <li class="on" alt="官方套餐">
+                                    <span class="seriesName">官方标配</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="quantity">
-                            <span class="colorsWords">套餐：</span>
+                            <span class="colorsWords">数量：</span>
                             <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" class="btn btn-default" onclick="m_subtract(this)"><i class="iconfont icon-jianhao"></i></button>
-                                <input type="text" class="btn btn-default inputBtn" value="1" id="inputNum" onkeyup="value=(parseInt((value=value.replace(/\D/g,''))==''||parseInt((value=value.replace(/\D/g,''))==0)?'1':value,10))">
-                                <button type="button" class="btn btn-default" onclick="m_add(this)"><i class="iconfont icon-jiahao1"></i></button>
+                                <button type="button" class="btn btn-default" onclick="m_count(this)"><i class="iconfont icon-jianhao"></i></button>
+                                <input type="number" class="btn btn-default inputBtn" value="1" id="inputNum" min="1" required>
+                                <button type="button" class="btn btn-default" onclick="m_count(this)"><i class="iconfont icon-jiahao1"></i></button>
                             </div>
                         </div>
                         <div class="proBuy">
@@ -132,11 +131,76 @@
                                 <span class="footerService">全国联保</span>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+        <!--手机端-->
+        <div class="page-product-xs visible-sm visible-xs">
+            <div id="page-carousel-xs" class="carousel slide carousel-fade pro-banner" data-ride="carousel"  data-interval="5000">
+                <ol class="carousel-indicators">
+                    <li data-target="#page-carousel-xs" data-slide-to="0" class="active"><a class="dot" href="javascript:void(0)"></a></li>
+                    <li data-target="#page-carousel-xs" data-slide-to="1"><a class="dot" href="javascript:void(0)"></a></li>
+                    <li data-target="#page-carousel-xs" data-slide-to="2"><a class="dot" href="javascript:void(0)"></a></li>
+                    <li data-target="#page-carousel-xs" data-slide-to="3"><a class="dot" href="javascript:void(0)"></a></li>
+                    <li data-target="#page-carousel-xs" data-slide-to="4"><a class="dot" href="javascript:void(0)"></a></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <div th:class="${thumbnailStat.index ==0}?'item active':'item'" th:each="thumbnail,thumbnailStat:${product.thumbnailSet}">
+                        <div class="page_slider_xs">
+                            <img th:src="${thumbnail.mobileUrl}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="page-product-cont-xs">
+                <div class="page-xs-div">
+                    <div class="container">
+                        <p class="productName" th:text="${product.categoryName+' '+product.name}"></p>
+                        <p class="productWords" th:text="${product.content}"></p>
+                        <p class="productPrice">价格：<span class="productMoney" th:text="'¥'+${product.priceSale}"></span><!--<a class="pull-right" th:href="@{/discount}"><img class="click-discount" th:src="@{/images-xs/click-discount-xs.png}"></a>--></p>
+                    </div>
+                </div>
+                <div class="page-xs-div">
+                    <div class="container">
+                        <p class="page-xs-div-t">颜色</p>
+                        <ul class="chooseColors choose clearfix" id="chooseColor-xs">
+                            <li th:class="${property.getNum()<1}?'disabledChoose':(${property.getNum()>1 and stat.index == 0}?'on':'')" th:each="property,stat:${product.getPropertySet()}" th:alt="${property.getColorNo()}" th:title="${property.getColorName()}">
+                                <span th:class="'colorCircle '+${property.getColorNo()}"></span>
+                                <span th:text="${property.getColorName()}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-xs-div">
+                    <div class="container">
+                        <p class="page-xs-div-t">套餐</p>
+                        <ul class="chooseColors choose clearfix" id="chooseSeries-xs">
+                            <li class="on">
+                                <span class="seriesName">官方标配</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-xs-div quantity">
+                    <div class="container">
+                        <p class="page-xs-div-t">数量</p>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-default" onclick="m_count(this)"><i class="iconfont icon-jianhao"></i></button>
+                            <input type="number" class="btn btn-default inputBtn" value="1" id="inputNum-xs" min="1" required>
+                            <button type="button" class="btn btn-default" onclick="m_count(this)"><i class="iconfont icon-jiahao1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-xs-buy">
+                    <a class="addTo-xs pull-left" href="javascript:void(0)" id="addToCart-xs" onclick="addCart(this)">加入购物车</a>
+                    <a class="addTo-xs buyTo-xs pull-right" href="javascript:void(0)" id="buyNow-xs" onclick="nowBuy()">立即购买</a>
+                </div>
+            </div>
+        </div>
+
         <div class="page-detail">
             <div class="pageNav" >
                 <div class="container">
@@ -152,7 +216,7 @@
                                 <a class="details" href="#askQ" aria-controls="askQ" role="tab" data-toggle="tab">常见问题</a>
                             </li>
                         </ul>
-                        <div class="pagePro_navRight">
+                        <div class="pagePro_navRight hidden-xs hidden-sm">
                             <div class="pro_sec_div">
                                 <div class="pro_sec_div_img">
                                     <img class="pro_sec_img" th:src="${product.thumbnail4}">
@@ -171,14 +235,8 @@
             <div id="content" class="tab-content">
                 <div id="proDetail" role="tabpanel" class="tab-pane active" th:include="${proDetail}">
                 </div>
-                <div role="tabpanel" class="tab-pane" id="spec" >
-                    <div class="block block1">
-                        <div class="container">
-                            <div class="specification">
-                                <img class="parameter-img" th:src="${spec}">
-                            </div>
-                        </div>
-                    </div>
+                <div role="tabpanel" class="tab-pane" id="spec" th:include="${spec}">
+
                 </div>
                 <div role="tabpanel" class="tab-pane" id="askQ" th:include="${askQ}">
                 </div>
@@ -186,7 +244,8 @@
         </div>
     </section>
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer::footer">
+    <footer id="footer">
+        <div class="hidden-sm hidden-xs" th:include="/public/_footer::footer"></div>
     </footer>
     <!--addCartModal-->
     <div class="modal myInfoModal" tabindex="-1" role="dialog" id="addCartModal">
@@ -218,7 +277,11 @@
 <script type="text/javascript" th:src="@{/js/sdw_hw.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.js}"></script>
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
+<script type="text/javascript" th:src="@{/js/public/ajaxForm.js}"></script>
+<script type="text/javascript" th:src="@{/js/public/alert.js}"></script>
 <script type="text/javascript" th:src="@{/js/product/page.js}"></script>
+<script type="text/javascript" >
 
+</script>
 </body>
 </html>

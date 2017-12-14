@@ -24,6 +24,8 @@ public class Banner {
     private String picUrl2;
     @Column(name = "info")
     private String info;
+    @Column(name = "mobile_url")
+    private String mobileUrl;
     @Column(name = "category")
     private String category;
     @Column(name = "class_name")
@@ -80,6 +82,14 @@ public class Banner {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public String getMobileUrl() {
+        return mobileUrl;
+    }
+
+    public void setMobileUrl(String mobileUrl) {
+        this.mobileUrl = mobileUrl;
     }
 
     @Override

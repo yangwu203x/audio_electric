@@ -23,8 +23,10 @@
     <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/iconfont.css}">
-    <link rel="stylesheet" th:href="@{/css/main.css}">
-    <link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/css/public/common.css}">
+    <!--<link rel="stylesheet" th:href="@{/css/main.css}">-->
+    <link rel="stylesheet" th:href="@{/css/about/about.css}">
+    <!--<link rel="stylesheet" th:href="@{/css/app.css}" type="text/css">-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -33,34 +35,33 @@
 <body>
 <div class="wrapper">
     <!-- 通用头部-->
-    <header class="header navbar-fixed-top" th:include="/public/_header::header"></header>
+    <header>
+        <div class="header navbar-fixed-top hidden-sm hidden-xs" th:include="/public/_header::header"></div>
+        <div class="header-xs visible-xs visible-sm" th:include="/public/_header::tel_index"></div>
+    </header>
     <!-- 内容区-->
     <div class="content">
-        <div class="container">
-            <!--&lt;!&ndash;位置导航&ndash;&gt;-->
-            <!--<div class="navAdd">-->
-                <!--<div class="navAdd-block">-->
-                    <!--<a class="navAdd-a" th:href="@{/}">首页</a>-->
-                    <!--<span class="navAdd-dot"></span>-->
-                    <!--<a class="navAdd-a active" href="#">关于我们</a>-->
-                <!--</div>-->
-            <!--</div>-->
-        </div>
         <div id="about">
             <!--关于我们-->
             <div class="aboutUS">
-                <img class="aboutUsBg" th:src="@{/images/about1.jpg}" alt="aboutUs">
+                <img class="aboutUsBg hidden-xs hidden-sm" th:src="@{/images/about1.jpg}" alt="aboutUs">
+                <img class="aboutUsBg visible-sm visible-xs" th:src="@{/images-xs/about1-xs.jpg}" alt="aboutUs">
                 <div class="aboutUs_words">
                     <div class="container">
                         <div class="aboutUs-left">
-                            <p class="aboutUs_t">关于我们</p>
+                            <p class="aboutUs_t aboutUs_t1">关于我们</p>
                             <div class="aboutUs_text">
-                                <p class="aboutUs_p">音特电子科技有限公司是一家专门从事娱乐行业IT产品的首要开发商和制造商。</p>
-                                <p class="aboutUs_p">我们为客户的生活提供了极大的便利，给他们带来了极大的乐趣。</p>
-                                <p class="aboutUs_p">音特电子成立后，公司很快成为便携式卡拉OK娱乐系统最大和最受尊敬的开发商之一。</p>
-                                <p class="aboutUs_p">通过专注于提供愉快的娱乐体验，我司自1994年成立以来一直保持着无与伦比的质量声誉。</p>
-                                <p class="aboutUs_p">我们的忠诚客户和合作伙伴帮助音特为30多个国家服务，并继续以更快的速度增长。</p>
-                                <p class="aboutUs_p">我们致力于为您的朋友和家人提供最好的娱乐产品。</p>
+                                <div class="hidden-xs hidden-sm">
+                                    <p class="aboutUs_p">音特电子科技有限公司是一家专门从事娱乐行业IT产品的首要开发商和制造商。</p>
+                                    <p class="aboutUs_p">我们为客户的生活提供了极大的便利，给他们带来了极大的乐趣。</p>
+                                    <p class="aboutUs_p">音特电子成立后，公司很快成为便携式卡拉OK娱乐系统最大和最受尊敬的开发商之一。</p>
+                                    <p class="aboutUs_p">通过专注于提供愉快的娱乐体验，我司自1994年成立以来一直保持着无与伦比的质量声誉。</p>
+                                    <p class="aboutUs_p">我们的忠诚客户和合作伙伴帮助音特为30多个国家服务，并继续以更快的速度增长。</p>
+                                    <p class="aboutUs_p">我们致力于为您的朋友和家人提供最好的娱乐产品。</p>
+                                </div>
+                                <div class="visible-sm visible-xs">
+                                    <p class="aboutUs_p">音特电子科技有限公司是一家专门从事娱乐行业IT产品的首要开发商和制造商。我们为客户的生活提供了极大的便利，给他们带来了极大的乐趣。音特电子成立后，公司很快成为便携式卡拉OK娱乐系统最大和最受尊敬的开发商之一。通过专注于提供愉快的娱乐体验，我司自1994年成立以来一直保持着无与伦比的质量声誉。我们的忠诚客户和合作伙伴帮助音特为30多个国家服务，并继续以更快的速度增长。我们致力于为您的朋友和家人提供最好的娱乐产品。</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
                 </div>
             </div>
             <!--历史进程-->
-            <div class="history_section">
+            <div class="history_section hidden-xs hidden-sm">
                 <img class="timeImg" th:src="@{/images/time.png}">
                 <div class="container">
                     <div class="about_history">
@@ -481,6 +482,256 @@
                     </div>
                 </div>
             </div>
+            <!--移动端-->
+            <div class="history_section_xs visible-sm visible-xs">
+                <img class="timeImg" th:src="@{/images/time.png}">
+                <div class="about_history">
+                    <div class="about_time">
+                        <div id="timeline-xs">
+                            <ul id="dates-xs">
+                                <li>
+                                    <a href="#1994">
+                                        <p class="historyYear">1994</p>
+                                        <p class="historyEvents">音特电子科技有限公司成立</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#11995">
+                                        <p class="historyYear">1995</p>
+                                        <p class="historyEvents">建立了第一个工厂</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#11997">
+                                        <p class="historyYear">1997</p>
+                                        <p class="historyEvents">完成开发ET1000半导体</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#11999">
+                                        <p class="historyYear">1999</p>
+                                        <p class="historyEvents">被更名为“音特电子科技有限公司”</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12000">
+                                        <p class="historyYear">2000</p>
+                                        <p class="historyEvents">在韩国注册为风险投资公司</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12001">
+                                        <p class="historyYear">2001</p>
+                                        <p class="historyEvents">在美国获得便携式卡拉OK设备专利</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12002">
+                                        <p class="historyYear">2002</p>
+                                        <p class="historyEvents">MagicSing产品通过了美国FCC</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12003">
+                                        <p class="historyYear">2003</p>
+                                        <p class="historyEvents">由韩国证券交易商协会在KOSDAQ注册</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12005">
+                                        <p class="historyYear">2005</p>
+                                        <p class="historyEvents">成功开发ICS5100半导体</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12006">
+                                        <p class="historyYear">2006</p>
+                                        <p class="historyEvents">成功开发GMX1000半导体</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12007">
+                                        <p class="historyYear">2007</p>
+                                        <p class="historyEvents">开始使用Retaw1-05</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12008">
+                                        <p class="historyYear">2008</p>
+                                        <p class="historyEvents">成功研制出CT-500半导体</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12009">
+                                        <p class="historyYear">2009</p>
+                                        <p class="historyEvents">完成开发RT100半导体</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12011">
+                                        <p class="historyYear">2011</p>
+                                        <p class="historyEvents">完成了100％无线麦克风的开发</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12011">
+                                        <p class="historyYear">2012</p>
+                                        <p class="historyEvents">Assa和Enter-Tech完成合并</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#12013">
+                                        <p class="historyYear">2013</p>
+                                        <p class="historyEvents">商业级系统AK系列开发完成</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="time_circle">
+                                <img class="time_circle_img" th:src="@{/images-xs/time_circle_xs.png}">
+                            </div>
+                            <ul id="issues-xs">
+                                <li class="issues_li" id="11994">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">05</span><span class="history_text">音特电子科技有限公司成立，并开展麦克风 - 卡拉OK业务。</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="11995">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">08</span><span class="history_text">建立了第一个工厂。</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="11997">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">08</span><span class="history_text">完成开发应用于早期ET系列（ET1000，ET3000等）的ET1000半导体。</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="11999">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">09</span><span class="history_text">被更名为“音特电子科技有限公司”</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12000">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">07</span><span class="history_text">在韩国注册为风险投资公司。</span></li>
+                                            <li class="events_li"><span class="events_time">12</span><span class="history_text">在韩国获得便携式音乐演奏设备专利（2000年12月14日/第284049号）</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12001">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">08</span><span class="history_text">在美国获得便携式卡拉OK设备专利（2001年8月21日/第6,278,048号）</span></li>
+                                            <li class="events_li"><span class="events_time">11</span><span class="history_text">MagicSing产品通过了欧洲CE认证（2001年11月19日/ VAEE 27961 EMV）</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12002">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">04</span><span class="history_text">MagicSing产品通过了美国FCC（PBNHARMONY）</span></li>
+                                            <li class="events_li"><span class="events_time">04</span><span class="history_text">在韩国获得便携式卡拉OK设备专利（2002年4月30日/第336465号）</span></li>
+                                            <li class="events_li"><span class="events_time">06</span><span class="history_text">获得ISO 9001认证（2001年6月1日/ UNK 20491）</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12003">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">03</span><span class="history_text">获得ISO 14001认证（2003年3月28日/ UNK30203）</span></li>
+                                            <li class="events_li"><span class="events_time">03</span><span class="history_text">通过互联网获得“新歌加法”专利（2003年3月6日，第376622号）</span></li>
+                                            <li class="events_li"><span class="events_time">04</span><span class="history_text">韩国证券业协会通过了KOSDAQ的初步审查</span></li>
+                                            <li class="events_li"><span class="events_time">07</span><span class="history_text">由韩国证券交易商协会在KOSDAQ注册</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12005">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">04</span><span class="history_text">与韩国三星电子，LG电子，MagnaChip半导体，核心逻辑和Gencore技术一起参加韩国科学技术院（KAIST）SoCium研究中心的合作开发项目。</span></li>
+                                            <li class="events_li"><span class="events_time">04</span><span class="history_text">与NEMA（韩国国家应急管理局）签订合同，开发现场安全管理和控制系统。</span></li>
+                                            <li class="events_li"><span class="events_time">08</span><span class="history_text">在伊朗获得便携式视频卡拉OK系统专利（2005年8月9日/第32291号）</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12006">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">10</span><span class="history_text">在中国获得便携式卡拉OK设备专利（2006年10月18日，中国香港1040805号ZL 00134270.3）</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12007">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">09</span><span class="history_text">赢得了专利便携式视频卡拉OK系统在印度（9.21）合作项目资助</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12008">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">01</span><span class="history_text">获得“数字音频播放器及其播放方法”专利（2008年3月11日，第7342522号）</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12009">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">10</span><span class="history_text">国际注册专利（161件）：专利（12件），外观设计专利（121件），商标（28件）；国际执照申请（54件）：专利（25件），外观设计专利（22件） （7例）</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12011">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">03</span><span class="history_text">完成23KH＆HDK2000高清卡拉OK系统的开发</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12012">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">08</span><span class="history_text">经所有董事会成员批准，Assa和Enter-Tech完成合并</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="issues_li" id="12013">
+                                    <div class="events">
+                                        <img class="historyImg" th:src="@{/images-xs/history1_xs.png}">
+                                        <ul class="eventList">
+                                            <li class="events_li"><span class="events_time">01</span><span class="history_text">商业级系统AK系列开发完成</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--产品优势-->
             <div class="about_advantage">
                 <div class="container">
@@ -494,26 +745,31 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="about_adv_block">
-                                <img class="advIcon" th:src="@{/images/advIcon1.png}">
+                                <img class="advIcon hidden-xs hidden-sm" th:src="@{/images/advIcon1.png}">
                                 <p class="about_adv_title">专利芯片</p>
                                 <div class="about_adv_text">
                                     <p class="about_adv_p">音特电子的硬件研发团队，经过多年的努力研发改进，研发出<br>
                                         独立的音源芯片，并且成功申请专利，完美兼容音特产品<br>
                                         高音质得到充分的保障。</p>
                                 </div>
-                                <img class="advImg" th:src="@{/images/advImg1.jpg}">
+                                <img class="advImg hidden-sm hidden-xs" th:src="@{/images/advImg1.jpg}">
+                                <img class="advImg visible-sm visible-xs" th:src="@{/images-xs/advImg1-xs.jpg}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="about_adv_block">
-                                <img class="advIcon" th:src="@{/images/advIcon2.png}">
+                                <img class="advIcon hidden-xs hidden-sm" th:src="@{/images/advIcon2.png}">
+                                <div class="advIcon-xs visible-sm visible-xs">
+                                    <img class="advIcon" th:src="@{/images-xs/advIcon2-xs.png}">
+                                </div>
                                 <p class="about_adv_title">卓越设计</p>
                                 <div class="about_adv_text">
                                     <p class="about_adv_p">音特电子的所有的产品为了保证最好的用户体验以及最舒服的<br>
                                         最适合的手感，设计师都是由韩国最好的设计师权先生设计<br>
                                         保证到用户手机的产品都是最美的以及最舒适的</p>
                                 </div>
-                                <img class="advImg" th:src="@{/images/advImg2.jpg}">
+                                <img class="advImg hidden-sm hidden-xs" th:src="@{/images/advImg2.jpg}">
+                                <img class="advImg visible-sm visible-xs" th:src="@{/images-xs/advImg2-xs.jpg}">
                             </div>
                         </div>
                     </div>
@@ -527,36 +783,51 @@
                         <ul class="clearfix">
                             <li class="scaleList">
                                 <p class="about_scale_t">总部</p>
-                                <div class="aboutIcons">
+                                <div class="aboutIcons hidden-sm hidden-xs">
                                     <img class="companyIcon" th:src="@{/images/companyIcon1.jpg}">
+                                </div>
+                                <div class="aboutIcons-xs visible-sm visible-xs">
+                                    <img class="companyIcon" th:src="@{/images-xs/companyIcon1-xs.png}">
                                 </div>
                                 <p class="about_scale_add">中国</p>
                             </li>
                             <li class="scaleList">
                                 <p class="about_scale_t">分部</p>
-                                <div class="aboutIcons">
+                                <div class="aboutIcons hidden-sm hidden-xs">
                                     <img class="companyIcon" th:src="@{/images/companyIcon2.jpg}">
+                                </div>
+                                <div class="aboutIcons-xs visible-sm visible-xs">
+                                    <img class="companyIcon" th:src="@{/images-xs/companyIcon2-xs.png}">
                                 </div>
                                 <p class="about_scale_add">韩国</p>
                             </li>
                             <li class="scaleList">
                                 <p class="about_scale_t">分部</p>
-                                <div class="aboutIcons">
+                                <div class="aboutIcons hidden-sm hidden-xs">
                                     <img class="companyIcon" th:src="@{/images/companyIcon3.jpg}">
+                                </div>
+                                <div class="aboutIcons-xs visible-sm visible-xs">
+                                    <img class="companyIcon" th:src="@{/images-xs/companyIcon3-xs.png}">
                                 </div>
                                 <p class="about_scale_add">美国</p>
                             </li>
                             <li class="scaleList">
                                 <p class="about_scale_t">分部</p>
-                                <div class="aboutIcons">
+                                <div class="aboutIcons hidden-sm hidden-xs">
                                     <img class="companyIcon" th:src="@{/images/companyIcon4.jpg}">
+                                </div>
+                                <div class="aboutIcons-xs visible-sm visible-xs">
+                                    <img class="companyIcon" th:src="@{/images-xs/companyIcon4-xs.png}">
                                 </div>
                                 <p class="about_scale_add">日本</p>
                             </li>
                             <li class="scaleList">
                                 <p class="about_scale_t">分部</p>
-                                <div class="aboutIcons">
+                                <div class="aboutIcons hidden-sm hidden-xs">
                                     <img class="companyIcon" th:src="@{/images/companyIcon5.jpg}">
+                                </div>
+                                <div class="aboutIcons-xs visible-sm visible-xs">
+                                    <img class="companyIcon" th:src="@{/images-xs/companyIcon5-xs.png}">
                                 </div>
                                 <p class="about_scale_add">菲律宾</p>
                             </li>
@@ -569,7 +840,8 @@
                                     <p class="companyNum">500<span class="ge">个</span></p>
                                     <p class="companyText">覆盖全球城市</p>
                                 </div>
-                                <img class="advImg" th:src="@{/images/netImg1.jpg}">
+                                <img class="advImg hidden-xs hidden-sm" th:src="@{/images/netImg1.jpg}">
+                                <img class="advImg visible-sm visible-xs" th:src="@{/images-xs/netImg1-xs.png}">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -578,7 +850,8 @@
                                     <p class="companyNum">100,000<span class="ge">个</span></p>
                                     <p class="companyText">线下销售和售后网点</p>
                                 </div>
-                                <img class="advImg" th:src="@{/images/netImg2.jpg}">
+                                <img class="advImg hidden-xs hidden-sm" th:src="@{/images/netImg2.jpg}">
+                                <img class="advImg visible-sm visible-xs" th:src="@{/images-xs/netImg2-xs.png}">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -587,7 +860,8 @@
                                     <p class="companyNum">60,000<span class="ge">个</span></p>
                                     <p class="companyText">全球专属品牌销售人员</p>
                                 </div>
-                                <img class="advImg" th:src="@{/images/netImg3.jpg}">
+                                <img class="advImg hidden-xs hidden-sm" th:src="@{/images/netImg3.jpg}">
+                                <img class="advImg visible-sm visible-xs" th:src="@{/images-xs/netImg3-xs.png}">
                             </div>
                         </div>
                     </div>
@@ -595,134 +869,171 @@
             </div>
             <!--世界分布-->
             <div class="about_fb">
-                <div class="container">
-                    <div class="about_fb_cont">
+                <!--pc-->
+                <div class="hidden-sm hidden-xs">
+                    <div class="container">
+                        <div class="about_fb_cont">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="about_fb_block">
+                                        <img class="fbIcon" th:src="@{/images/fbIcon1.png}">
+                                        <p class="about_fb_t">全球5个国家</p>
+                                        <p class="about_fb_p">发布品牌</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="about_fb_block">
+                                        <img class="fbIcon" th:src="@{/images/fbIcon2.png}">
+                                        <p class="about_fb_t">全球5个国家</p>
+                                        <p class="about_fb_p">建设生产基地</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="about_fb_block">
+                                        <img class="fbIcon" th:src="@{/images/fbIcon3.png}">
+                                        <p class="about_fb_t">全球3大城市</p>
+                                        <p class="about_fb_p">建设研发中心</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="about_fb_map">
+                                <img class="about_map" th:src="@{/images/about_map.png}">
+                                <div class="map_adds1">
+                                    <div class="map_add_bg">联系人：李先生，电话：188 2232  1125</div>
+                                    <div class="map_add1">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">韩国</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds2">
+                                    <div class="map_add_bg">联系人：王先生，电话：188 2232  1125</div>
+                                    <div class="map_add2">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">惠州</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds3">
+                                    <div class="map_add_bg">联系人：陈先生，电话：188 2232  1125</div>
+                                    <div class="map_add3">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">越南</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds4">
+                                    <div class="map_add_bg">联系人：朱先生，电话：188 2232  1125</div>
+                                    <div class="map_add4">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">菲律宾</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds5">
+                                    <div class="map_add_bg">联系人：许先生，电话：188 2232  1125</div>
+                                    <div class="map_add5">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">美国</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds6">
+                                    <div class="map_add_bg">联系人：刘先生，电话：188 2232  1125</div>
+                                    <div class="map_add6">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">加拿大</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds7">
+                                    <div class="map_add_bg">联系人：胡先生，电话：188 2232  1125</div>
+                                    <div class="map_add7">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">墨西哥</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds8">
+                                    <div class="map_add_bg">联系人：秦先生，电话：188 2232  1125</div>
+                                    <div class="map_add8">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">澳大利亚</span>
+                                    </div>
+                                </div>
+                                <div class="map_adds9">
+                                    <div class="map_add_bg">联系人：武先生，电话：188 2232  1125</div>
+                                    <div class="map_add9">
+                                        <div class="circleDot"></div>
+                                        <div class="map_dot"></div>
+                                        <div class="map_dot1"></div>
+                                        <div class="map_dot2"></div>
+                                        <span class="about_map_add">英国</span>
+                                    </div>
+                                </div>
+                                <div class="about_fb_logo">
+                                    <img th:src="@{/images/about_logo.png}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--移动端-->
+                <div class="about_map_xs visible-sm visible-xs">
+                    <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <div class="about_fb_block">
-                                    <img class="fbIcon" th:src="@{/images/fbIcon1.png}">
+                                    <img class="fbIcon" th:src="@{/images-xs/fbIcon1-xs.png}">
                                     <p class="about_fb_t">全球5个国家</p>
                                     <p class="about_fb_p">发布品牌</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <div class="about_fb_block">
-                                    <img class="fbIcon" th:src="@{/images/fbIcon2.png}">
+                                    <img class="fbIcon" th:src="@{/images-xs/fbIcon2-xs.png}">
                                     <p class="about_fb_t">全球5个国家</p>
                                     <p class="about_fb_p">建设生产基地</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-xs-4">
                                 <div class="about_fb_block">
-                                    <img class="fbIcon" th:src="@{/images/fbIcon3.png}">
+                                    <img class="fbIcon" th:src="@{/images-xs/fbIcon3-xs.png}">
                                     <p class="about_fb_t">全球3大城市</p>
                                     <p class="about_fb_p">建设研发中心</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="about_fb_map">
-                            <img class="about_map" th:src="@{/images/about_map.png}">
-                            <div class="map_adds1">
-                                <div class="map_add_bg">联系人：李先生，电话：188 2232  1125</div>
-                                <div class="map_add1">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">韩国</span>
-                                </div>
-                            </div>
-                            <div class="map_adds2">
-                                <div class="map_add_bg">联系人：王先生，电话：188 2232  1125</div>
-                                <div class="map_add2">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">惠州</span>
-                                </div>
-                            </div>
-                            <div class="map_adds3">
-                                <div class="map_add_bg">联系人：陈先生，电话：188 2232  1125</div>
-                                <div class="map_add3">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">越南</span>
-                                </div>
-                            </div>
-                            <div class="map_adds4">
-                                <div class="map_add_bg">联系人：朱先生，电话：188 2232  1125</div>
-                                <div class="map_add4">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">菲律宾</span>
-                                </div>
-                            </div>
-                            <div class="map_adds5">
-                                <div class="map_add_bg">联系人：许先生，电话：188 2232  1125</div>
-                                <div class="map_add5">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">美国</span>
-                                </div>
-                            </div>
-                            <div class="map_adds6">
-                                <div class="map_add_bg">联系人：刘先生，电话：188 2232  1125</div>
-                                <div class="map_add6">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">加拿大</span>
-                                </div>
-                            </div>
-                            <div class="map_adds7">
-                                <div class="map_add_bg">联系人：胡先生，电话：188 2232  1125</div>
-                                <div class="map_add7">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">墨西哥</span>
-                                </div>
-                            </div>
-                            <div class="map_adds8">
-                                <div class="map_add_bg">联系人：秦先生，电话：188 2232  1125</div>
-                                <div class="map_add8">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">澳大利亚</span>
-                                </div>
-                            </div>
-                            <div class="map_adds9">
-                                <div class="map_add_bg">联系人：武先生，电话：188 2232  1125</div>
-                                <div class="map_add9">
-                                    <div class="circleDot"></div>
-                                    <div class="map_dot"></div>
-                                    <div class="map_dot1"></div>
-                                    <div class="map_dot2"></div>
-                                    <span class="about_map_add">英国</span>
-                                </div>
-                            </div>
-                            <div class="about_fb_logo">
-                                <img th:src="@{/images/about_logo.png}">
-                            </div>
-                        </div>
                     </div>
+                    <img class="about_map" th:src="@{/images-xs/about_map_xs.png}">
                 </div>
             </div>
         </div>
     </div>
     <!-- footer-->
-    <footer id="footer" th:include="/public/_footer::footer"></footer>
+    <footer id="footer">
+        <div class="hidden-sm hidden-xs" th:include="/public/_footer::footer"></div>
+        <div class="footer-xs visible-xs visible-sm" th:include="/public/_footer::tel_index"></div>
+    </footer>
+    <!--语言-->
+    <div class="modal newsModal langModal" id="langModal" tabindex="-1" role="dialog" aria-labelledby="langModalLabel" th:include="/public/lang::lang"></div>
 </div>
 
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
@@ -734,7 +1045,49 @@
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <script type="text/javascript">
     $(function () {
-        $("#timeline").timelinr();
+        var bodyWidth =document.body.clientWidth;//网页可见区域宽
+        if(bodyWidth <= 991){
+            $('#timeline-xs').timelinr({
+                orientation: 'horizontal',
+                containerDiv: '#timeline-xs',
+                datesDiv: '#dates-xs',
+                datesSelectedClass: 'selected',
+                datesSpeed: 'normal',
+                issuesDiv : '#issues-xs',
+                issuesSelectedClass: 'selected',
+                issuesSpeed: 'fast',
+                issuesTransparency: 0.2,
+                issuesTransparencySpeed: 500,
+                arrowKeys: 'false',
+                startAt: 9,
+                autoPlay: 'true',
+                autoPlayDirection: 'forward',
+                autoPlayPause: 2000
+            });
+
+        }else{
+            $("#timeline").timelinr({
+                orientation: 'horizontal',
+                containerDiv: '#timeline',
+                datesDiv: '#dates',
+                datesSelectedClass: 'selected',
+                datesSpeed: 'normal',
+                issuesDiv : '#issues',
+                issuesSelectedClass: 'selected',
+                issuesSpeed: 'fast',
+                issuesTransparency: 0.2,
+                issuesTransparencySpeed: 500,
+                prevButton: '#prev',
+                nextButton: '#next',
+                arrowKeys: 'false',
+                startAt: 9,
+                autoPlay: 'false',
+                autoPlayDirection: 'forward',
+                autoPlayPause: 2000
+            });
+
+        }
+
     })
 
 </script>

@@ -27,7 +27,7 @@ import java.util.List;
  * @Author leo_Yang【音特】
  * @Date 2017/10/23 0023 9:33
  */
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @Component
 public class TrolleyServiceImpl implements ITrolleyService {
     @Autowired

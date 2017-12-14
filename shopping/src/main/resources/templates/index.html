@@ -23,8 +23,10 @@
     <LINK rel="Shortcut Icon" href="/favicon.ico" />
     <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/public/common.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/lang/lang.css}" >
 
     <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
 
@@ -37,16 +39,18 @@
     <![endif]-->
 </head>
 <body>
-<div class="wrapper">
     <!-- 通用头部-->
-    <header class="header navbar-fixed-top" th:include="/public/_header::header">
+    <header>
+        <div class="header navbar-fixed-top hidden-sm hidden-xs" th:include="/public/_header::header"></div>
+        <div class="header-xs visible-xs visible-sm" th:include="/public/_header::tel_index"></div>
     </header>
+
 
     <!--banner-->
     <section class="index-banner">
         <div id="carousel-index" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
-            <ol class="carousel-indicators">
+            <ol class="carousel-indicators hidden-xs hidden-sm">
                 <li data-target="#carousel-index" data-slide-to="0" class="active"><a class="dot" href="javascript:void(0)"></a></li>
                 <li data-target="#carousel-index" data-slide-to="1"><a class="dot" href="javascript:void(0)"></a></li>
                 <li data-target="#carousel-index" data-slide-to="2"><a class="dot" href="javascript:void(0)"></a></li>
@@ -56,27 +60,31 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div th:class="${itemStat.index == 0}?'item active':'item'" th:each="banner,itemStat:${banners}">
-                    <div class="banner_slider">
+                    <div class="banner_slider hidden-xs hidden-sm">
                         <img th:src="${banner.picUrl}" alt="">
                         <a class="banner_link" th:href="${banner.url}"><img th:src="${banner.picUrl2}"></a>
+                    </div>
+                    <div class="banner_slider visible-xs visible-sm">
+                        <img class="bannerImg" th:src="${banner.mobileUrl}" alt="banner1-xs">
                     </div>
                 </div>
             </div>
             <!-- Controls -->
-            <a class="arrows arrow-left" href="#carousel-index" role="button" data-slide="prev">
-                <span class="iconfont icon-zuofanhui" aria-hidden="true"></span>
+            <a class="arrows arrow-left hidden-sm hidden-xs" href="#carousel-index" role="button" data-slide="prev">
+                <span class="iconfont icon-jiantou1-copy-copy-copy" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="arrows arrow-right" href="#carousel-index" role="button" data-slide="next">
-                <span class="iconfont icon-right-arrow" aria-hidden="true"></span>
+            <a class="arrows arrow-right hidden-sm hidden-xs" href="#carousel-index" role="button" data-slide="next">
+                <span class="iconfont icon-jiantou1-copy-copy-copy1" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
     </section>
     <!-- 内容区-->
     <section class="content_index">
+        <!--pc端-->
         <!--APP应用-->
-        <div class="apps">
+        <div class="apps hidden-sm hidden-xs">
             <div class="sings">
                 <!--APP应用-->
                 <div class="app">
@@ -190,18 +198,71 @@
             </div>
 
         </div>
-
+        <!--手机端-->
+        <div class="sings-xs visible-xs visible-sm">
+            <div class="app-xs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <a class="app_a" th:href="@{/songs}">
+                                <div class="app_div_xs">
+                                    <img class="app_div_bg" th:src="@{/images-xs/yd_xs.png}">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a class="app_a" th:href="@{/media}">
+                                <div class="app_div_xs">
+                                    <img class="app_div_bg" th:src="@{/images-xs/lmt_xs.png}">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a class="app_a" th:href="@{/music}">
+                                <div class="app_div_xs">
+                                    <img class="app_div_bg" th:src="@{/images-xs/yp_xs.png}">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img class="sing_t_xs" th:src="@{/images-xs/sing-xs.png}">
+            <div class="sing_text_xs">
+                <div class="sing_p_xs">人人唱歌库均为独家精心编曲制作，<br>拥有各国海量高品质音乐伴奏！</div>
+            </div>
+            <div class="sing_slider_xs">
+                <img class="app_div_bg" th:src="@{/images-xs/sing_slider_xs.png}">
+            </div>
+        </div>
         <!--商城-家庭娱乐-->
         <div class="index-shop">
-            <div class="singBao">
+            <div class="singBao hidden-sm hidden-xs">
                 <img class="makfong" th:src="@{/images/feng.png}" alt="maikefeng">
-                <a class="singBao_a" href="http://localhost:8080/product/view/id/14">使用K歌宝唱歌<i class="iconfont icon-right"></i></a>
+                <a class="singBao_a" th:href="@{/product/view/id/14}">使用K歌宝唱歌<i class="iconfont icon-right"></i></a>
+            </div>
+            <div class="singBao_xs visible-xs visible-sm">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="singBao">
+                                <img class="makfong" th:src="@{/images-xs/songsBao_xs.png}" alt="maikefeng">
+                                <a class="singBao_a" th:href="@{/product/view/id/14}">使用K歌宝唱歌<i class="iconfont icon-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="singBao">
+                                <a class="singBao_a" href="http://118.190.204.56/app/download/rrc/EveryoneSingChn1.apk">安装人人唱APP<i class="iconfont icon-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="container">
-                <h2 class="pro_kinds">音特商城</h2>
-                <p class="pro_kinds_words">音特专利技术，造就品质生活娱乐</p>
+                <h2 class="pro_kinds">我们的产品</h2>
                 <div class="row">
-                    <div class="col-md-12 col-lg-6" >
+                    <div class="col-md-12 col-lg-6 col-xs-12">
                         <div class="productDiv mp30">
                             <!--/*@thymesVar id="flyProduct" type="com.enter.entity.Product"*/-->
                             <a th:href="'/product/view/id/' + ${flyProduct.id}">
@@ -221,7 +282,7 @@
                     </div>
                     <!--/*@thymesVar id="ktvProduct" type="java.util.ArrayList"*/-->
 
-                    <div class="col-md-6 col-lg-3" th:each="product:${ktvProduct}">
+                    <div class="col-md-6 col-lg-3 col-xs-12" th:each="product:${ktvProduct}">
                         <!--/*@thymesVar id="product" type="com.enter.entity.Product"*/-->
                         <div class="productDiv">
                             <a th:href="'/product/view/id/' + ${product.id}">
@@ -240,7 +301,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="indexPro_more">
+                <div class="indexPro_more hidden-xs hidden-sm">
                     <a class="singBao_a" th:href="@{/product/view}">查看更多<i class="iconfont icon-right"></i></a>
                 </div>
             </div>
@@ -249,7 +310,7 @@
         <div class="miniKtv">
             <div id="content">
                 <div id="sdw-wrap">
-                    <div class="block sdw-container">
+                    <div class="block sdw-container hidden-sm hidden-xs">
                         <div class="sdw-animate" data-speed="3000" data-delay="0" data-occur="1">
                             <img class="miniKtvBg" th:src="@{/images/miniKtv.jpg}" alt="miniKtv">
                         </div>
@@ -270,14 +331,35 @@
                             </div>
                         </div>
                     </div>
+                    <!--移动端-->
+                    <div class="block sdw-container visible-xs visible-sm">
+                        <div class="sdw-animate" data-speed="3000" data-delay="0" data-occur="1">
+                            <img class="miniKtvBg" th:src="@{/images-xs/miniKtv_xs.png}" alt="miniKtv">
+                        </div>
+                        <div class="block-words-center">
+                            <p class="sdw-animate miniKtv_t" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500" data-delay="0s" data-occur="1">音特迷你KTV唱歌房</p>
+                            <p class="sdw-animate miniKtv_p1" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500" data-delay="0.2s" data-occur="1">我和音乐有个约会，想唱就唱，一台会唱歌的房子</p>
+                            <p class="sdw-animate miniKtv_p2" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500" data-delay="0.4s" data-occur="1">迷你KTV房唱歌机，是一款全新的自主空间娱乐吧，以耳机体验为主集唱歌、练歌、录歌为一体，通过微信分享的物联网设备，满足消费者享受音乐和社交分享的需求！</p>
+                            <img class="sdw-animate miniktv_gn" th:src="@{/images-xs/gn-xs.png}" data-start="{&quot;transform&quot;:&quot;translate3d(0,50px,0)&quot;}" data-end="{&quot;transform&quot;:&quot;translate3d(0,0px,0)&quot;}" data-speed="1500" data-delay="0.6s" data-occur="1">
+                            <p class="miniKtv_btn sdw-animate" data-start="{&quot;opacity&quot;:&quot;0&quot;}" data-end="{&quot;opacity&quot;:&quot;1&quot;}" data-speed="1500" data-delay="0.8s" data-occur="1" >
+                                <a class="btn-sing-xs" href="https://shouji.baidu.com/software/22599722.html"><img th:src="@{/images-xs/miniktv_btn_xs2.png}"></a>
+                            </p>
+                            <p class="miniKtv_btn sdw-animate" data-start="{&quot;opacity&quot;:&quot;0&quot;}" data-end="{&quot;opacity&quot;:&quot;1&quot;}" data-speed="1500" data-delay="1s" data-occur="1"  >
+                                <a class="btn-sing-xs" onclick="loadMap()"><img th:src="@{/images-xs/miniktv_btn_xs1.png}"></a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- footer-->
-    <footer id="footer" th:include="/public/_footer::footer">
-    </footer>
-</div>
+<!-- footer-->
+<footer id="footer">
+    <div class="hidden-sm hidden-xs" th:include="/public/_footer::footer"></div>
+    <div class="footer-xs visible-xs visible-sm" th:include="/public/_footer::tel_index"></div>
+</footer>
+<!--语言-->
+<div class="modal newsModal langModal" id="langModal" tabindex="-1" role="dialog" aria-labelledby="langModalLabel" th:include="/public/lang::lang"></div>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-2.1.3.min.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery.easing.1.3.js}"></script>
 <script type="text/javascript" th:src="@{/plugins/jquery/js/jquery-migrate-1.4.1.min.js}"></script>
@@ -289,17 +371,18 @@
 <script type="text/javascript" th:src="@{/js/app.js}"></script>
 <script type="text/javascript" th:src="@{/js/index/index.js}"></script>
 <script type="text/javascript" th:src="@{/map/js/index-map.js}"></script>
+
 <!-- Modal -->
-<div class="modal newsModal" id="deviceModal" tabindex="-1" role="dialog" aria-labelledby="deviceModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="border: 3px solid #ff6000;border-radius: 0;">
-            <div class="closeImg" data-dismiss="modal" aria-label="Close"><i class="iconfont icon-close"></i></div>
-            <div class="map_content" style="height:650px;">
-                <div id="container"></div>
-                <div id="panel"></div>
+    <div class="modal newsModal" id="deviceModal" tabindex="-1" role="dialog" aria-labelledby="deviceModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border: 3px solid #ff6000;border-radius: 0;">
+                <div class="closeImg" data-dismiss="modal" aria-label="Close"><i class="iconfont icon-close"></i></div>
+                <div class="map_content">
+                    <div id="container"></div>
+                    <div id="panel"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

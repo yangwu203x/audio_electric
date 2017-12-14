@@ -39,7 +39,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     public Product findOne(Long productId) {
         Product product = productRepository.findOne(productId);
-        Set<Property> propertySet = propertyRepository.findPropertyByProductId(productId);
+        Set<Property> propertySet = propertyRepository.findPropertyByProductIdOrderByNumDesc(productId);
         product.setPropertySet(propertySet);
         return product;
     }
